@@ -23,7 +23,7 @@ func _ready() -> void:
 		card.clicked.connect(_on_card_clicked)
 		card.left_screen.connect(_on_card_left_screen)
 		card.position = get_random_position()
-		card.rotation_degrees = randf_range(-180, 180)
+		card.rotation_degrees = randf_range(-20, 20)
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card
