@@ -21,6 +21,7 @@ func _ready() -> void:
 	for i in range(num_cards):
 		var card: Card = card_scene.instantiate()
 		card.clicked.connect(_on_card_clicked)
+		card.left_screen.connect(_on_card_left_screen)
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card
@@ -36,14 +37,22 @@ func _on_shuffle_button_pressed() -> void:
 	get_tree().reload_current_scene()
 
 
-func _on_card_clicked(card) -> void:
+func _on_card_clicked(card: Card) -> void:
 	if !held_card:
 		card.pickup()
 		held_card = card
 
 
+func _on_card_left_screen(card: Card) -> void:
+	if card == held_card:
+		held_card = null
+	if card == card_to_find:
+		print("YOU LOOSE")
+
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
-			held_card.drop(Input.get_last_mouse_velocity())
+			if held_card.is_inside_tree():
+				held_card.drop(Input.get_last_mouse_velocity())
 			held_card = null
