@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://brofk6oqxlvu6"]
+
+[ext_resource type="Script" path="res://card.gd" id="1_00shj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlpa3"]
+size = Vector2(50, 50)
+
+[node name="Card" type="RigidBody2D" groups=["pickable"]]
+collision_mask = 0
+input_pickable = true
+mass = 2.0
+gravity_scale = 0.0
+script = ExtResource("1_00shj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_tlpa3")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.635294, 0.184314, 0.788235, 1)
+polygon = PackedVector2Array(-25, 25, 25, 25, 25, -25, -25, -25)
