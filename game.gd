@@ -22,6 +22,8 @@ func _ready() -> void:
 		var card: Card = card_scene.instantiate()
 		card.clicked.connect(_on_card_clicked)
 		card.left_screen.connect(_on_card_left_screen)
+		card.position = get_random_position()
+		card.rotation_degrees = randf_range(-180, 180)
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card
@@ -56,3 +58,11 @@ func _unhandled_input(event):
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
 			held_card = null
+
+
+func get_random_position() -> Vector2:
+	var viewport_size: Vector2 = get_viewport_rect().size as Vector2
+	return Vector2(
+		randi_range(50, viewport_size.x - 50),  # The cards are 50x50
+		randi_range(50, viewport_size.y - 150)  # Leave some extra space for the bottom menu
+	)
