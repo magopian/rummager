@@ -15,6 +15,7 @@ signal left_screen(card: Card)
 @export var color: Color
 @export var pattern_sprite: CompressedTexture2D
 @export var border_sprite: CompressedTexture2D
+@export var small_scale: Vector2 = Vector2(0.16, 0.16)
 
 
 var held = false
@@ -51,6 +52,7 @@ func pickup() -> void:
 		return
 	freeze = true
 	held = true
+	update_scale(Vector2(1, 1))
 
 
 func drop(impulse=Vector2.ZERO) -> void:
@@ -58,3 +60,9 @@ func drop(impulse=Vector2.ZERO) -> void:
 		freeze = false
 		apply_central_impulse(impulse)
 		held = false
+		update_scale(small_scale)
+
+
+func update_scale(new_scale: Vector2) -> void:
+	for child in get_children():
+		child.scale = new_scale

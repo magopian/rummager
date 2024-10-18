@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://card.gd" id="1_00shj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlpa3"]
-size = Vector2(50, 50)
+size = Vector2(300, 300)
 
 [node name="Card" type="RigidBody2D"]
 collision_mask = 0
@@ -18,15 +18,14 @@ shape = SubResource("RectangleShape2D_tlpa3")
 [node name="Background" type="Polygon2D" parent="."]
 unique_name_in_owner = true
 color = Color(1, 1, 1, 0)
-polygon = PackedVector2Array(-25, 25, 25, 25, 25, -25, -25, -25)
+polygon = PackedVector2Array(-150, 150, 150, 150, 150, -150, -150, -150)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 unique_name_in_owner = true
+rect = Rect2(-150, -150, 300, 300)
 
 [node name="Pattern" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.16, 0.16)
 
 [node name="Border" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-scale = Vector2(0.16, 0.16)

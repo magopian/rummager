@@ -23,20 +23,24 @@ func _ready() -> void:
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
 	for i in range(num_cards):
-		var card: Card = card_scene.instantiate()
-		card.clicked.connect(_on_card_clicked)
-		card.left_screen.connect(_on_card_left_screen)
-		card.position = get_random_position()
-		card.rotation_degrees = randf_range(-20, 20)
-		card.background_color = background_colors.pick_random()
-		card.color = colors.pick_random()
-		card.pattern_sprite = patterns.pick_random()
-		card.border_sprite = borders.pick_random()
+		var card: Card = new_card()
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card
-			# TODO: no need for that when we have proper sprites
-			card.color = Color("#ff8b40")
+
+
+func new_card() -> Card:
+	var card: Card = card_scene.instantiate()
+	card.clicked.connect(_on_card_clicked)
+	card.left_screen.connect(_on_card_left_screen)
+	card.position = get_random_position()
+	card.rotation_degrees = randf_range(-20, 20)
+	card.background_color = background_colors.pick_random()
+	card.color = colors.pick_random()
+	card.pattern_sprite = patterns.pick_random()
+	card.border_sprite = borders.pick_random()
+	card.update_scale(card.small_scale)
+	return card
 
 
 func _on_menu_button_pressed() -> void:
@@ -51,6 +55,7 @@ func _on_card_clicked(card: Card) -> void:
 	if !held_card:
 		card.pickup()
 		held_card = card
+		cards.move_child(card, -1)  # The card will be drawn over the others
 
 
 func _on_card_left_screen(card: Card) -> void:
