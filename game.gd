@@ -4,6 +4,9 @@ extends Node2D
 @onready var menu_button: Button = %MenuButton
 @onready var shuffle_button: Button = %ShuffleButton
 @onready var cards: Node2D = %Cards
+@onready var pick_me_canvas_layer: CanvasLayer = %PickMeCanvasLayer
+@onready var card_display: Control = %CardDisplay
+@onready var lets_go_button: Button = %LetsGoButton
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -23,11 +26,24 @@ var card_datas: Array[Dictionary]
 func _ready() -> void:
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
+	lets_go_button.pressed.connect(_on_lets_go_button_pressed)
 	for i in range(num_cards):
 		var card: Card = new_card()
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card
+	pick_me_canvas_layer.show()
+	display_card_to_find()
+
+
+func display_card_to_find() -> void:
+	var card_to_display: Card = card_to_find.duplicate()
+	card_display.add_child(card_to_display)
+	card_to_display.position = Vector2(200, 200)
+	card_to_display.show_big()
+	var tween: Tween = lets_go_button.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
+	tween.tween_property(lets_go_button, "scale", Vector2(1.5, 1.5), 0.5)
+	tween.tween_property(lets_go_button, "scale", Vector2.ONE, 0.5)
 
 
 func new_card() -> Card:
@@ -40,7 +56,6 @@ func new_card() -> Card:
 	# TODO: fail after a given number of tries!
 	while card_data in card_datas:
 		card_data = random_card()
-		print("card_data collision!")
 	card_datas.append(card_data)
 	card.data = card_data
 	card.update_scale(card.small_scale)
@@ -62,6 +77,10 @@ func _on_menu_button_pressed() -> void:
 
 func _on_shuffle_button_pressed() -> void:
 	get_tree().reload_current_scene()
+
+
+func _on_lets_go_button_pressed() -> void:
+	pick_me_canvas_layer.queue_free()
 
 
 func _on_card_clicked(card: Card) -> void:

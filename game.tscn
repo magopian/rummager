@@ -53,6 +53,7 @@ background_colors = Array[Color]([Color(1, 0.545098, 0.25098, 1), Color(1, 0.956
 colors = Array[Color]([Color(0.160784, 0.00392157, 0.262745, 1), Color(0.635294, 0.184314, 0.788235, 1)])
 patterns = Array[CompressedTexture2D]([ExtResource("2_wictp"), ExtResource("3_gbd1s"), ExtResource("4_nnte1"), ExtResource("5_kbppd"), ExtResource("6_rkmw7"), ExtResource("7_mccj3"), ExtResource("8_26nlw"), ExtResource("9_yrsaa"), ExtResource("10_q17po"), ExtResource("11_f5mjk"), ExtResource("12_hot0a"), ExtResource("13_fbrtr"), ExtResource("14_djsqm"), ExtResource("15_60kux"), ExtResource("16_4i6iw"), ExtResource("17_tigxi"), ExtResource("18_7h4lc"), ExtResource("19_tethl"), ExtResource("20_3lhl1"), ExtResource("21_dxbjn"), ExtResource("22_otlqi"), ExtResource("23_4upg4"), ExtResource("24_6skmj"), ExtResource("25_dbve6"), ExtResource("26_xmbnv"), ExtResource("27_dxrax"), ExtResource("28_c044b"), ExtResource("29_svw8r"), ExtResource("30_jjl6m"), ExtResource("31_gaap5"), ExtResource("32_r1aib"), ExtResource("33_y7pnu")])
 borders = Array[CompressedTexture2D]([ExtResource("34_pv6ce"), ExtResource("35_wyjj3"), ExtResource("36_rxwis"), ExtResource("37_qlelj"), ExtResource("38_cm3y7"), ExtResource("39_6bfak"), ExtResource("40_bnbvb"), ExtResource("41_qqi2j"), ExtResource("42_e1e4w"), ExtResource("43_5xpwt"), ExtResource("44_iovjm")])
+metadata/_edit_horizontal_guides_ = [620.0]
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -65,9 +66,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.160784, 0.00392157, 0.262745, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="MenuCanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -78,14 +79,14 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuCanvasLayer/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuCanvasLayer/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="MenuButton" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="MenuButton" type="Button" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../ShuffleButton")
@@ -110,12 +111,12 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hpbc4")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_hpbc4")
 text = "Menu"
 
-[node name="Control" type="Control" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="Control" type="Control" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ShuffleButton" type="Button" parent="CanvasLayer/MarginContainer/HBoxContainer"]
+[node name="ShuffleButton" type="Button" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../MenuButton")
@@ -140,6 +141,73 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hpbc4")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_hpbc4")
 text = "Shuffle
 "
+
+[node name="PickMeCanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="PickMeCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.160784, 0.00392157, 0.262745, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="PickMeCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Find Me!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_font_sizes/font_size = 20
+text = "And drag me to
+the bottom of
+the screen"
+horizontal_alignment = 1
+
+[node name="CardDisplay" type="Control" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+
+[node name="LetsGoButton" type="Button" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer/Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(200, 55)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Let's go!"
+flat = true
 
 [node name="Cards" type="Node2D" parent="."]
 unique_name_in_owner = true
