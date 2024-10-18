@@ -16,11 +16,13 @@ signal left_screen(card: Card)
 
 
 var held = false
+var tween: Tween
 
 
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
+	get_viewport().physics_object_picking_sort = true
 	init_from_data()
 
 
@@ -36,6 +38,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			clicked.emit(self)
+			get_viewport().set_input_as_handled()
 
 
 func _on_exit_screen() -> void:
@@ -53,7 +56,20 @@ func pickup() -> void:
 		return
 	freeze = true
 	held = true
+	show_big()
+
+
+func show_big() -> void:
+	var original_rotation: float = rotation_degrees
 	update_scale(Vector2(1, 1))
+	tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
+	tween.tween_property(self, "rotation_degrees", rotation_degrees + 5, 1)
+	tween.tween_property(self, "rotation_degrees", rotation_degrees - 5, 1)
+
+
+func show_small() -> void:
+	update_scale(small_scale)
+	tween.stop()
 
 
 func drop(impulse=Vector2.ZERO) -> void:
@@ -61,7 +77,7 @@ func drop(impulse=Vector2.ZERO) -> void:
 		freeze = false
 		apply_central_impulse(impulse)
 		held = false
-		update_scale(small_scale)
+		show_small()
 
 
 func update_scale(new_scale: Vector2) -> void:
