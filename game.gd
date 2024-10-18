@@ -7,6 +7,11 @@ extends Node2D
 @onready var pick_me_canvas_layer: CanvasLayer = %PickMeCanvasLayer
 @onready var card_display: Control = %CardDisplay
 @onready var lets_go_button: Button = %LetsGoButton
+@onready var you_win_canvas_layer: CanvasLayer = %YouWinCanvasLayer
+@onready var try_again_button: Button = %TryAgainButton
+@onready var you_lose_canvas_layer: CanvasLayer = %YouLoseCanvasLayer
+@onready var lost_reason: Label = %LostReason
+@onready var try_again_lost_button: Button = %TryAgainLostButton
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -28,6 +33,8 @@ var win_zone_display: Polygon2D
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	menu_button.pressed.connect(_on_menu_button_pressed)
+	try_again_button.pressed.connect(_on_shuffle_button_pressed)
+	try_again_lost_button.pressed.connect(_on_shuffle_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
 	lets_go_button.pressed.connect(_on_lets_go_button_pressed)
 	for i in range(num_cards):
@@ -45,9 +52,13 @@ func display_card_to_find() -> void:
 	card_display.add_child(card_to_display)
 	card_to_display.position = Vector2(200, 200)
 	card_to_display.show_big()
-	var tween: Tween = lets_go_button.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
-	tween.tween_property(lets_go_button, "scale", Vector2(1.5, 1.5), 0.5)
-	tween.tween_property(lets_go_button, "scale", Vector2.ONE, 0.5)
+	animate_button(lets_go_button)
+
+
+func animate_button(button: Button) -> void:
+	var tween: Tween = button.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
+	tween.tween_property(button, "scale", Vector2(1.5, 1.5), 0.5)
+	tween.tween_property(button, "scale", Vector2.ONE, 0.5)
 
 
 func new_card() -> Card:
@@ -100,12 +111,17 @@ func _on_card_left_screen(card: Card) -> void:
 		held_card = null
 	if thrown_out_bottom(card):
 		if card == card_to_find:
-			print("YOU WIN")
+			you_win_canvas_layer.show()
+			animate_button(try_again_button)
 		else:
-			print("YOU LOOSE, WRONG CARD")
+			you_lose_canvas_layer.show()
+			lost_reason.text = "You chose the wrong card"
+			animate_button(try_again_lost_button)
 	else:
 		if card == card_to_find:
-			print("YOU LOOSE, DISCARDED CORRECT CARD")
+			you_lose_canvas_layer.show()
+			lost_reason.text = "You discarded the card you were looking for"
+			animate_button(try_again_lost_button)
 
 
 func thrown_out_bottom(card: Card) -> bool:
