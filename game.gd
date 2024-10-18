@@ -21,9 +21,12 @@ extends Node2D
 var held_card: Card
 var card_to_find: Card
 var card_datas: Array[Dictionary]
+var viewport_size: Vector2
+var win_zone_display: Polygon2D
 
 
 func _ready() -> void:
+	viewport_size = get_viewport_rect().size
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
 	lets_go_button.pressed.connect(_on_lets_go_button_pressed)
@@ -34,6 +37,7 @@ func _ready() -> void:
 			card_to_find = card
 	pick_me_canvas_layer.show()
 	display_card_to_find()
+	add_win_zone_display()
 
 
 func display_card_to_find() -> void:
@@ -88,13 +92,26 @@ func _on_card_clicked(card: Card) -> void:
 		card.pickup()
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
+		win_zone_display.show()
 
 
 func _on_card_left_screen(card: Card) -> void:
 	if card == held_card:
 		held_card = null
-	if card == card_to_find:
-		print("YOU LOOSE")
+	if thrown_out_bottom(card):
+		if card == card_to_find:
+			print("YOU WIN")
+		else:
+			print("YOU LOOSE, WRONG CARD")
+	else:
+		if card == card_to_find:
+			print("YOU LOOSE, DISCARDED CORRECT CARD")
+
+
+func thrown_out_bottom(card: Card) -> bool:
+	return (0 < card.position.x and
+			card.position.x < viewport_size.x and
+			card.position.y > viewport_size.y)
 
 
 func _unhandled_input(event):
@@ -103,11 +120,34 @@ func _unhandled_input(event):
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
 			held_card = null
+			win_zone_display.hide()
 
 
 func get_random_position() -> Vector2:
-	var viewport_size: Vector2 = get_viewport_rect().size as Vector2
 	return Vector2(
 		randi_range(50, viewport_size.x - 50),  # The cards are 50x50
 		randi_range(50, viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)
+
+
+func add_win_zone_display() -> void:
+	var points: PackedVector2Array = [
+		Vector2(0, viewport_size.y - 100),
+		Vector2(viewport_size.x, viewport_size.y - 100),
+		Vector2(viewport_size.x, viewport_size.y),
+		Vector2(0, viewport_size.y),
+	]
+	win_zone_display = Polygon2D.new()
+	win_zone_display.polygon = points
+	win_zone_display.color = Color("00c9b3")
+	win_zone_display.hide()
+	add_child(win_zone_display)
+	move_child(win_zone_display, 0)
+
+
+func _on_win_area_body_entered(body: Node2D) -> void:
+	print("body entered: ", body)
+	if body is Card and body == card_to_find:
+		print("YOU WIN")
+	else:
+		print("YOU LOOSE, wrong card")

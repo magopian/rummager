@@ -43,7 +43,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 func _on_exit_screen() -> void:
 	left_screen.emit(self)
-	queue_free()
+	call_deferred("queue_free")
 
 
 func _physics_process(_delta) -> void:
