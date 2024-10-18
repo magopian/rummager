@@ -15,9 +15,18 @@ script = ExtResource("1_00shj")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tlpa3")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-color = Color(0.635294, 0.184314, 0.788235, 1)
+[node name="Background" type="Polygon2D" parent="."]
+unique_name_in_owner = true
+color = Color(1, 1, 1, 0)
 polygon = PackedVector2Array(-25, 25, 25, 25, 25, -25, -25, -25)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 unique_name_in_owner = true
+
+[node name="Pattern" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.16, 0.16)
+
+[node name="Border" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.16, 0.16)

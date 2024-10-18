@@ -9,6 +9,10 @@ extends Node2D
 
 
 @export var num_cards: int = 5
+@export var background_colors: Array[Color]
+@export var colors: Array[Color]
+@export var patterns: Array[CompressedTexture2D]
+@export var borders: Array[CompressedTexture2D]
 
 
 var held_card: Card
@@ -24,6 +28,10 @@ func _ready() -> void:
 		card.left_screen.connect(_on_card_left_screen)
 		card.position = get_random_position()
 		card.rotation_degrees = randf_range(-20, 20)
+		card.background_color = background_colors.pick_random()
+		card.color = colors.pick_random()
+		card.pattern_sprite = patterns.pick_random()
+		card.border_sprite = borders.pick_random()
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card

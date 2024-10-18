@@ -5,11 +5,17 @@ signal clicked(card: Card)
 signal left_screen(card: Card)
 
 
-@onready var polygon_2d: Polygon2D = $Polygon2D
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = %VisibleOnScreenNotifier2D
+@onready var background: Polygon2D = %Background
+@onready var pattern: Sprite2D = %Pattern
+@onready var border: Sprite2D = %Border
 
 
-@export var color: Color = Color("#a22fc9")
+@export var background_color: Color
+@export var color: Color
+@export var pattern_sprite: CompressedTexture2D
+@export var border_sprite: CompressedTexture2D
+
 
 var held = false
 
@@ -17,6 +23,11 @@ var held = false
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
+	background.color = background_color
+	pattern.texture = pattern_sprite
+	pattern.modulate = color
+	border.texture = border_sprite
+	border.modulate = color
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -31,7 +42,6 @@ func _on_exit_screen() -> void:
 
 
 func _physics_process(_delta) -> void:
-	polygon_2d.color = color
 	if held:
 		global_transform.origin = get_global_mouse_position()
 
