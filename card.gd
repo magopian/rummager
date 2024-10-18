@@ -11,11 +11,8 @@ signal left_screen(card: Card)
 @onready var border: Sprite2D = %Border
 
 
-@export var background_color: Color
-@export var color: Color
-@export var pattern_sprite: CompressedTexture2D
-@export var border_sprite: CompressedTexture2D
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
+@export var data: Dictionary
 
 
 var held = false
@@ -24,11 +21,15 @@ var held = false
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
-	background.color = background_color
-	pattern.texture = pattern_sprite
-	pattern.modulate = color
-	border.texture = border_sprite
-	border.modulate = color
+	init_from_data()
+
+
+func init_from_data() -> void:
+	background.color = data["background_color"]
+	pattern.texture = data["pattern_sprite"]
+	pattern.modulate = data["color"]
+	border.texture = data["border_sprite"]
+	border.modulate = data["color"]
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

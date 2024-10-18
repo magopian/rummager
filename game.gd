@@ -8,7 +8,7 @@ extends Node2D
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
 
-@export var num_cards: int = 5
+@export var num_cards: int = 50
 @export var background_colors: Array[Color]
 @export var colors: Array[Color]
 @export var patterns: Array[CompressedTexture2D]
@@ -17,6 +17,7 @@ extends Node2D
 
 var held_card: Card
 var card_to_find: Card
+var card_datas: Array[Dictionary]
 
 
 func _ready() -> void:
@@ -35,12 +36,24 @@ func new_card() -> Card:
 	card.left_screen.connect(_on_card_left_screen)
 	card.position = get_random_position()
 	card.rotation_degrees = randf_range(-20, 20)
-	card.background_color = background_colors.pick_random()
-	card.color = colors.pick_random()
-	card.pattern_sprite = patterns.pick_random()
-	card.border_sprite = borders.pick_random()
+	var card_data: Dictionary = random_card()
+	# TODO: fail after a given number of tries!
+	while card_data in card_datas:
+		card_data = random_card()
+		print("card_data collision!")
+	card_datas.append(card_data)
+	card.data = card_data
 	card.update_scale(card.small_scale)
 	return card
+
+
+func random_card() -> Dictionary:
+	return {
+		"background_color": background_colors.pick_random(),
+		"color": colors.pick_random(),
+		"pattern_sprite": patterns.pick_random(),
+		"border_sprite": borders.pick_random(),
+	}
 
 
 func _on_menu_button_pressed() -> void:
