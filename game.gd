@@ -118,6 +118,7 @@ func _on_card_left_screen(card: Card) -> void:
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			you_win_canvas_layer.show()
+			Music.play_win()
 			Global.level += 1
 		else:
 			var correct_card: Card = card_to_find.duplicate()
@@ -163,11 +164,3 @@ func get_random_position() -> Vector2:
 		randi_range(50, viewport_size.x - 50),  # The cards are 50x50
 		randi_range(50, viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)
-
-
-func _on_win_area_body_entered(body: Node2D) -> void:
-	print("body entered: ", body)
-	if body is Card and body == card_to_find:
-		print("YOU WIN")
-	else:
-		print("YOU LOOSE, wrong card")
