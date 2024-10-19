@@ -27,8 +27,6 @@ func _ready() -> void:
 	button.add_theme_constant_override("outline_size", outline_size)
 	button.add_theme_constant_override("font_size",  font_size)
 	button.pivot_offset = Vector2(button.size.x / 2, button.size.y / 2)
-	print("button.size: ", text, " - ", button.size)
-	print("button.pivot_offset: ", text, " - ", button.pivot_offset)
 	
 	var tween: Tween = button.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
 	tween.tween_property(button, "scale", Vector2(1.5, 1.5), 0.5)

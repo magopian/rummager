@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=49 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://78q437yfrq22" path="res://assets/sprites/big_circles_diag_empty.png" id="2_wictp"]
@@ -45,6 +45,8 @@
 [ext_resource type="Texture2D" uid="uid://dtb32i44n5cra" path="res://assets/sprites/border_thin_squiggly.png" id="43_5xpwt"]
 [ext_resource type="Texture2D" uid="uid://c6c87idv8dwwl" path="res://assets/sprites/border_thin_squiggly_double_dotted.png" id="44_iovjm"]
 [ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="45_5qh7m"]
+[ext_resource type="Texture2D" uid="uid://dydmvh0c4fan8" path="res://assets/sprites/sprite_wrong.png" id="46_po0o2"]
+[ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="47_oxn3a"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpbc4"]
 
@@ -294,13 +296,11 @@ autowrap_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="WrongLabel" type="Label" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
+[node name="Sprite2D" type="TextureRect" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.709804, 0.219608, 0.317647, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "✗"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("46_po0o2")
 
 [node name="CardDisplayWrong" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
 unique_name_in_owner = true
@@ -311,13 +311,11 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ValidLabel" type="Label" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
+[node name="Sprite2D" type="TextureRect" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.788235, 0.701961, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "✔"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("47_oxn3a")
 
 [node name="CardDisplayCorrect" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
 unique_name_in_owner = true
