@@ -7,12 +7,12 @@ extends Node2D
 @onready var pick_me_canvas_layer: CanvasLayer = %PickMeCanvasLayer
 @onready var level_label: Label = %LevelLabel
 @onready var card_display: Control = %CardDisplay
-@onready var lets_go_button: Button = %LetsGoButton
+@onready var lets_go_button: AnimatedButton = %LetsGoButton
 @onready var you_win_canvas_layer: CanvasLayer = %YouWinCanvasLayer
-@onready var try_again_button: Button = %TryAgainButton
+@onready var next_level_button: AnimatedButton = %NextLevelButton
 @onready var you_lose_canvas_layer: CanvasLayer = %YouLoseCanvasLayer
 @onready var lost_reason: Label = %LostReason
-@onready var try_again_lost_button: Button = %TryAgainLostButton
+@onready var try_again_button: AnimatedButton = %TryAgainButton
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -34,10 +34,10 @@ var win_zone_display: Polygon2D
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	menu_button.pressed.connect(_on_menu_button_pressed)
-	try_again_button.pressed.connect(_on_shuffle_button_pressed)
-	try_again_lost_button.pressed.connect(_on_shuffle_button_pressed)
+	next_level_button.button_pressed.connect(_on_shuffle_button_pressed)
+	try_again_button.button_pressed.connect(_on_shuffle_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
-	lets_go_button.pressed.connect(_on_lets_go_button_pressed)
+	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	level_label.text += str(Global.level)
 	for i in range(Global.level * num_cards):
 		var card: Card = new_card()
@@ -54,7 +54,6 @@ func display_card_to_find() -> void:
 	card_display.add_child(card_to_display)
 	card_to_display.position = Vector2(200, 200)
 	card_to_display.show_big()
-	animate_button(lets_go_button)
 
 
 func animate_button(button: Button) -> void:
@@ -115,18 +114,15 @@ func _on_card_left_screen(card: Card) -> void:
 		if card == card_to_find:
 			you_win_canvas_layer.show()
 			Global.level += 1
-			animate_button(try_again_button)
 		else:
 			you_lose_canvas_layer.show()
 			lost_reason.text = "You chose the wrong card"
 			Global.level = 1
-			animate_button(try_again_lost_button)
 	else:
 		if card == card_to_find:
 			you_lose_canvas_layer.show()
 			lost_reason.text = "You discarded the card you were looking for"
 			Global.level = 1
-			animate_button(try_again_lost_button)
 
 
 func thrown_out_bottom(card: Card) -> bool:

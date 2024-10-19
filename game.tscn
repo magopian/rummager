@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=47 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://78q437yfrq22" path="res://assets/sprites/big_circles_diag_empty.png" id="2_wictp"]
@@ -44,6 +44,7 @@
 [ext_resource type="Texture2D" uid="uid://ry7dhtu6e4of" path="res://assets/sprites/border_thin_double_dotted.png" id="42_e1e4w"]
 [ext_resource type="Texture2D" uid="uid://dtb32i44n5cra" path="res://assets/sprites/border_thin_squiggly.png" id="43_5xpwt"]
 [ext_resource type="Texture2D" uid="uid://c6c87idv8dwwl" path="res://assets/sprites/border_thin_squiggly_double_dotted.png" id="44_iovjm"]
+[ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="45_5qh7m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpbc4"]
 
@@ -203,31 +204,11 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-
-[node name="LetsGoButton" type="Button" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer/Control"]
+[node name="LetsGoButton" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(200, 55)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_focus_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
+layout_mode = 2
 text = "Let's go!"
-flat = true
+color = Color(1, 0.545098, 0.25098, 1)
 
 [node name="YouWinCanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -260,31 +241,11 @@ theme_override_font_sizes/font_size = 40
 text = "YOU WIN!"
 horizontal_alignment = 1
 
-[node name="Control" type="Control" parent="YouWinCanvasLayer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-
-[node name="TryAgainButton" type="Button" parent="YouWinCanvasLayer/CenterContainer/VBoxContainer/Control"]
+[node name="NextLevelButton" parent="YouWinCanvasLayer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(105, 55)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_focus_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
 text = "Next level"
-flat = true
 
 [node name="YouLoseCanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
@@ -329,31 +290,13 @@ because"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Control" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 100)
-layout_mode = 2
-
-[node name="TryAgainLostButton" type="Button" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/Control"]
+[node name="TryAgainButton" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(102, 52)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_hover_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_focus_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_colors/font_outline_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
+layout_mode = 2
 text = "Try again"
-flat = true
+color = Color(1, 0.956863, 0.721569, 1)
+outline_color = Color(0.635294, 0.184314, 0.788235, 1)
+focus_color = Color(1, 0.545098, 0.25098, 1)
 
 [node name="Cards" type="Node2D" parent="."]
 unique_name_in_owner = true
