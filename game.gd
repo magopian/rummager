@@ -19,6 +19,7 @@ extends Node2D
 @onready var wrong_container: HBoxContainer = %WrongContainer
 @onready var zones: CanvasLayer = %Zones
 @onready var menu_canvas_layer: CanvasLayer = %MenuCanvasLayer
+@onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -28,6 +29,11 @@ extends Node2D
 @export var colors: Array[Color]
 @export var patterns: Array[CompressedTexture2D]
 @export var borders: Array[CompressedTexture2D]
+@export var sound_shuffle: AudioStream
+@export var sound_lose: AudioStream
+@export var sound_pickup: AudioStream
+@export var sound_drop: AudioStream
+@export var sound_exit_screen: AudioStream
 
 
 var held_card: Card
@@ -94,16 +100,24 @@ func _on_menu_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://start_menu.tscn")
 
 
+func play_sound(sound: AudioStream) -> void:
+	audio_stream_player.stream = sound
+	audio_stream_player.play()
+
+
 func _on_shuffle_button_pressed() -> void:
+	play_sound(sound_shuffle)
 	get_tree().reload_current_scene()
 
 
 func _on_lets_go_button_pressed() -> void:
+	play_sound(sound_shuffle)
 	pick_me_canvas_layer.queue_free()
 
 
 func _on_card_clicked(card: Card) -> void:
 	if !held_card:
+		play_sound(sound_pickup)
 		card.pickup()
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
@@ -113,6 +127,7 @@ func _on_card_clicked(card: Card) -> void:
 
 
 func _on_card_left_screen(card: Card) -> void:
+	play_sound(sound_exit_screen)
 	if card == held_card:
 		held_card = null
 	if thrown_out_bottom(card):
@@ -121,6 +136,7 @@ func _on_card_left_screen(card: Card) -> void:
 			Music.play_win()
 			Global.level += 1
 		else:
+			play_sound(sound_lose)
 			var correct_card: Card = card_to_find.duplicate()
 			card_display_correct.add_child(correct_card)
 			correct_card.show_medium()
@@ -134,6 +150,7 @@ func _on_card_left_screen(card: Card) -> void:
 			Global.level = 1
 	else:
 		if card == card_to_find:
+			play_sound(sound_lose)
 			var correct_card: Card = card_to_find.duplicate()
 			card_display_correct.add_child(correct_card)
 			correct_card.show_medium()
@@ -152,6 +169,7 @@ func thrown_out_bottom(card: Card) -> bool:
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
+			play_sound(sound_drop)
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
 			held_card = null
