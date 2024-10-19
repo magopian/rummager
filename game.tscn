@@ -70,6 +70,7 @@ grow_vertical = 2
 color = Color(0.160784, 0.00392157, 0.262745, 1)
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MenuCanvasLayer"]
 anchors_preset = 15
@@ -147,6 +148,7 @@ text = "Shuffle
 
 [node name="PickMeCanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+layer = 5
 
 [node name="ColorRect" type="ColorRect" parent="PickMeCanvasLayer"]
 anchors_preset = 15
@@ -329,6 +331,95 @@ text = "Try again"
 color = Color(1, 0.956863, 0.721569, 1)
 outline_color = Color(0.635294, 0.184314, 0.788235, 1)
 focus_color = Color(1, 0.545098, 0.25098, 1)
+
+[node name="Zones" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = -1
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Zones"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="ColorRectWrong" type="ColorRect" parent="Zones/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+color = Color(0.709804, 0.219608, 0.317647, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/VBoxContainer/ColorRectWrong"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Zones/VBoxContainer/ColorRectWrong/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("46_po0o2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Zones/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorRectWrongLeft" type="ColorRect" parent="Zones/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+color = Color(0.709804, 0.219608, 0.317647, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/VBoxContainer/HBoxContainer/ColorRectWrongLeft"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Zones/VBoxContainer/HBoxContainer/ColorRectWrongLeft/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("46_po0o2")
+
+[node name="Control" type="Control" parent="Zones/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorRectWrongRight" type="ColorRect" parent="Zones/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+color = Color(0.709804, 0.219608, 0.317647, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/VBoxContainer/HBoxContainer/ColorRectWrongRight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Zones/VBoxContainer/HBoxContainer/ColorRectWrongRight/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("46_po0o2")
+
+[node name="ColorRectValid" type="ColorRect" parent="Zones/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+color = Color(0, 0.788235, 0.701961, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="Zones/VBoxContainer/ColorRectValid"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Zones/VBoxContainer/ColorRectValid/CenterContainer"]
+layout_mode = 2
+texture = ExtResource("47_oxn3a")
 
 [node name="Cards" type="Node2D" parent="."]
 unique_name_in_owner = true
