@@ -144,7 +144,6 @@ text = "Shuffle
 
 [node name="PickMeCanvasLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="PickMeCanvasLayer"]
 anchors_preset = 15
@@ -154,17 +153,34 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.160784, 0.00392157, 0.262745, 1)
 
-[node name="CenterContainer" type="CenterContainer" parent="PickMeCanvasLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="PickMeCanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/CenterContainer"]
+[node name="LevelLabel" type="Label" parent="PickMeCanvasLayer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_font_sizes/font_size = 20
+text = "Level "
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="PickMeCanvasLayer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/MarginContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
@@ -173,7 +189,7 @@ theme_override_font_sizes/font_size = 40
 text = "Find Me!"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_font_sizes/font_size = 20
@@ -182,16 +198,16 @@ the bottom of
 the screen"
 horizontal_alignment = 1
 
-[node name="CardDisplay" type="Control" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+[node name="CardDisplay" type="Control" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
 
-[node name="Control" type="Control" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 
-[node name="LetsGoButton" type="Button" parent="PickMeCanvasLayer/CenterContainer/VBoxContainer/Control"]
+[node name="LetsGoButton" type="Button" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer/Control"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -267,7 +283,7 @@ theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 40
-text = "Try again"
+text = "Next level"
 flat = true
 
 [node name="YouLoseCanvasLayer" type="CanvasLayer" parent="."]

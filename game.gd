@@ -5,6 +5,7 @@ extends Node2D
 @onready var shuffle_button: Button = %ShuffleButton
 @onready var cards: Node2D = %Cards
 @onready var pick_me_canvas_layer: CanvasLayer = %PickMeCanvasLayer
+@onready var level_label: Label = %LevelLabel
 @onready var card_display: Control = %CardDisplay
 @onready var lets_go_button: Button = %LetsGoButton
 @onready var you_win_canvas_layer: CanvasLayer = %YouWinCanvasLayer
@@ -16,7 +17,7 @@ extends Node2D
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
 
-@export var num_cards: int = 50
+@export var num_cards: int = 10
 @export var background_colors: Array[Color]
 @export var colors: Array[Color]
 @export var patterns: Array[CompressedTexture2D]
@@ -37,7 +38,8 @@ func _ready() -> void:
 	try_again_lost_button.pressed.connect(_on_shuffle_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
 	lets_go_button.pressed.connect(_on_lets_go_button_pressed)
-	for i in range(num_cards):
+	level_label.text += str(Global.level)
+	for i in range(Global.level * num_cards):
 		var card: Card = new_card()
 		cards.add_child(card)
 		if i == 0:
@@ -112,15 +114,18 @@ func _on_card_left_screen(card: Card) -> void:
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			you_win_canvas_layer.show()
+			Global.level += 1
 			animate_button(try_again_button)
 		else:
 			you_lose_canvas_layer.show()
 			lost_reason.text = "You chose the wrong card"
+			Global.level = 1
 			animate_button(try_again_lost_button)
 	else:
 		if card == card_to_find:
 			you_lose_canvas_layer.show()
 			lost_reason.text = "You discarded the card you were looking for"
+			Global.level = 1
 			animate_button(try_again_lost_button)
 
 
