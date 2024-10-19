@@ -13,6 +13,10 @@ extends Node2D
 @onready var you_lose_canvas_layer: CanvasLayer = %YouLoseCanvasLayer
 @onready var lost_reason: Label = %LostReason
 @onready var try_again_button: AnimatedButton = %TryAgainButton
+@onready var card_display_correct: Control = %CardDisplayCorrect
+@onready var card_display_wrong: Control = %CardDisplayWrong
+@onready var valid_container: HBoxContainer = %ValidContainer
+@onready var wrong_container: HBoxContainer = %WrongContainer
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -52,7 +56,6 @@ func _ready() -> void:
 func display_card_to_find() -> void:
 	var card_to_display: Card = card_to_find.duplicate()
 	card_display.add_child(card_to_display)
-	card_to_display.position = Vector2(200, 200)
 	card_to_display.show_big()
 
 
@@ -115,12 +118,24 @@ func _on_card_left_screen(card: Card) -> void:
 			you_win_canvas_layer.show()
 			Global.level += 1
 		else:
+			var correct_card: Card = card_to_find.duplicate()
+			card_display_correct.add_child(correct_card)
+			correct_card.show_medium()
+			var wrong_card: Card = card.duplicate()
+			card_display_wrong.add_child(wrong_card)
+			wrong_card.show_medium()
 			you_lose_canvas_layer.show()
+			valid_container.show()
+			wrong_container.show()
 			lost_reason.text = "You chose the wrong card"
 			Global.level = 1
 	else:
 		if card == card_to_find:
+			var correct_card: Card = card_to_find.duplicate()
+			card_display_correct.add_child(correct_card)
+			correct_card.show_medium()
 			you_lose_canvas_layer.show()
+			wrong_container.hide()
 			lost_reason.text = "You discarded the card you were looking for"
 			Global.level = 1
 

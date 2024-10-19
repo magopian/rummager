@@ -12,6 +12,7 @@ signal left_screen(card: Card)
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
+@export var medium_scale: Vector2 = Vector2(0.5, 0.5)
 @export var data: Dictionary
 
 
@@ -60,8 +61,12 @@ func pickup() -> void:
 
 
 func show_big() -> void:
-	var original_rotation: float = rotation_degrees
 	update_scale(Vector2(1, 1))
+	position = Vector2(200, 200)
+	animate_card()
+
+
+func animate_card() -> void:	
 	tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
 	tween.tween_property(self, "rotation_degrees", rotation_degrees + 5, 1)
 	tween.tween_property(self, "rotation_degrees", rotation_degrees - 5, 1)
@@ -70,6 +75,13 @@ func show_big() -> void:
 func show_small() -> void:
 	update_scale(small_scale)
 	tween.stop()
+
+
+func show_medium() -> void:
+	update_scale(medium_scale)
+	freeze = true
+	position = Vector2(100, 100)
+	animate_card()
 
 
 func drop(impulse=Vector2.ZERO) -> void:

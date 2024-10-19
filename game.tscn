@@ -290,6 +290,40 @@ because"
 horizontal_alignment = 1
 autowrap_mode = 2
 
+[node name="WrongContainer" type="HBoxContainer" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WrongLabel" type="Label" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.709804, 0.219608, 0.317647, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "✗"
+
+[node name="CardDisplayWrong" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
+[node name="ValidContainer" type="HBoxContainer" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ValidLabel" type="Label" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.788235, 0.701961, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "✔"
+
+[node name="CardDisplayCorrect" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+
 [node name="TryAgainButton" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
 layout_mode = 2
