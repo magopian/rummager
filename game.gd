@@ -45,14 +45,13 @@ var viewport_size: Vector2
 func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	menu_button.pressed.connect(_on_menu_button_pressed)
-	next_level_button.button_pressed.connect(_on_shuffle_button_pressed)
-	you_win_canvas_layer.button_pressed.connect(_on_shuffle_button_pressed)
-	try_again_button.button_pressed.connect(_on_shuffle_button_pressed)
-	you_lose_canvas_layer.button_pressed.connect(_on_shuffle_button_pressed)
-	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
+	next_level_button.button_pressed.connect(_on_next_level_pressed)
+	you_win_canvas_layer.button_pressed.connect(_on_next_level_pressed)
+	try_again_button.button_pressed.connect(_on_try_again_pressed)
+	you_lose_canvas_layer.button_pressed.connect(_on_try_again_pressed)
+	shuffle_button.pressed.connect(shuffle)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
-	level_label.text += str(Global.level)
 	for i in range(Global.level * num_cards):
 		var card: Card = new_card()
 		cards.add_child(card)
@@ -108,7 +107,17 @@ func play_sound(sound: AudioStream) -> void:
 	audio_stream_player.play()
 
 
-func _on_shuffle_button_pressed() -> void:
+func _on_try_again_pressed() -> void:
+	Global.level = 1
+	shuffle()
+
+
+func _on_next_level_pressed() -> void:
+	Global.level += 1
+	shuffle()
+
+
+func shuffle() -> void:
 	play_sound(sound_shuffle)
 	get_tree().reload_current_scene()
 
@@ -137,7 +146,6 @@ func _on_card_left_screen(card: Card) -> void:
 		if card == card_to_find:
 			you_win_canvas_layer.show()
 			Music.play_win()
-			Global.level += 1
 		else:
 			play_sound(sound_lose)
 			var correct_card: Card = card_to_find.duplicate()
@@ -150,7 +158,6 @@ func _on_card_left_screen(card: Card) -> void:
 			valid_container.show()
 			wrong_container.show()
 			lost_reason.text = "You chose the wrong card"
-			Global.level = 1
 	else:
 		if card == card_to_find:
 			play_sound(sound_lose)
@@ -160,7 +167,6 @@ func _on_card_left_screen(card: Card) -> void:
 			you_lose_canvas_layer.show()
 			wrong_container.hide()
 			lost_reason.text = "You discarded the card you were looking for"
-			Global.level = 1
 
 
 func thrown_out_bottom(card: Card) -> bool:

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcxjxqadvhk87"]
+
+[ext_resource type="Script" path="res://level_label.gd" id="1_uk7fa"]
+
+[node name="LevelLabel" type="Label"]
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_font_sizes/font_size = 20
+text = "Level "
+horizontal_alignment = 1
+script = ExtResource("1_uk7fa")
