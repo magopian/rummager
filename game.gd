@@ -46,8 +46,11 @@ func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	next_level_button.button_pressed.connect(_on_shuffle_button_pressed)
+	you_win_canvas_layer.button_pressed.connect(_on_shuffle_button_pressed)
 	try_again_button.button_pressed.connect(_on_shuffle_button_pressed)
+	you_lose_canvas_layer.button_pressed.connect(_on_shuffle_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_button_pressed)
+	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	level_label.text += str(Global.level)
 	for i in range(Global.level * num_cards):

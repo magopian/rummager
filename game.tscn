@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=55 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://78q437yfrq22" path="res://assets/sprites/big_circles_diag_empty.png" id="2_wictp"]
@@ -52,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="47_oxn3a"]
 [ext_resource type="AudioStream" uid="uid://d3jpbah8ihbnr" path="res://assets/sounds/drop.wav" id="48_8jvtj"]
 [ext_resource type="AudioStream" uid="uid://dpg078ihlfk80" path="res://assets/sounds/exit_screen.wav" id="49_u307k"]
+[ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="50_uxbrs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpbc4"]
 
@@ -156,7 +157,7 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_hpbc4")
 text = "Shuffle
 "
 
-[node name="PickMeCanvasLayer" type="CanvasLayer" parent="."]
+[node name="PickMeCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
 layer = 5
 
@@ -166,6 +167,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.160784, 0.00392157, 0.262745, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="PickMeCanvasLayer"]
@@ -174,6 +176,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 20
@@ -191,9 +194,11 @@ horizontal_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="PickMeCanvasLayer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/MarginContainer/CenterContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -217,6 +222,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 400)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="LetsGoButton" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
@@ -224,7 +230,7 @@ layout_mode = 2
 text = "Let's go!"
 color = Color(1, 0.545098, 0.25098, 1)
 
-[node name="YouWinCanvasLayer" type="CanvasLayer" parent="."]
+[node name="YouWinCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
 visible = false
 
@@ -234,6 +240,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0.788235, 0.701961, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="YouWinCanvasLayer"]
@@ -242,9 +249,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="YouWinCanvasLayer/CenterContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="YouWinCanvasLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -261,7 +270,7 @@ custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 text = "Next level"
 
-[node name="YouLoseCanvasLayer" type="CanvasLayer" parent="."]
+[node name="YouLoseCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
 visible = false
 
@@ -271,6 +280,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.709804, 0.219608, 0.317647, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="YouLoseCanvasLayer"]
@@ -279,9 +289,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="YouLoseCanvasLayer/CenterContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -307,32 +319,38 @@ autowrap_mode = 2
 [node name="WrongContainer" type="HBoxContainer" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Sprite2D" type="TextureRect" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("46_po0o2")
 
 [node name="CardDisplayWrong" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/WrongContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ValidContainer" type="HBoxContainer" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Sprite2D" type="TextureRect" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+mouse_filter = 2
 texture = ExtResource("47_oxn3a")
 
 [node name="CardDisplayCorrect" type="Control" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer/ValidContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TryAgainButton" parent="YouLoseCanvasLayer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
