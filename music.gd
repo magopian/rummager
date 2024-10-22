@@ -16,5 +16,3 @@ func play_theme() -> void:
 func play_win() -> void:
 	stream = win_music
 	play()
-	await finished
-	play_theme()

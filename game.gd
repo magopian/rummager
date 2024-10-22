@@ -114,6 +114,7 @@ func _on_try_again_pressed() -> void:
 
 func _on_next_level_pressed() -> void:
 	Global.level += 1
+	Music.play_theme()
 	shuffle()
 
 
