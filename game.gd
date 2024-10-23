@@ -108,7 +108,6 @@ func play_sound(sound: AudioStream) -> void:
 
 
 func _on_try_again_pressed() -> void:
-	Global.level = 1
 	shuffle()
 
 

@@ -2,6 +2,7 @@ class_name UserPreferences extends Resource
 
 enum AUDIO_BUS { MASTER }
 @export var muted: bool = false
+@export var level: int = 1
 
 
 func save() -> void:
