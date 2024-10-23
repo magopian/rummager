@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c74mokjvytaxx"]
+[gd_scene load_steps=7 format=3 uid="uid://c74mokjvytaxx"]
 
 [ext_resource type="Script" path="res://start_menu.gd" id="1_lbbar"]
 [ext_resource type="PackedScene" uid="uid://t6pokx6riwkc" path="res://mute_sound_button.tscn" id="2_88lsy"]
+[ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_mmat7"]
 [ext_resource type="Texture2D" uid="uid://dvui57bodppg6" path="res://assets/sprites/sound_on.png" id="2_wi4kh"]
 [ext_resource type="Texture2D" uid="uid://b74tn4615ikn3" path="res://assets/sprites/sound_off.png" id="3_klq30"]
 
@@ -16,14 +17,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lbbar")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ScrollingBackground" parent="." instance=ExtResource("2_mmat7")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.160784, 0.00392157, 0.262745, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
