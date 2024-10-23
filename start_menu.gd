@@ -2,6 +2,7 @@ extends Control
 
 @onready var continue_button: Button = %ContinueButton
 @onready var start_button: Button = %StartButton
+@onready var credits_button: Button = %CreditsButton
 @onready var quit_button: Button = %QuitButton
 @onready var version_label: Label = %VersionLabel
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 		start_button.grab_focus()
 	continue_button.pressed.connect(_on_continue_button_pressed)
 	start_button.pressed.connect(_on_start_button_pressed)
+	credits_button.pressed.connect(_on_credits_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	version_label.text += ProjectSettings.get_setting("application/config/version")
 
@@ -27,6 +29,10 @@ func _on_continue_button_pressed() -> void:
 func _on_start_button_pressed() -> void:
 	Global.level = 1
 	get_tree().change_scene_to_file("res://game.tscn")
+
+
+func _on_credits_pressed() -> void:
+	get_tree().change_scene_to_file("res://credits.tscn")
 
 
 func _on_quit_button_pressed() -> void:

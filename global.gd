@@ -16,6 +16,6 @@ func get_level() -> int:
 	return user_prefs.level
 
 
-func set_level(level: int) -> void:
-	user_prefs.level = level
+func set_level(new_level: int) -> void:
+	user_prefs.level = new_level
 	user_prefs.save()
