@@ -6,7 +6,7 @@ signal left_screen(card: Card)
 
 
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = %VisibleOnScreenNotifier2D
-@onready var background: Polygon2D = %Background
+@onready var background: Sprite2D = %Background
 @onready var pattern: Sprite2D = %Pattern
 @onready var border: Sprite2D = %Border
 
@@ -28,7 +28,7 @@ func _ready() -> void:
 
 
 func init_from_data() -> void:
-	background.color = data["background_color"]
+	background.modulate = data["background_color"]
 	pattern.texture = data["pattern_sprite"]
 	pattern.modulate = data["color"]
 	border.texture = data["border_sprite"]
