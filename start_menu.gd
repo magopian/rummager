@@ -22,6 +22,9 @@ func _ready() -> void:
 	credits_button.pressed.connect(_on_credits_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	version_label.text += ProjectSettings.get_setting("application/config/version")
+	# Only display the "quit" button on desktop.
+	if OS.has_feature("web") or OS.has_feature("mobile"):
+		quit_button.hide()
 
 
 func _on_continue_button_pressed() -> void:
