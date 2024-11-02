@@ -61,7 +61,7 @@ func pickup() -> void:
 
 
 func show_big() -> void:
-	update_scale(Vector2(1, 1))
+	animate_scale(Vector2(1, 1))
 	position = Vector2(200, 200)
 	animate_card()
 
@@ -73,7 +73,7 @@ func animate_card() -> void:
 
 
 func show_small() -> void:
-	update_scale(small_scale)
+	animate_scale(small_scale)
 	tween.stop()
 
 
@@ -95,3 +95,9 @@ func drop(impulse=Vector2.ZERO) -> void:
 func update_scale(new_scale: Vector2) -> void:
 	for child in get_children():
 		child.scale = new_scale
+
+
+func animate_scale(new_scale: Vector2) -> void:
+	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
+	for child in get_children():
+		scale_tween.tween_property(child, "scale", new_scale, 0.15)
