@@ -9,13 +9,16 @@ extends Control
 
 
 func _ready() -> void:
-	if Global.level > 1:
+	if Global.level > 1:  # Player already completed at least one level
 		continue_button.show()
 		continue_button.grab_focus()
 		start_button.text = "RESTART"
+		quit_button.focus_neighbor_bottom = continue_button.get_path()
 	else:
 		continue_button.hide()
 		start_button.grab_focus()
+		quit_button.focus_neighbor_bottom = start_button.get_path()
+		start_button.focus_neighbor_top = quit_button.get_path()
 	continue_button.pressed.connect(_on_continue_button_pressed)
 	start_button.pressed.connect(_on_start_button_pressed)
 	how_to_play_button.pressed.connect(_on_how_to_play)
