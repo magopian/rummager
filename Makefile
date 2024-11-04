@@ -12,6 +12,7 @@ export_from_godot:
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "Rummager" ../exports/index.html
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "Android" ../export_android/rummager.aab
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "Android APK" ../export_android/rummager.apk
+	rm -rf ../export_ios && mkdir ../export_ios
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "iOS" ../export_ios/rummager.ipa
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "macOS" ../export_macos/rummager.dmg
 
@@ -21,6 +22,8 @@ export: update_version git_bump_version export_from_godot
 upload: export
 	../../butler-darwin-amd64/butler push ../exports/Archive.zip magopian/rummager:html
 	../../butler-darwin-amd64/butler push ../export_android/rummager.apk magopian/rummager:android
+	echo "*** Open https://appstoreconnect.apple.com/apps/6737626586/distribution/ios/version/inflight and add a new version"
+	echo "*** Open https://play.google.com/console/u/0/developers/6835995711892807257/app-list, select Rummager, browse the left pannel to 'Tester et publier' > 'Explorateur d'app bundle' > 'Importer une nouvelle version'"
 
 macos_specific:
 	# https://medium.com/the-bkpt/godot-tutorial-exporting-for-macos-e82a04856db7
