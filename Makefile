@@ -22,6 +22,20 @@ upload: export
 	../../butler-darwin-amd64/butler push ../exports/Archive.zip magopian/rummager:html
 	../../butler-darwin-amd64/butler push ../export_android/rummager.apk magopian/rummager:android
 
+macos_specific:
+	# https://medium.com/the-bkpt/godot-tutorial-exporting-for-macos-e82a04856db7
+	# Find list of valid certificates
+	# security find-identity -v -p codesigning
+	#
+	# echo "Password is app specific password in https://account.apple.com/account/manage :  Makefile export macos app"
+	## Check notarification requests
+	# xcrun notarytool history --apple-id mathieu-icloud@agopian.info --team-id D4JA25UPZB
+	#
+	# xcrun altool --validate-app -f ../export_macos/rummager.dmg -t macOS -u mathieu-icloud@agopian.info
+	# xcrun altool --upload-app -f file -t platform -u username [-p password] [—output-format xml]
+	#
+	# xcrun stapler staple ../export_macos/rummager.dmg
+
 itch_status:
 	../../butler-darwin-amd64/butler status magopian/rummager:html
 
