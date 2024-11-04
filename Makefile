@@ -1,9 +1,10 @@
 
-DATE:=$(shell date "+%Y%m%d.%H.%M")
+DATE:=$(shell date "+%Y%m%d%H%M")
+SHORT_DATE:=$(shell date "+%Y%m%d")
 
 update_version:
 	sed -i '' 's/config\/version=".*"/config\/version="$(DATE)"/' project.godot
-	sed -i '' 's/version\/code=.*/version\/code=$(DATE)/' export_presets.cfg
+	sed -i '' 's/version\/code=.*/version\/code=$(SHORT_DATE)/' export_presets.cfg
 
 git_bump_version:
 	git add project.godot export_presets.cfg && git commit -m "Bump version number"
@@ -23,7 +24,7 @@ upload: export
 	../../butler-darwin-amd64/butler push ../exports/Archive.zip magopian/rummager:html
 	../../butler-darwin-amd64/butler push ../export_android/rummager.apk magopian/rummager:android
 	echo "*** Open https://appstoreconnect.apple.com/apps/6737626586/distribution/ios/version/inflight and add a new version"
-	echo "*** Open https://play.google.com/console/u/0/developers/6835995711892807257/app-list, select Rummager, browse the left pannel to 'Tester et publier' > 'Explorateur d'app bundle' > 'Importer une nouvelle version'"
+	echo "*** Open https://play.google.com/console/u/0/developers/6835995711892807257/app-list, select Rummager, browse the left pannel to 'Production' > 'Créer une version'"
 
 macos_specific:
 	# https://medium.com/the-bkpt/godot-tutorial-exporting-for-macos-e82a04856db7
