@@ -27,6 +27,7 @@ upload: export
 	echo "*** Open https://play.google.com/console/u/0/developers/6835995711892807257/app-list, select Rummager, browse the left pannel to 'Production' > 'Créer une version'"
 
 macos_specific:
+	# https://alicegg.tech/2024/09/12/godot-mac
 	# https://medium.com/the-bkpt/godot-tutorial-exporting-for-macos-e82a04856db7
 	# Find list of valid certificates
 	# security find-identity -v -p codesigning
