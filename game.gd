@@ -85,7 +85,7 @@ func new_card() -> Card:
 		card_data = random_card()
 	card_datas.append(card_data)
 	card.data = card_data
-	card.update_scale(card.small_scale)
+	card.call_deferred("show_small")
 	return card
 
 

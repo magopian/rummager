@@ -23,8 +23,17 @@ var tween: Tween
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
+	compute_small_size(get_viewport_rect().size)
 	get_viewport().physics_object_picking_sort = true
 	init_from_data()
+
+
+func compute_small_size(viewport_size: Vector2) -> void:
+	var smallest_size: int = min(viewport_size.x, viewport_size.y)
+	viewport_size.normalized()
+	# smallest_size = 414 => small_scale = 0.16
+	var scale_size: float = smallest_size * 0.16 / 414
+	small_scale = Vector2(scale_size, scale_size)
 
 
 func init_from_data() -> void:
@@ -74,7 +83,8 @@ func animate_card() -> void:
 
 func show_small() -> void:
 	animate_scale(small_scale)
-	tween.stop()
+	if tween:
+		tween.stop()
 
 
 func show_medium() -> void:
