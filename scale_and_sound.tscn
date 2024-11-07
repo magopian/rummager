@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg0xtfp4bp48s"]
+
+[ext_resource type="Script" path="res://scale_and_sound.gd" id="1_6v4u2"]
+[ext_resource type="AudioStream" uid="uid://d2dl2cb3ssf4m" path="res://assets/sounds/menu_entry.ogg" id="2_lflbq"]
+
+[node name="ScaleAndSound" type="Node"]
+script = ExtResource("1_6v4u2")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_lflbq")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c74mokjvytaxx"]
+[gd_scene load_steps=8 format=3 uid="uid://c74mokjvytaxx"]
 
 [ext_resource type="Script" path="res://start_menu.gd" id="1_lbbar"]
 [ext_resource type="PackedScene" uid="uid://t6pokx6riwkc" path="res://mute_sound_button.tscn" id="2_88lsy"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_mmat7"]
 [ext_resource type="Texture2D" uid="uid://dvui57bodppg6" path="res://assets/sprites/sound_on.png" id="2_wi4kh"]
 [ext_resource type="Texture2D" uid="uid://b74tn4615ikn3" path="res://assets/sprites/sound_off.png" id="3_klq30"]
+[ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="6_36ro2"]
 [ext_resource type="PackedScene" uid="uid://b50ttnmwse2tb" path="res://fancy_button.tscn" id="6_n0hxg"]
 
 [node name="StartMenu" type="Control"]
@@ -39,9 +40,16 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="MuteSoundButton" parent="MarginContainer/VBoxContainer/Control2" instance=ExtResource("2_88lsy")]
-layout_mode = 0
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+offset_right = 62.0
+offset_bottom = 53.1977
+scale = Vector2(1, 1)
+theme_override_constants/icon_max_width = 50
 theme_override_icons/checked = ExtResource("3_klq30")
 theme_override_icons/unchecked = ExtResource("2_wi4kh")
+
+[node name="ScaleAndSound" parent="MarginContainer/VBoxContainer/Control2/MuteSoundButton" instance=ExtResource("6_36ro2")]
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 clip_contents = false

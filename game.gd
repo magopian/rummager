@@ -1,8 +1,8 @@
 extends Node2D
 
 
-@onready var menu_button: Button = %MenuButton
-@onready var shuffle_button: Button = %ShuffleButton
+@onready var menu_button: TextureButton = %MenuButton
+@onready var shuffle_button: TextureButton = %ShuffleButton
 @onready var cards: Node2D = %Cards
 @onready var pick_me_canvas_layer: CanvasLayer = %PickMeCanvasLayer
 @onready var level_label: Label = %LevelLabel
@@ -189,5 +189,5 @@ func _unhandled_input(event):
 func get_random_position() -> Vector2:
 	return Vector2(
 		randi_range(50, viewport_size.x - 50),  # The cards are 50x50
-		randi_range(50, viewport_size.y - 150)  # Leave some extra space for the bottom menu
+		randi_range(150, viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)

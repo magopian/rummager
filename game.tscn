@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=69 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -56,15 +56,18 @@
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="50_2o8bk"]
 [ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="50_uxbrs"]
 [ext_resource type="PackedScene" uid="uid://dcxjxqadvhk87" path="res://level_label.tscn" id="51_n831h"]
+[ext_resource type="Texture2D" uid="uid://b2fiv6h3e56d4" path="res://assets/sprites/menu_icon.png" id="52_83ybm"]
+[ext_resource type="Texture2D" uid="uid://yoh5ervhre0q" path="res://assets/sprites/menu_hover.png" id="53_wty3r"]
+[ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="54_71tse"]
+[ext_resource type="Texture2D" uid="uid://c74f0fstiamim" path="res://assets/sprites/shuffle_icon.png" id="54_asxbk"]
 [ext_resource type="Texture2D" uid="uid://bwm31tuymnoxs" path="res://assets/sprites/background_win.png" id="54_r2wap"]
 [ext_resource type="Texture2D" uid="uid://be6kqaxf8oiyh" path="res://assets/sprites/background_lose.png" id="55_gc81l"]
+[ext_resource type="Texture2D" uid="uid://dhvsbddv3u720" path="res://assets/sprites/shuffle_hover.png" id="55_kwsue"]
 [ext_resource type="Texture2D" uid="uid://fy4d22tetdxl" path="res://assets/sprites/zones.png" id="55_tqlyy"]
 [ext_resource type="Texture2D" uid="uid://bf2kofh2hytnw" path="res://assets/sprites/sprite_wrong_arrow.png" id="56_435cm"]
 [ext_resource type="Texture2D" uid="uid://cd1ymd6ajiy2n" path="res://assets/sprites/sprite_wrong_arrow_left.png" id="57_d6fnq"]
 [ext_resource type="Texture2D" uid="uid://cggl6s3bb1ygo" path="res://assets/sprites/sprite_wrong_arrow_right.png" id="58_xugu7"]
 [ext_resource type="Texture2D" uid="uid://dbjjgreftelq6" path="res://assets/sprites/sprite_valid_arrow.png" id="59_btyvn"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpbc4"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_gbsqv")
@@ -103,63 +106,38 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuCanvasLayer/MarginContainer"]
 layout_mode = 2
-size_flags_vertical = 8
+size_flags_vertical = 0
 
-[node name="MenuButton" type="Button" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
+[node name="MenuButton" type="TextureButton" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-focus_neighbor_top = NodePath("../ShuffleButton")
-theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_focus_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 48
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hpbc4")
-text = "Menu"
+texture_normal = ExtResource("52_83ybm")
+texture_pressed = ExtResource("53_wty3r")
+texture_hover = ExtResource("53_wty3r")
+texture_focused = ExtResource("53_wty3r")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ScaleAndSound" parent="MenuCanvasLayer/MarginContainer/HBoxContainer/MenuButton" instance=ExtResource("54_71tse")]
 
 [node name="Control" type="Control" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ShuffleButton" type="Button" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
+[node name="ShuffleButton" type="TextureButton" parent="MenuCanvasLayer/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-focus_neighbor_bottom = NodePath("../MenuButton")
-theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_focus_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 48
-theme_override_styles/focus = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_hpbc4")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_hpbc4")
-text = "Shuffle
-"
+texture_normal = ExtResource("54_asxbk")
+texture_pressed = ExtResource("55_kwsue")
+texture_hover = ExtResource("55_kwsue")
+texture_focused = ExtResource("55_kwsue")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ScaleAndSound" parent="MenuCanvasLayer/MarginContainer/HBoxContainer/ShuffleButton" instance=ExtResource("54_71tse")]
 
 [node name="PickMeCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
