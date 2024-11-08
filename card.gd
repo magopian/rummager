@@ -9,6 +9,7 @@ signal left_screen(card: Card)
 @onready var background: Sprite2D = %Background
 @onready var pattern: Sprite2D = %Pattern
 @onready var border: Sprite2D = %Border
+@onready var animated_sprite_2d: AnimatedSprite2D = %AnimatedSprite2D
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
@@ -102,6 +103,18 @@ func drop(impulse=Vector2.ZERO) -> void:
 		apply_central_impulse(impulse)
 		held = false
 		show_small()
+		show_dust()
+
+
+func show_dust() -> void:
+	animated_sprite_2d.show()
+	animated_sprite_2d.play()
+	await animated_sprite_2d.animation_finished
+	hide_dust()
+
+
+func hide_dust() -> void:
+	animated_sprite_2d.hide()
 
 
 func update_scale(new_scale: Vector2) -> void:
