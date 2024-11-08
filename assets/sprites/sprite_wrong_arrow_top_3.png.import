@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbjjgreftelq6"
-path="res://.godot/imported/sprite_valid_arrow.png-9e53b520a27454c894e6d1c5f0b6843d.ctex"
+uid="uid://351doeipyco6"
+path="res://.godot/imported/sprite_wrong_arrow_top_3.png-5b36320b6a4374450412f3cf9a4993b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/sprite_valid_arrow.png"
-dest_files=["res://.godot/imported/sprite_valid_arrow.png-9e53b520a27454c894e6d1c5f0b6843d.ctex"]
+source_file="res://assets/sprites/sprite_wrong_arrow_top_3.png"
+dest_files=["res://.godot/imported/sprite_wrong_arrow_top_3.png-5b36320b6a4374450412f3cf9a4993b5.ctex"]
 
 [params]
 

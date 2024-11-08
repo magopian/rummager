@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cd1ymd6ajiy2n"
-path="res://.godot/imported/sprite_wrong_arrow_left.png-64f666886d5a41ab7be4a4145ca9263a.ctex"
+uid="uid://d1wfi08ygsqwd"
+path="res://.godot/imported/zone_top.png-0a47eedb13c062e30d0bffbf88722f30.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/sprite_wrong_arrow_left.png"
-dest_files=["res://.godot/imported/sprite_wrong_arrow_left.png-64f666886d5a41ab7be4a4145ca9263a.ctex"]
+source_file="res://assets/sprites/zone_top.png"
+dest_files=["res://.godot/imported/zone_top.png-0a47eedb13c062e30d0bffbf88722f30.ctex"]
 
 [params]
 

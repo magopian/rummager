@@ -1,0 +1,152 @@
+[gd_scene load_steps=22 format=3 uid="uid://d1q80rolx3cja"]
+
+[ext_resource type="Texture2D" uid="uid://d1wfi08ygsqwd" path="res://assets/sprites/zone_top.png" id="1_0bsb2"]
+[ext_resource type="Script" path="res://zones.gd" id="1_4v5gn"]
+[ext_resource type="Texture2D" uid="uid://c8l5keot2655x" path="res://assets/sprites/sprite_wrong_arrow_top_1.png" id="3_21s1j"]
+[ext_resource type="Texture2D" uid="uid://vbcjyik2uigp" path="res://assets/sprites/zone_left.png" id="3_rtgyv"]
+[ext_resource type="Texture2D" uid="uid://d3tmhak7x0761" path="res://assets/sprites/sprite_wrong_arrow_top_2.png" id="4_hkl5g"]
+[ext_resource type="Texture2D" uid="uid://mqgjw40hohg6" path="res://assets/sprites/sprite_wrong_arrow_left_1.png" id="5_6v0d0"]
+[ext_resource type="Texture2D" uid="uid://b07565f21t8sv" path="res://assets/sprites/zone_right.png" id="5_cxjk3"]
+[ext_resource type="Texture2D" uid="uid://351doeipyco6" path="res://assets/sprites/sprite_wrong_arrow_top_3.png" id="5_xel14"]
+[ext_resource type="Texture2D" uid="uid://mg41slwixbk7" path="res://assets/sprites/sprite_wrong_arrow_left_2.png" id="6_1vd2g"]
+[ext_resource type="Texture2D" uid="uid://v31dbghfih45" path="res://assets/sprites/sprite_wrong_arrow_left_3.png" id="7_2vwlo"]
+[ext_resource type="Texture2D" uid="uid://c6ed27b2h0sad" path="res://assets/sprites/zone_bottom.png" id="7_hvftn"]
+[ext_resource type="Texture2D" uid="uid://i4gmry3bvvw8" path="res://assets/sprites/sprite_wrong_arrow_right_1.png" id="8_xx1ll"]
+[ext_resource type="Texture2D" uid="uid://c45bhjaxjr4gw" path="res://assets/sprites/sprite_wrong_arrow_right_2.png" id="9_mcrxp"]
+[ext_resource type="Texture2D" uid="uid://diins6piwxe4d" path="res://assets/sprites/sprite_wrong_arrow_right_3.png" id="10_3dj87"]
+[ext_resource type="Texture2D" uid="uid://bfvjpqbkvstfs" path="res://assets/sprites/sprite_valid_arrow_1.png" id="12_401rh"]
+[ext_resource type="Texture2D" uid="uid://bctpjxpr5xb84" path="res://assets/sprites/sprite_valid_arrow_2.png" id="13_y6mn6"]
+[ext_resource type="Texture2D" uid="uid://y1epdewkmrk" path="res://assets/sprites/sprite_valid_arrow_3.png" id="14_bdkt0"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_q7el1"]
+frames = 3
+frame_0/texture = ExtResource("3_21s1j")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("4_hkl5g")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("5_xel14")
+frame_2/duration = 0.2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_2lyhj"]
+frames = 3
+frame_0/texture = ExtResource("5_6v0d0")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("6_1vd2g")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("7_2vwlo")
+frame_2/duration = 0.2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_ij2sp"]
+frames = 3
+frame_0/texture = ExtResource("8_xx1ll")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("9_mcrxp")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("10_3dj87")
+frame_2/duration = 0.2
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_633hp"]
+frames = 3
+frame_0/texture = ExtResource("12_401rh")
+frame_0/duration = 0.2
+frame_1/texture = ExtResource("13_y6mn6")
+frame_1/duration = 0.2
+frame_2/texture = ExtResource("14_bdkt0")
+frame_2/duration = 0.2
+
+[node name="Zones" type="CanvasLayer"]
+script = ExtResource("1_4v5gn")
+
+[node name="PanelContainerTop" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 150)
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -10.0
+offset_bottom = 140.0
+grow_horizontal = 2
+size_flags_vertical = 0
+
+[node name="ZoneTop" type="TextureRect" parent="PanelContainerTop"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("1_0bsb2")
+expand_mode = 2
+
+[node name="ArrowUp" type="TextureRect" parent="PanelContainerTop"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = SubResource("AnimatedTexture_q7el1")
+
+[node name="PanelContainerLeft" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_right = 140.0
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="ZoneLeft" type="TextureRect" parent="PanelContainerLeft"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("3_rtgyv")
+
+[node name="ArrowLeft" type="TextureRect" parent="PanelContainerLeft"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = SubResource("AnimatedTexture_2lyhj")
+stretch_mode = 2
+
+[node name="PanelContainerRight" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_right = 10.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 0
+
+[node name="ZoneRight" type="TextureRect" parent="PanelContainerRight"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("5_cxjk3")
+
+[node name="ArrowRight" type="TextureRect" parent="PanelContainerRight"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AnimatedTexture_ij2sp")
+stretch_mode = 2
+
+[node name="PanelContainerBottom" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -140.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 0
+
+[node name="ZoneBottom" type="TextureRect" parent="PanelContainerBottom"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+texture = ExtResource("7_hvftn")
+
+[node name="ArrowBottom" type="TextureRect" parent="PanelContainerBottom"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = SubResource("AnimatedTexture_633hp")
+stretch_mode = 2
