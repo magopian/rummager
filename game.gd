@@ -77,7 +77,7 @@ func new_card() -> Card:
 	var card: Card = card_scene.instantiate()
 	card.clicked.connect(_on_card_clicked)
 	card.left_screen.connect(_on_card_left_screen)
-	card.position = get_random_position()
+	card.position = viewport_size / 2
 	card.rotation_degrees = randf_range(-20, 20)
 	var card_data: Dictionary = random_card()
 	# TODO: fail after a given number of tries!
@@ -125,6 +125,17 @@ func shuffle() -> void:
 func _on_lets_go_button_pressed() -> void:
 	play_sound(sound_shuffle)
 	pick_me_canvas_layer.queue_free()
+	shuffle_cards()
+
+
+func shuffle_cards() -> void:
+	var x: int = 0
+	for card in cards.get_children():
+		var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		var random_position: Vector2 = get_random_position()
+		tween.tween_interval(x * 0.01)
+		tween.tween_property(card, "position", random_position, 1)
+		x += 1
 
 
 func _on_card_clicked(card: Card) -> void:
