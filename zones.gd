@@ -14,7 +14,7 @@ func _ready() -> void:
 	viewport_rect = get_viewport().get_visible_rect().size
 
 
-func _process(event):
+func _process(_delta: float):
 	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
 	var distance_to_left: float = clamp(mouse_pos.x, 0, viewport_rect.x / 2) / (viewport_rect.x / 2)
 	var distance_to_top: float = clamp(mouse_pos.y, 0, viewport_rect.y / 2) / (viewport_rect.y / 2)

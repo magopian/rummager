@@ -140,7 +140,6 @@ func _on_card_clicked(card: Card) -> void:
 
 func _on_card_left_screen(card: Card) -> void:
 	play_sound(sound_exit_screen)
-	card.hide_dust()
 	if card == held_card:
 		held_card = null
 	if thrown_out_bottom(card):
