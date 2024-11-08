@@ -75,7 +75,7 @@ theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
-text = "Nicolas Berland"
+text = "Celthyan - Music"
 uri = "https://www.youtube.com/@celthyan-music1118/videos"
 
 [node name="Control3" type="Control" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
