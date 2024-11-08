@@ -1,40 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://btw4apieubt2i"]
+[gd_scene load_steps=3 format=3 uid="uid://btw4apieubt2i"]
 
+[ext_resource type="Material" uid="uid://l6486gk7vck5" path="res://dust_cloud_particles.tres" id="1_egndc"]
 [ext_resource type="Texture2D" uid="uid://ci15i5t3k2a1s" path="res://assets/sprites/dust_particle.png" id="1_vfnxy"]
 
-[sub_resource type="Curve" id="Curve_1cqur"]
-_data = [Vector2(0, 0.703083), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_7qtwf"]
-curve = SubResource("Curve_1cqur")
-
-[sub_resource type="Curve" id="Curve_yh8nn"]
-max_value = 3.0
-_data = [Vector2(0, 1.96079), 0.0, 0.0, 0, 0, Vector2(0.503371, 0.795394), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_67mcw"]
-curve = SubResource("Curve_yh8nn")
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ci1f6"]
-lifetime_randomness = 0.4
-particle_flag_disable_z = true
-angle_min = 1.07288e-05
-angle_max = 360.0
-spread = 180.0
-initial_velocity_min = 180.0
-initial_velocity_max = 219.26
-gravity = Vector3(0, 0, 0)
-scale_min = 0.5
-scale_max = 1.5
-scale_over_velocity_curve = SubResource("CurveTexture_67mcw")
-alpha_curve = SubResource("CurveTexture_7qtwf")
-
 [node name="DustCloud" type="GPUParticles2D"]
-emitting = false
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_ci1f6")
+process_material = ExtResource("1_egndc")
 texture = ExtResource("1_vfnxy")
 lifetime = 0.5
 speed_scale = 1.3

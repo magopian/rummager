@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://brofk6oqxlvu6"]
+[gd_scene load_steps=8 format=3 uid="uid://brofk6oqxlvu6"]
 
 [ext_resource type="Script" path="res://card.gd" id="1_00shj"]
 [ext_resource type="PackedScene" uid="uid://btw4apieubt2i" path="res://dust_cloud.tscn" id="2_j26a1"]
 [ext_resource type="Texture2D" uid="uid://dgih8trwrav0f" path="res://assets/card_background_sprite.png" id="2_rr0sm"]
 [ext_resource type="Texture2D" uid="uid://whm181ryabkk" path="res://assets/card_background_shadow_sprite.png" id="2_s53wd"]
 [ext_resource type="Texture2D" uid="uid://c14iofacbne7e" path="res://assets/card_background_over_sprite.png" id="3_5ebab"]
+[ext_resource type="PackedScene" uid="uid://biyssf7mfv1mf" path="res://dust_trail.tscn" id="4_rjo7v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlpa3"]
 size = Vector2(300, 300)
@@ -17,6 +18,11 @@ gravity_scale = 0.0
 script = ExtResource("1_00shj")
 
 [node name="DustCloud" parent="." instance=ExtResource("2_j26a1")]
+unique_name_in_owner = true
+emitting = false
+one_shot = true
+
+[node name="DustTrail" parent="." instance=ExtResource("4_rjo7v")]
 unique_name_in_owner = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

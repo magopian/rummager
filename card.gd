@@ -10,6 +10,7 @@ signal left_screen(card: Card)
 @onready var pattern: Sprite2D = %Pattern
 @onready var border: Sprite2D = %Border
 @onready var dust_cloud: GPUParticles2D = %DustCloud
+@onready var dust_trail: GPUParticles2D = %DustTrail
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
@@ -23,9 +24,6 @@ var viewport_rect: Vector2
 
 
 func _ready() -> void:
-	dust_cloud.one_shot = true
-	dust_cloud.emitting = false
-	dust_cloud.position = Vector2.ZERO
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
 	viewport_rect = get_viewport_rect().size
@@ -73,6 +71,7 @@ func pickup() -> void:
 	freeze = true
 	held = true
 	show_big()
+	hide_trail()
 
 
 func show_big() -> void:
@@ -107,10 +106,19 @@ func drop(impulse=Vector2.ZERO) -> void:
 		held = false
 		show_small()
 		show_dust()
+		show_trail()
 
 
 func show_dust() -> void:
 	dust_cloud.emitting = true
+
+
+func hide_trail() -> void:
+	dust_trail.emitting = false
+
+
+func show_trail() -> void:
+	dust_trail.emitting = true
 
 
 func update_scale(new_scale: Vector2) -> void:
