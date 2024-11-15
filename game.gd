@@ -42,8 +42,14 @@ func _ready() -> void:
 	shuffle_button.pressed.connect(shuffle)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
-	for i in range(Global.level * num_cards):
-		var card: Card = new_card()
+	var time_before = Time.get_ticks_msec()
+	var all_permutations: Array[Dictionary] = get_all_permutations()
+	all_permutations.shuffle()
+	var level_num_cards: int = Global.level * num_cards
+	# Make sure we never try to instantiate more cards than we have.
+	var total_num_cards: int = min(level_num_cards, all_permutations.size())
+	for i in range(total_num_cards):
+		var card: Card = new_card(all_permutations)
 		cards.add_child(card)
 		if i == 0:
 			card_to_find = card
@@ -64,29 +70,31 @@ func animate_button(button: Button) -> void:
 	tween.tween_property(button, "scale", Vector2.ONE, 0.5)
 
 
-func new_card() -> Card:
+func get_all_permutations() -> Array[Dictionary]:
+	var permutations: Array[Dictionary] = []
+	for background_color in background_colors:
+		for color in colors:
+			for pattern in patterns:
+				for border in borders:
+					permutations.push_back({
+						"background_color": background_color,
+						"color": color,
+						"pattern_sprite": pattern,
+						"border_sprite": border,
+					})
+	return permutations
+
+func new_card(all_permutations: Array[Dictionary]) -> Card:
 	var card: Card = card_scene.instantiate()
 	card.clicked.connect(_on_card_clicked)
 	card.left_screen.connect(_on_card_left_screen)
 	card.position = Global.viewport_size / 2
 	card.rotation_degrees = randf_range(-20, 20)
-	var card_data: Dictionary = random_card()
-	# TODO: fail after a given number of tries!
-	while card_data in card_datas:
-		card_data = random_card()
+	var card_data: Dictionary = all_permutations.pop_back()
 	card_datas.append(card_data)
 	card.data = card_data
 	card.call_deferred("show_small")
 	return card
-
-
-func random_card() -> Dictionary:
-	return {
-		"background_color": background_colors.pick_random(),
-		"color": colors.pick_random(),
-		"pattern_sprite": patterns.pick_random(),
-		"border_sprite": borders.pick_random(),
-	}
 
 
 func _on_menu_button_pressed() -> void:
