@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=62 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -46,11 +46,9 @@
 [ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="45_5qh7m"]
 [ext_resource type="AudioStream" uid="uid://b2se2e8pslvuh" path="res://assets/sounds/start.wav" id="45_sxixt"]
 [ext_resource type="Texture2D" uid="uid://dporhmhtywurp" path="res://assets/cards_borders/thick.png" id="46_7s2qb"]
-[ext_resource type="Texture2D" uid="uid://dydmvh0c4fan8" path="res://assets/sprites/sprite_wrong.png" id="46_po0o2"]
 [ext_resource type="AudioStream" uid="uid://b0bos3blcxi6j" path="res://assets/sounds/lose.wav" id="46_qsdsf"]
 [ext_resource type="Texture2D" uid="uid://y8x6v61pedyv" path="res://assets/cards_borders/triangles.png" id="47_co188"]
 [ext_resource type="AudioStream" uid="uid://ufon2ppmslv7" path="res://assets/sounds/pickup.wav" id="47_nik6d"]
-[ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="47_oxn3a"]
 [ext_resource type="AudioStream" uid="uid://d3jpbah8ihbnr" path="res://assets/sounds/drop.wav" id="48_8jvtj"]
 [ext_resource type="AudioStream" uid="uid://dpg078ihlfk80" path="res://assets/sounds/exit_screen.wav" id="49_u307k"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="50_2o8bk"]
@@ -60,10 +58,9 @@
 [ext_resource type="Texture2D" uid="uid://yoh5ervhre0q" path="res://assets/sprites/menu_hover.png" id="53_wty3r"]
 [ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="54_71tse"]
 [ext_resource type="Texture2D" uid="uid://c74f0fstiamim" path="res://assets/sprites/shuffle_icon.png" id="54_asxbk"]
-[ext_resource type="Texture2D" uid="uid://bwm31tuymnoxs" path="res://assets/sprites/background_win.png" id="54_r2wap"]
-[ext_resource type="Texture2D" uid="uid://be6kqaxf8oiyh" path="res://assets/sprites/background_lose.png" id="55_gc81l"]
 [ext_resource type="Texture2D" uid="uid://dhvsbddv3u720" path="res://assets/sprites/shuffle_hover.png" id="55_kwsue"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
+[ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="65_oc4fy"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_gbsqv")
@@ -197,150 +194,6 @@ layout_mode = 2
 text = "Let's go!"
 color = Color(1, 0.545098, 0.25098, 1)
 
-[node name="YouWinCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
-unique_name_in_owner = true
-layer = 5
-visible = false
-
-[node name="ScrollingBackground" parent="YouWinCanvasLayer" instance=ExtResource("50_2o8bk")]
-mouse_filter = 2
-texture = ExtResource("54_r2wap")
-
-[node name="MarginContainer" type="MarginContainer" parent="YouWinCanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="LevelLabel" parent="YouWinCanvasLayer/MarginContainer" instance=ExtResource("51_n831h")]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="YouWinCanvasLayer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="YouWinCanvasLayer/MarginContainer/CenterContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="YouWinCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "YOU WIN!"
-horizontal_alignment = 1
-
-[node name="NextLevelButton" parent="YouWinCanvasLayer/MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 100)
-layout_mode = 2
-text = "Next level"
-
-[node name="YouLoseCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
-unique_name_in_owner = true
-layer = 5
-visible = false
-
-[node name="ScrollingBackground" parent="YouLoseCanvasLayer" instance=ExtResource("50_2o8bk")]
-mouse_filter = 2
-texture = ExtResource("55_gc81l")
-
-[node name="MarginContainer" type="MarginContainer" parent="YouLoseCanvasLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="LevelLabel" parent="YouLoseCanvasLayer/MarginContainer" instance=ExtResource("51_n831h")]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="YouLoseCanvasLayer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_colors/font_outline_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "You lost :("
-horizontal_alignment = 1
-
-[node name="LostReason" type="Label" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_colors/font_outline_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_font_sizes/font_size = 20
-text = "
-because"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="WrongContainer" type="HBoxContainer" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Sprite2D" type="TextureRect" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer/WrongContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-texture = ExtResource("46_po0o2")
-
-[node name="CardDisplayWrong" type="Control" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer/WrongContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ValidContainer" type="HBoxContainer" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Sprite2D" type="TextureRect" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer/ValidContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-mouse_filter = 2
-texture = ExtResource("47_oxn3a")
-
-[node name="CardDisplayCorrect" type="Control" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer/ValidContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(200, 200)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="TryAgainButton" parent="YouLoseCanvasLayer/MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource("45_5qh7m")]
-unique_name_in_owner = true
-layout_mode = 2
-text = "Try again"
-color = Color(1, 0.956863, 0.721569, 1)
-outline_color = Color(0.635294, 0.184314, 0.788235, 1)
-focus_color = Color(1, 0.545098, 0.25098, 1)
-
 [node name="Zones" parent="." instance=ExtResource("64_rxnl2")]
 unique_name_in_owner = true
 visible = false
@@ -351,3 +204,10 @@ unique_name_in_owner = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="FadeTransition" parent="CanvasLayer" instance=ExtResource("65_oc4fy")]
+unique_name_in_owner = true
+visible = false

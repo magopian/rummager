@@ -8,18 +8,10 @@ extends Node2D
 @onready var level_label: Label = %LevelLabel
 @onready var card_display: Control = %CardDisplay
 @onready var lets_go_button: AnimatedButton = %LetsGoButton
-@onready var you_win_canvas_layer: CanvasLayer = %YouWinCanvasLayer
-@onready var next_level_button: AnimatedButton = %NextLevelButton
-@onready var you_lose_canvas_layer: CanvasLayer = %YouLoseCanvasLayer
-@onready var lost_reason: Label = %LostReason
-@onready var try_again_button: AnimatedButton = %TryAgainButton
-@onready var card_display_correct: Control = %CardDisplayCorrect
-@onready var card_display_wrong: Control = %CardDisplayWrong
-@onready var valid_container: HBoxContainer = %ValidContainer
-@onready var wrong_container: HBoxContainer = %WrongContainer
 @onready var zones: CanvasLayer = %Zones
 @onready var menu_canvas_layer: CanvasLayer = %MenuCanvasLayer
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
+@onready var fade_transition: ColorRect = %FadeTransition
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -43,12 +35,9 @@ var viewport_size: Vector2
 
 
 func _ready() -> void:
+	fade_transition.show()
 	viewport_size = get_viewport_rect().size
 	menu_button.pressed.connect(_on_menu_button_pressed)
-	next_level_button.button_pressed.connect(_on_next_level_pressed)
-	you_win_canvas_layer.button_pressed.connect(_on_next_level_pressed)
-	try_again_button.button_pressed.connect(_on_try_again_pressed)
-	you_lose_canvas_layer.button_pressed.connect(_on_try_again_pressed)
 	shuffle_button.pressed.connect(shuffle)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
@@ -59,6 +48,7 @@ func _ready() -> void:
 			card_to_find = card
 	pick_me_canvas_layer.show()
 	display_card_to_find()
+	await fade_transition.fade_in()
 
 
 func display_card_to_find() -> void:
@@ -99,32 +89,23 @@ func random_card() -> Dictionary:
 
 
 func _on_menu_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://start_menu.tscn")
+	fade_transition.fade_to_file("res://start_menu.tscn")
 
 
-func play_sound(sound: AudioStream) -> void:
+func play_sound(sound: AudioStream) -> AudioStreamPlayer:
 	audio_stream_player.stream = sound
 	audio_stream_player.play()
-
-
-func _on_try_again_pressed() -> void:
-	shuffle()
-
-
-func _on_next_level_pressed() -> void:
-	Global.level += 1
-	Music.play_theme()
-	shuffle()
+	return audio_stream_player
 
 
 func shuffle() -> void:
-	play_sound(sound_shuffle)
-	get_tree().reload_current_scene()
+	fade_transition.fade_to_file("res://game.tscn", sound_shuffle)
 
 
 func _on_lets_go_button_pressed() -> void:
 	play_sound(sound_shuffle)
 	pick_me_canvas_layer.queue_free()
+	await fade_transition.fade_in()
 	shuffle_cards()
 
 
@@ -155,29 +136,20 @@ func _on_card_left_screen(card: Card) -> void:
 		held_card = null
 	if thrown_out_bottom(card):
 		if card == card_to_find:
-			you_win_canvas_layer.show()
 			Music.play_win()
+			fade_transition.fade_to_file("res://you_win.tscn")
 		else:
-			play_sound(sound_lose)
-			var correct_card: Card = card_to_find.duplicate()
-			card_display_correct.add_child(correct_card)
-			correct_card.show_medium()
-			var wrong_card: Card = card.duplicate()
-			card_display_wrong.add_child(wrong_card)
-			wrong_card.show_medium()
-			you_lose_canvas_layer.show()
-			valid_container.show()
-			wrong_container.show()
-			lost_reason.text = "You chose the wrong card"
+			var you_lose_scene = load("res://you_lose.tscn").instantiate()
+			you_lose_scene.lost_reason = "You chose the wrong card"
+			you_lose_scene.valid_card = card_to_find.duplicate()
+			you_lose_scene.wrong_card = card.duplicate()
+			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 	else:
 		if card == card_to_find:
-			play_sound(sound_lose)
-			var correct_card: Card = card_to_find.duplicate()
-			card_display_correct.add_child(correct_card)
-			correct_card.show_medium()
-			you_lose_canvas_layer.show()
-			wrong_container.hide()
-			lost_reason.text = "You discarded the card you were looking for"
+			var you_lose_scene = load("res://you_lose.tscn").instantiate()
+			you_lose_scene.lost_reason = "You discarded the card you were looking for"
+			you_lose_scene.valid_card = card_to_find.duplicate()
+			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 
 
 func thrown_out_bottom(card: Card) -> bool:
