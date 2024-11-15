@@ -2,26 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="1_4n2jc"]
 [ext_resource type="Script" path="res://credits.gd" id="1_efaty"]
-[ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="2_gk6pj"]
+[ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="3_h1rj1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qchel"]
 
-[node name="Credits" type="Control"]
-layout_mode = 3
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource("1_efaty")
+
+[node name="ScrollingBackground" parent="." instance=ExtResource("1_4n2jc")]
+mouse_filter = 2
+
+[node name="ClickCatch" type="TextureButton" parent="."]
+unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_efaty")
 
-[node name="ClickToChangeScene" parent="." instance=ExtResource("2_gk6pj")]
-unique_name_in_owner = true
-
-[node name="ScrollingBackground" parent="ClickToChangeScene" instance=ExtResource("1_4n2jc")]
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="ClickToChangeScene"]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,11 +32,11 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ClickToChangeScene/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 clip_contents = false
 layout_mode = 2
 mouse_filter = 2
@@ -50,12 +49,12 @@ text = "[center][wave freq=5 amp=150]Credits[/wave][/center]"
 fit_content = true
 scroll_active = false
 
-[node name="Control" type="Control" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
@@ -64,7 +63,7 @@ theme_override_font_sizes/font_size = 48
 text = "Music"
 horizontal_alignment = 1
 
-[node name="LinkButton" type="LinkButton" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="LinkButton" type="LinkButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
@@ -78,12 +77,12 @@ theme_override_font_sizes/font_size = 24
 text = "Celthyan - Music"
 uri = "https://www.youtube.com/@celthyan-music1118/videos"
 
-[node name="Control3" type="Control" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Label2" type="Label" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
@@ -92,7 +91,7 @@ theme_override_font_sizes/font_size = 48
 text = "Huge thanks"
 horizontal_alignment = 1
 
-[node name="Label3" type="Label" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(10, 10)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
@@ -103,12 +102,12 @@ text = "To my family and friends"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Control2" type="Control" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MenuButton" type="Button" parent="ClickToChangeScene/MarginContainer/VBoxContainer"]
+[node name="MenuButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
@@ -132,3 +131,7 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_qchel")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_qchel")
 text = "Back
 "
+
+[node name="FadeTransition" parent="." instance=ExtResource("3_h1rj1")]
+unique_name_in_owner = true
+visible = false
