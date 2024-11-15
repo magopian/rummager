@@ -28,8 +28,9 @@ func fade_out(sound: AudioStream = null) -> void:
 
 
 func fade_to_file(file: String, sound: AudioStream = null) -> void:
-	await fade_out(sound)
-	get_tree().change_scene_to_file(file)
+	var scene: PackedScene = load(file)
+	var node: Node = scene.instantiate()
+	fade_to_node(node, sound)
 
 
 func fade_to_node(node: Node, sound: AudioStream = null) -> void:
