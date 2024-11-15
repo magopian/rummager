@@ -135,9 +135,9 @@ stretch_mode = 0
 [node name="PickMeCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
 layer = 5
-visible = false
 
 [node name="ScrollingBackground" parent="PickMeCanvasLayer" instance=ExtResource("50_2o8bk")]
+visible = false
 mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="PickMeCanvasLayer"]
@@ -165,6 +165,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" type="Label" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
@@ -174,6 +175,7 @@ text = "Find Me!"
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="PickMeCanvasLayer/MarginContainer/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_font_sizes/font_size = 20

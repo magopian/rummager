@@ -131,7 +131,12 @@ func update_scale(new_scale: Vector2) -> void:
 		child.scale = new_scale
 
 
-func animate_scale(new_scale: Vector2) -> void:
+func animate_scale(new_scale: Vector2) -> Tween:
+	return scale_to(new_scale, 0.15)
+
+
+func scale_to(new_scale: Vector2, duration: float) -> Tween:
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	for child in get_children():
-		scale_tween.tween_property(child, "scale", new_scale, 0.15)
+		scale_tween.tween_property(child, "scale", new_scale, duration)
+	return scale_tween

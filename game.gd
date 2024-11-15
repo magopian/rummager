@@ -12,6 +12,8 @@ extends Node2D
 @onready var menu_canvas_layer: CanvasLayer = %MenuCanvasLayer
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 @onready var fade_transition: ColorRect = %FadeTransition
+@onready var label: Label = %Label
+@onready var label_2: Label = %Label2
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -104,8 +106,13 @@ func shuffle() -> void:
 
 func _on_lets_go_button_pressed() -> void:
 	play_sound(sound_shuffle)
+	level_label.hide()
+	lets_go_button.hide()
+	label.hide()
+	label_2.hide()
+	var card: Card = card_display.get_child(0)
+	await card.scale_to(Vector2.ZERO, 0.5).finished
 	pick_me_canvas_layer.queue_free()
-	await fade_transition.fade_in()
 	shuffle_cards()
 
 
