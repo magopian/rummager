@@ -37,29 +37,30 @@ func slide_in_screen(node: Node, duration: float) -> Tween:
 
 
 func slide_off_screen(node: Node, duration: float) -> Tween:
-	print("viewport_size: ", viewport_size)
-	print("node: ", node)
-	print("node global position: ", node.global_position)
-	print("node size: ", node.size)
+	#print("viewport_size: ", viewport_size)
+	#print("node: ", node)
+	#print("node global position: ", node.global_position)
+	#print("node size: ", node.size)
+	#
 	# Distance from the bottom of the node to the top of the screen (y = 0)
 	var distance_to_top: float = node.global_position.y + node.size.y
 	var distance_to_top_norm: float = distance_to_top / viewport_size.y
-	print("distance to top: ", distance_to_top, " - norm: ", distance_to_top_norm)
+	#print("distance to top: ", distance_to_top, " - norm: ", distance_to_top_norm)
 	
 	# Distance from the top of the node to the bottom of the screen
 	var distance_to_bottom: float = viewport_size.y - node.global_position.y
 	var distance_to_bottom_norm: float = distance_to_bottom / viewport_size.y
-	print("distance to bottom: ", distance_to_bottom, " - norm: ", distance_to_bottom_norm)
+	#print("distance to bottom: ", distance_to_bottom, " - norm: ", distance_to_bottom_norm)
 	
 	# Distance from the right side of the node to the left of the screen (x = 0)
 	var distance_to_left: float = node.global_position.x + node.size.x
 	var distance_to_left_norm: float = distance_to_left / viewport_size.x
-	print("distance to left: ", distance_to_left, " - norm: ", distance_to_left_norm)
+	#print("distance to left: ", distance_to_left, " - norm: ", distance_to_left_norm)
 	
 	# Distance from the left side of the node to the right of the screen
 	var distance_to_right: float = viewport_size.x - node.global_position.x
 	var distance_to_right_norm: float = distance_to_right / viewport_size.x
-	print("distance to right: ", distance_to_right, " - norm: ", distance_to_right_norm)
+	#print("distance to right: ", distance_to_right, " - norm: ", distance_to_right_norm)
 	
 	var new_position: Vector2 = node.global_position
 	var min_distance_norm: float = min(distance_to_top_norm, distance_to_bottom_norm, distance_to_left_norm, distance_to_right_norm)
@@ -72,7 +73,7 @@ func slide_off_screen(node: Node, duration: float) -> Tween:
 			new_position.x -= distance_to_left
 		distance_to_right_norm:
 			new_position.x += distance_to_right
-	print("new position: ", new_position)
+	#print("new position: ", new_position)
 	
 	if node.get_meta("initial_position", Vector2.ZERO) != Vector2.ZERO:  # Only set the initial position if it wasn't set yet
 		node.set_meta("initial_position", node.global_position)
