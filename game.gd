@@ -32,12 +32,10 @@ extends Node2D
 var held_card: Card
 var card_to_find: Card
 var card_datas: Array[Dictionary]
-var viewport_size: Vector2
 
 
 func _ready() -> void:
-	viewport_size = get_viewport_rect().size
-	slide_off_screen(menu, 0)  # Move the menu out of the screen
+	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	fade_transition.show()
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	shuffle_button.pressed.connect(shuffle)
@@ -69,7 +67,7 @@ func new_card() -> Card:
 	var card: Card = card_scene.instantiate()
 	card.clicked.connect(_on_card_clicked)
 	card.left_screen.connect(_on_card_left_screen)
-	card.position = viewport_size / 2
+	card.position = Global.viewport_size / 2
 	card.rotation_degrees = randf_range(-20, 20)
 	var card_data: Dictionary = random_card()
 	# TODO: fail after a given number of tries!
@@ -106,65 +104,13 @@ func shuffle() -> void:
 
 func _on_lets_go_button_pressed() -> void:
 	play_sound(sound_shuffle)
-	slide_off_screen(level_label, 0.15)
-	slide_off_screen(explanation, 0.15)
-	slide_in_screen(menu, 0.15)
+	Global.slide_off_screen(level_label, 0.15)
+	Global.slide_off_screen(explanation, 0.15)
+	Global.slide_in_screen(menu, 0.15)
 	var card: Card = card_display.get_child(0)
 	await card.scale_to(Vector2.ZERO, 0.5).finished
 	pick_me_canvas_layer.queue_free()
 	shuffle_cards()
-
-
-func slide_in_screen(node: Node, duration: float) -> Tween:
-	var initial_position: Vector2 = node.get_meta("initial_position", Vector2.ZERO)
-	var tween: Tween = node.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(node, "global_position", initial_position, duration)
-	return tween
-
-
-func slide_off_screen(node: Node, duration: float) -> Tween:
-	print("viewport_size: ", viewport_size)
-	print("node: ", node)
-	print("node global position: ", node.global_position)
-	print("node size: ", node.size)
-	# Distance from the bottom of the node to the top of the screen (y = 0)
-	var distance_to_top: float = node.global_position.y + node.size.y
-	var distance_to_top_norm: float = distance_to_top / viewport_size.y
-	print("distance to top: ", distance_to_top, " - norm: ", distance_to_top_norm)
-	
-	# Distance from the top of the node to the bottom of the screen
-	var distance_to_bottom: float = viewport_size.y - node.global_position.y
-	var distance_to_bottom_norm: float = distance_to_bottom / viewport_size.y
-	print("distance to bottom: ", distance_to_bottom, " - norm: ", distance_to_bottom_norm)
-	
-	# Distance from the right side of the node to the left of the screen (x = 0)
-	var distance_to_left: float = node.global_position.x + node.size.x
-	var distance_to_left_norm: float = distance_to_left / viewport_size.x
-	print("distance to left: ", distance_to_left, " - norm: ", distance_to_left_norm)
-	
-	# Distance from the left side of the node to the right of the screen
-	var distance_to_right: float = viewport_size.x - node.global_position.x
-	var distance_to_right_norm: float = distance_to_right / viewport_size.x
-	print("distance to right: ", distance_to_right, " - norm: ", distance_to_right_norm)
-	
-	var new_position: Vector2 = node.global_position
-	var min_distance_norm: float = min(distance_to_top_norm, distance_to_bottom_norm, distance_to_left_norm, distance_to_right_norm)
-	match min_distance_norm:
-		distance_to_top_norm:
-			new_position.y -= distance_to_top
-		distance_to_bottom_norm:
-			new_position.y += distance_to_bottom
-		distance_to_left_norm:
-			new_position.x -= distance_to_left
-		distance_to_right_norm:
-			new_position.x += distance_to_right
-	print("new position: ", new_position)
-	
-	if node.get_meta("initial_position", Vector2.ZERO) != Vector2.ZERO:  # Only set the initial position if it wasn't set yet
-		node.set_meta("initial_position", node.global_position)
-	var tween: Tween = node.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.tween_property(node, "global_position", new_position, duration)
-	return tween
 
 
 func shuffle_cards() -> void:
@@ -184,7 +130,7 @@ func _on_card_clicked(card: Card) -> void:
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
 		zones.show()
-		slide_off_screen(menu, 0.15)
+		Global.slide_off_screen(menu, 0.15)
 		
 
 
@@ -212,8 +158,8 @@ func _on_card_left_screen(card: Card) -> void:
 
 func thrown_out_bottom(card: Card) -> bool:
 	return (0 < card.position.x and
-			card.position.x < viewport_size.x and
-			card.position.y > viewport_size.y)
+			card.position.x < Global.viewport_size.x and
+			card.position.y > Global.viewport_size.y)
 
 
 func _unhandled_input(event):
@@ -224,11 +170,11 @@ func _unhandled_input(event):
 				held_card.drop(Input.get_last_mouse_velocity())
 			held_card = null
 			zones.hide()
-			slide_in_screen(menu, 0.15)
+			Global.slide_in_screen(menu, 0.15)
 
 
 func get_random_position() -> Vector2:
 	return Vector2(
-		randi_range(50, viewport_size.x - 50),  # The cards are 50x50
-		randi_range(150, viewport_size.y - 150)  # Leave some extra space for the bottom menu
+		randi_range(50, Global.viewport_size.x - 50),  # The cards are 50x50
+		randi_range(150, Global.viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)

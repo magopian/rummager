@@ -20,21 +20,18 @@ signal left_screen(card: Card)
 
 var held = false
 var tween: Tween
-var viewport_rect: Vector2
 
 
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
-	viewport_rect = get_viewport_rect().size
-	compute_small_size(viewport_rect)
+	compute_small_size(Global.viewport_size)
 	get_viewport().physics_object_picking_sort = true
 	init_from_data()
 
 
 func compute_small_size(viewport_size: Vector2) -> void:
 	var smallest_size: int = min(viewport_size.x, viewport_size.y)
-	viewport_size.normalized()
 	# smallest_size = 414 => small_scale = 0.16
 	var scale_size: float = smallest_size * 0.16 / 414
 	small_scale = Vector2(scale_size, scale_size)

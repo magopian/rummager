@@ -146,6 +146,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_filter = 2
 
 [node name="LevelLabel" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("51_n831h")]
