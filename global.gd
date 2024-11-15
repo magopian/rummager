@@ -31,6 +31,7 @@ func set_level(new_level: int) -> void:
 
 func slide_in_screen(node: Node, duration: float) -> Tween:
 	var initial_position: Vector2 = node.get_meta("initial_position", Vector2.ZERO)
+	#print("metadata: ", initial_position)
 	var tween: Tween = node.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(node, "global_position", initial_position, duration)
 	return tween
@@ -41,7 +42,7 @@ func slide_off_screen(node: Node, duration: float) -> Tween:
 	#print("node: ", node)
 	#print("node global position: ", node.global_position)
 	#print("node size: ", node.size)
-	#
+	
 	# Distance from the bottom of the node to the top of the screen (y = 0)
 	var distance_to_top: float = node.global_position.y + node.size.y
 	var distance_to_top_norm: float = distance_to_top / viewport_size.y
@@ -75,7 +76,8 @@ func slide_off_screen(node: Node, duration: float) -> Tween:
 			new_position.x += distance_to_right
 	#print("new position: ", new_position)
 	
-	if node.get_meta("initial_position", Vector2.ZERO) != Vector2.ZERO:  # Only set the initial position if it wasn't set yet
+	if not node.has_meta("initial_position"):
+		#print("setting metadata: ", node.global_position)
 		node.set_meta("initial_position", node.global_position)
 	var tween: Tween = node.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(node, "global_position", new_position, duration)
