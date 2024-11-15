@@ -6,6 +6,7 @@ extends Control
 @onready var credits_button: Button = %CreditsButton
 @onready var quit_button: Button = %QuitButton
 @onready var version_label: Label = %VersionLabel
+@onready var fade_transition: ColorRect = %FadeTransition
 
 
 func _ready() -> void:
@@ -31,20 +32,20 @@ func _ready() -> void:
 
 
 func _on_continue_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://game.tscn")
+	fade_transition.fade_to_file("res://game.tscn")
 
 
 func _on_start_button_pressed() -> void:
 	Global.level = 1
-	get_tree().change_scene_to_file("res://game.tscn")
+	fade_transition.fade_to_file("res://game.tscn")
 
 
 func _on_how_to_play() -> void:
-	get_tree().change_scene_to_file("res://how_to_play.tscn")
+	fade_transition.fade_to_file("res://how_to_play.tscn")
 
 
 func _on_credits_pressed() -> void:
-	get_tree().change_scene_to_file("res://credits.tscn")
+	fade_transition.fade_to_file("res://credits.tscn")
 
 
 func _on_quit_button_pressed() -> void:
