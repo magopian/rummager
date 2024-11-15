@@ -24,6 +24,7 @@ one_shot = true
 
 [node name="DustTrail" parent="." instance=ExtResource("4_rjo7v")]
 unique_name_in_owner = true
+emitting = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_tlpa3")

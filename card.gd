@@ -96,6 +96,8 @@ func show_medium() -> void:
 	update_scale(medium_scale)
 	freeze = true
 	position = Vector2(100, 100)
+	hide_dust()
+	hide_trail()
 	animate_card()
 
 
@@ -108,6 +110,9 @@ func drop(impulse=Vector2.ZERO) -> void:
 		show_dust()
 		show_trail()
 
+
+func hide_dust() -> void:
+	dust_cloud.emitting = false
 
 func show_dust() -> void:
 	dust_cloud.emitting = true
