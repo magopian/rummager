@@ -15,7 +15,7 @@ export_from_godot:
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "Android APK" ../export_android/rummager.apk
 	rm -rf ../export_ios && mkdir ../export_ios
 	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "iOS" ../export_ios/rummager.ipa
-	/Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "macOS" ../export_macos/rummager.dmg
+	# /Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "macOS" ../export_macos/rummager.dmg
 
 export: update_version git_bump_version export_from_godot
 	cd ../exports && rm -rf Archive.zip && zip Archive *
@@ -23,8 +23,8 @@ export: update_version git_bump_version export_from_godot
 upload: export
 	../../butler-darwin-amd64/butler push ../exports/Archive.zip magopian/rummager:html
 	../../butler-darwin-amd64/butler push ../export_android/rummager.apk magopian/rummager:android
-	echo "*** Open https://appstoreconnect.apple.com/apps/6737626586/distribution/ios/version/inflight and add a new version"
-	echo "*** Open https://play.google.com/console/u/0/developers/6835995711892807257/app-list, select Rummager, browse the left pannel to 'Production' > 'Créer une version'"
+	echo "*** Open the exported project in xcode, archive it, send it to the app store, then open https://appstoreconnect.apple.com/apps/6737626586/distribution/ios/version/inflight and add a new version"
+	echo "*** Open https://play.google.com/console/u/0/developers/6835995711892807257/app-list, select Rummager, browse the left pannel to 'Tester et publier' > 'Production' > 'Créer une version'"
 
 macos_specific:
 	# https://alicegg.tech/2024/09/12/godot-mac
