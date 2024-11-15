@@ -107,10 +107,12 @@ func _on_lets_go_button_pressed() -> void:
 	Global.slide_off_screen(level_label, 0.15)
 	Global.slide_off_screen(explanation, 0.15)
 	Global.slide_in_screen(menu, 0.15)
+	shuffle_cards()
 	var card: Card = card_display.get_child(0)
+	var tween: Tween = card.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(card, "global_position", Global.viewport_size / 2, 0.5)
 	await card.scale_to(Vector2.ZERO, 0.5).finished
 	pick_me_canvas_layer.queue_free()
-	shuffle_cards()
 
 
 func shuffle_cards() -> void:
