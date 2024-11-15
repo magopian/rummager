@@ -139,7 +139,7 @@ func _on_card_clicked(card: Card) -> void:
 func _on_card_left_screen(card: Card) -> void:
 	play_sound(sound_exit_screen)
 	if card == held_card:
-		held_card = null
+		drop_card()
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			Music.play_win()
@@ -170,9 +170,13 @@ func _unhandled_input(event):
 			play_sound(sound_drop)
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
-			held_card = null
-			zones.hide()
-			Global.slide_in_screen(menu, 0.15)
+			drop_card()
+
+
+func drop_card() -> void:
+	held_card = null
+	zones.hide()
+	Global.slide_in_screen(menu, 0.15)
 
 
 func get_random_position() -> Vector2:
