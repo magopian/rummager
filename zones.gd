@@ -24,3 +24,13 @@ func _process(_delta: float):
 	zone_top.modulate.a = lerp(1, 0, distance_to_top)
 	zone_right.modulate.a = lerp(1, 0, distance_to_right)
 	zone_bottom.modulate.a = lerp(1, 0, distance_to_bottom)
+
+
+func slide_in(duration: float) -> void:
+	for panel in get_children():
+		Global.slide_in_screen(panel, duration)
+
+
+func slide_out(duration: float) -> void:
+	for panel in get_children():
+		Global.slide_off_screen(panel, duration)

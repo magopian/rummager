@@ -73,7 +73,7 @@ layout_mode = 2
 texture = ExtResource("1_0bsb2")
 expand_mode = 2
 
-[node name="ArrowUp" type="TextureRect" parent="PanelContainerTop"]
+[node name="ArrowTop" type="TextureRect" parent="PanelContainerTop"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0

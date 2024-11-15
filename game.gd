@@ -36,6 +36,7 @@ var card_datas: Array[Dictionary]
 
 func _ready() -> void:
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
+	zones.slide_out(0)
 	fade_transition.show()
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	shuffle_button.pressed.connect(shuffle)
@@ -131,7 +132,7 @@ func _on_card_clicked(card: Card) -> void:
 		card.pickup()
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
-		zones.show()
+		zones.slide_in(0.15)
 		Global.slide_off_screen(menu, 0.15)
 		
 
@@ -175,7 +176,7 @@ func _unhandled_input(event):
 
 func drop_card() -> void:
 	held_card = null
-	zones.hide()
+	zones.slide_out(0.15)
 	Global.slide_in_screen(menu, 0.15)
 
 
