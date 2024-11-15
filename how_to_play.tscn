@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dmvihrw4pxni7"]
+[gd_scene load_steps=9 format=3 uid="uid://dmvihrw4pxni7"]
 
 [ext_resource type="Script" path="res://how_to_play.gd" id="1_e31w0"]
 [ext_resource type="Texture2D" uid="uid://b52ah5apk1th1" path="res://assets/how_to_play/1_memorize.png" id="2_csalg"]
@@ -7,17 +7,104 @@
 [ext_resource type="Texture2D" uid="uid://ch5tnrnptytjw" path="res://assets/how_to_play/4_throw.png" id="5_ttivv"]
 [ext_resource type="Texture2D" uid="uid://c5yfg4ji4wpgv" path="res://assets/how_to_play/5_lost.png" id="6_q2f0y"]
 [ext_resource type="Texture2D" uid="uid://bx15o5mdqm64" path="res://assets/how_to_play/6_win.png" id="7_bd5g8"]
+[ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="8_cmcxc"]
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="HowToPlay" type="CanvasLayer"]
 script = ExtResource("1_e31w0")
-images = Array[CompressedTexture2D]([ExtResource("2_csalg"), ExtResource("3_vpgwj"), ExtResource("4_8s0pl"), ExtResource("5_ttivv"), ExtResource("6_q2f0y"), ExtResource("7_bd5g8")])
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Screens" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect6" type="TextureRect" parent="Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.609756
+offset_right = 0.609741
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_bd5g8")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect5" type="TextureRect" parent="Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.609756
+offset_right = 0.609741
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_q2f0y")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.609756
+offset_right = 0.609741
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_ttivv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.609756
+offset_right = 0.609741
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_8s0pl")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.609756
+offset_right = 0.609741
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_vpgwj")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="Screens"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_csalg")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ClickCatch" type="TextureButton" parent="."]
 unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-expand_mode = 3
-stretch_mode = 5
+
+[node name="FadeTransition" parent="." instance=ExtResource("8_cmcxc")]
+unique_name_in_owner = true
+visible = false

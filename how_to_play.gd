@@ -1,24 +1,20 @@
 extends CanvasLayer
 
 
-@onready var texture_rect: TextureRect = %TextureRect
+@onready var screens: Control = %Screens
+@onready var click_catch: TextureButton = %ClickCatch
+@onready var fade_transition: ColorRect = %FadeTransition
 
-
-@export var images: Array[CompressedTexture2D]
 
 func _ready() -> void:
-	texture_rect.gui_input.connect(_on_gui_input)
-	load_next_how_to_play()
-
-
-func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
-		print("loading next")
-		load_next_how_to_play()
+	click_catch.pressed.connect(load_next_how_to_play)
 
 
 func load_next_how_to_play() -> void:
-	if images.size():
-		texture_rect.texture = images.pop_front()
-	else:
-		get_tree().change_scene_to_file("res://start_menu.tscn")
+	if screens.get_child_count() <= 1:
+		fade_transition.fade_to_file("res://start_menu.tscn")
+	var current_image: TextureRect = screens.get_child(-1)
+	var tween: Tween = current_image.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(current_image, "modulate:a", 0, 0.5)
+	await tween.finished
+	current_image.queue_free()
