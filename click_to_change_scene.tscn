@@ -5,9 +5,8 @@
 [node name="ClickToChangeScene" type="CanvasLayer"]
 script = ExtResource("1_14px6")
 
-[node name="Control" type="Control" parent="."]
+[node name="Button" type="TextureButton" parent="."]
 unique_name_in_owner = true
-layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

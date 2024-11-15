@@ -1,14 +1,13 @@
 extends CanvasLayer
 
-@onready var control: Control = %Control
+@onready var button: TextureButton = %Button
 
 signal button_pressed
 
 
 func _ready() -> void:
-	control.gui_input.connect(_on_gui_input)
+	button.pressed.connect(_on_button_pressed)
 
 
-func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		button_pressed.emit()
+func _on_button_pressed() -> void:
+	button_pressed.emit()
