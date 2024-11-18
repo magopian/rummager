@@ -42,7 +42,6 @@ func _ready() -> void:
 	shuffle_button.pressed.connect(shuffle)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
-	var time_before = Time.get_ticks_msec()
 	var all_permutations: Array[Dictionary] = get_all_permutations()
 	all_permutations.shuffle()
 	var level_num_cards: int = Global.level * num_cards
@@ -126,10 +125,12 @@ func _on_lets_go_button_pressed() -> void:
 
 func shuffle_cards() -> void:
 	var x: int = 0
+	var total_num_cards: float = cards.get_child_count()
+	var speed: float = 1 / total_num_cards
 	for card in cards.get_children():
 		var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		var random_position: Vector2 = get_random_position()
-		tween.tween_interval(x * 0.01)
+		tween.tween_interval(x * speed)
 		tween.tween_property(card, "position", random_position, 1)
 		x += 1
 
