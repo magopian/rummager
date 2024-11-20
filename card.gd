@@ -67,6 +67,9 @@ func pickup() -> void:
 		return
 	freeze = true
 	held = true
+
+
+func zoom_in() -> void:
 	show_big()
 	hide_trail()
 

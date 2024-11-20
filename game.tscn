@@ -208,3 +208,8 @@ layer = 100
 [node name="FadeTransition" parent="CanvasLayer" instance=ExtResource("65_oc4fy")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true

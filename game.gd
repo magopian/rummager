@@ -13,6 +13,7 @@ extends Node2D
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 @onready var fade_transition: ColorRect = %FadeTransition
 @onready var explanation: VBoxContainer = %Explanation
+@onready var timer: Timer = %Timer
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -42,6 +43,7 @@ func _ready() -> void:
 	shuffle_button.pressed.connect(shuffle)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
+	timer.timeout.connect(zoom_in)
 	var all_permutations: Array[Dictionary] = get_all_permutations()
 	all_permutations.shuffle()
 	var level_num_cards: int = Global.level * num_cards
@@ -141,9 +143,13 @@ func _on_card_clicked(card: Card) -> void:
 		card.pickup()
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
-		zones.slide_in(0.15)
-		Global.slide_off_screen(menu, 0.15)
-		
+		timer.start()
+
+
+func zoom_in() -> void:
+	held_card.zoom_in()
+	zones.slide_in(0.15)
+	Global.slide_off_screen(menu, 0.15)
 
 
 func _on_card_left_screen(card: Card) -> void:
@@ -177,6 +183,7 @@ func thrown_out_bottom(card: Card) -> bool:
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
+			timer.stop()
 			play_sound(sound_drop)
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
@@ -184,6 +191,7 @@ func _unhandled_input(event):
 
 
 func drop_card() -> void:
+	timer.stop()
 	held_card = null
 	zones.slide_out(0.15)
 	Global.slide_in_screen(menu, 0.15)
