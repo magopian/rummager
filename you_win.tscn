@@ -1,11 +1,40 @@
-[gd_scene load_steps=7 format=3 uid="uid://bd3dh78rgvc5y"]
+[gd_scene load_steps=11 format=3 uid="uid://bd3dh78rgvc5y"]
 
 [ext_resource type="Script" path="res://you_win.gd" id="1_1piuq"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_daxe7"]
 [ext_resource type="Texture2D" uid="uid://bwm31tuymnoxs" path="res://assets/sprites/background_win.png" id="3_w121e"]
 [ext_resource type="PackedScene" uid="uid://dcxjxqadvhk87" path="res://level_label.tscn" id="4_lhu34"]
 [ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="5_rwuot"]
+[ext_resource type="PackedScene" uid="uid://quspx8oqeob8" path="res://confetti.tscn" id="6_3dxxo"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="6_a0ny3"]
+
+[sub_resource type="Curve" id="Curve_hkm28"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250751, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74102, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3m78u"]
+curve = SubResource("Curve_hkm28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_asff1"]
+resource_local_to_scene = true
+lifetime_randomness = 0.27
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 379.08
+initial_velocity_max = 650.0
+angular_velocity_min = 60.65
+angular_velocity_max = 283.69
+gravity = Vector3(0, 250, 0)
+scale_min = 0.1
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_3m78u")
+color = Color(1, 0.166667, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
+anim_offset_max = 1.0
 
 [node name="YouWin" type="CanvasLayer"]
 script = ExtResource("1_1piuq")
@@ -74,6 +103,16 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 text = "Next level"
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Confetti" parent="MarginContainer/VBoxContainer/Control3" instance=ExtResource("6_3dxxo")]
+position = Vector2(0, 0)
+process_material = SubResource("ParticleProcessMaterial_asff1")
 
 [node name="FadeTransition" parent="." instance=ExtResource("6_a0ny3")]
 unique_name_in_owner = true
