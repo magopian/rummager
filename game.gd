@@ -155,7 +155,7 @@ func zoom_in() -> void:
 
 func _on_card_left_screen(card: Card) -> void:
 	play_sound(sound_exit_screen)
-	screen_shake()
+	card_discarded(card)
 	if card == held_card:
 		drop_card()
 	if thrown_out_bottom(card):
@@ -174,10 +174,6 @@ func _on_card_left_screen(card: Card) -> void:
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card = card_to_find.duplicate()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
-
-
-func screen_shake() -> void:
-	camera_shaker.apply_shake()
 
 
 func thrown_out_bottom(card: Card) -> bool:
@@ -208,3 +204,7 @@ func get_random_position() -> Vector2:
 		randi_range(50, Global.viewport_size.x - 50),  # The cards are 50x50
 		randi_range(150, Global.viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)
+
+func card_discarded(card:Card) -> void:
+	var force: float =card.linear_velocity.length()
+	camera_shaker.apply_shake(force / 100)
