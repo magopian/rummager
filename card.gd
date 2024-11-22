@@ -11,6 +11,7 @@ signal left_screen(card: Card)
 @onready var border: Sprite2D = %Border
 @onready var dust_cloud: GPUParticles2D = %DustCloud
 @onready var dust_trail: GPUParticles2D = %DustTrail
+@onready var confetti: GPUParticles2D = %Confetti
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
@@ -53,8 +54,8 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 
 func _on_exit_screen() -> void:
+	visible_on_screen_notifier_2d.queue_free()
 	left_screen.emit(self)
-	call_deferred("queue_free")
 
 
 func _physics_process(_delta) -> void:
@@ -140,3 +141,17 @@ func scale_to(new_scale: Vector2, duration: float) -> Tween:
 	for child in get_children():
 		scale_tween.tween_property(child, "scale", new_scale, duration)
 	return scale_tween
+
+
+func discard(force: float) -> void:
+	var angle: float = linear_velocity.angle()
+	var confetti_scale: float = force / 5000
+	linear_velocity = Vector2.ZERO
+	var confetti_position: Vector2 = global_position.clamp(Vector2.ZERO, Global.viewport_size)
+	confetti.global_position = confetti_position
+	confetti.scale = Vector2(confetti_scale, confetti_scale)
+	confetti.process_material.scale_max = confetti_scale
+	confetti.rotation = angle + PI
+	confetti.emitting = true
+	await confetti.finished
+	call_deferred("queue_free")

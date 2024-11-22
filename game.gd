@@ -157,6 +157,7 @@ func _on_card_left_screen(card: Card) -> void:
 	play_sound(sound_exit_screen)
 	card_discarded(card)
 	if card == held_card:
+		card.held = false
 		drop_card()
 	if thrown_out_bottom(card):
 		if card == card_to_find:
@@ -208,3 +209,4 @@ func get_random_position() -> Vector2:
 func card_discarded(card:Card) -> void:
 	var force: float =card.linear_velocity.length()
 	camera_shaker.apply_shake(force / 100)
+	card.discard(force)

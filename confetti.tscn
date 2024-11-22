@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://quspx8oqeob8"]
+
+[ext_resource type="Texture2D" uid="uid://b3c1xsoq27srh" path="res://assets/sprites/confetti_sprites.png" id="1_e4lsl"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s17a8"]
+particles_animation = true
+particles_anim_h_frames = 3
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_hkm28"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250751, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74102, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_3m78u"]
+curve = SubResource("Curve_hkm28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x60xt"]
+resource_local_to_scene = true
+lifetime_randomness = 0.27
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 30.0
+initial_velocity_min = 379.08
+initial_velocity_max = 567.94
+angular_velocity_min = 60.65
+angular_velocity_max = 283.69
+gravity = Vector3(0, 250, 0)
+scale_min = 0.1
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_3m78u")
+color = Color(1, 0.166667, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
+anim_offset_max = 1.0
+
+[node name="Confetti" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_s17a8")
+position = Vector2(1135, 681)
+amount = 48
+process_material = SubResource("ParticleProcessMaterial_x60xt")
+texture = ExtResource("1_e4lsl")
+lifetime = 3.5
+explosiveness = 0.75
+randomness = 0.29
