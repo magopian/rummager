@@ -36,27 +36,43 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="LevelLabel" parent="MarginContainer" instance=ExtResource("4_36nkc")]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+[node name="LevelLabel" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_36nkc")]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 64
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(414, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_colors/font_outline_color = Color(0.635294, 0.184314, 0.788235, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "You lost :("
-horizontal_alignment = 1
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center][wave freq=5 amp=150]You
+lost :([/wave][/center]"
+fit_content = true
+scroll_active = false
 
-[node name="LostReason" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="LostReason" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -68,43 +84,52 @@ because"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="WrongContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="WrongContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Sprite2D" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/WrongContainer"]
+[node name="Sprite2D" type="TextureRect" parent="MarginContainer/VBoxContainer/WrongContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("5_xaxvx")
 
-[node name="CardDisplayWrong" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/WrongContainer"]
+[node name="CardDisplayWrong" type="Control" parent="MarginContainer/VBoxContainer/WrongContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ValidContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="ValidContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 mouse_filter = 2
 
-[node name="Sprite2D" type="TextureRect" parent="MarginContainer/CenterContainer/VBoxContainer/ValidContainer"]
+[node name="Sprite2D" type="TextureRect" parent="MarginContainer/VBoxContainer/ValidContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 texture = ExtResource("6_piku8")
 
-[node name="CardDisplayCorrect" type="Control" parent="MarginContainer/CenterContainer/VBoxContainer/ValidContainer"]
+[node name="CardDisplayCorrect" type="Control" parent="MarginContainer/VBoxContainer/ValidContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="TryAgainButton" parent="MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource("7_8ccxa")]
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TryAgainButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_8ccxa")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Try again"

@@ -58,9 +58,10 @@ layout_mode = 2
 theme_override_colors/default_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 56
+theme_override_font_sizes/normal_font_size = 92
 bbcode_enabled = true
-text = "[center][wave freq=5 amp=150]Rummager[/wave][/center]"
+text = "[center][wave freq=5 amp=150]Rumm
+ager[/wave][/center]"
 fit_content = true
 scroll_active = false
 
@@ -72,28 +73,33 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
+theme_override_font_sizes/font_size = 32
 text = "Continue"
 
 [node name="StartButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "START
 "
 
 [node name="HowToPlayButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "How to play"
 
 [node name="CreditsButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Credits"
 
 [node name="QuitButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../ContinueButton")
+theme_override_font_sizes/font_size = 32
 text = "QUIT"
 
 [node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer"]

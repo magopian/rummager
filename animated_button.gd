@@ -29,7 +29,7 @@ func _ready() -> void:
 	button.pivot_offset = Vector2(button.size.x / 2, button.size.y / 2)
 	
 	var tween: Tween = button.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
-	tween.tween_property(button, "scale", Vector2(1.5, 1.5), 0.5)
+	tween.tween_property(button, "scale", Vector2(1.1, 1.1), 0.5)
 	tween.tween_property(button, "scale", Vector2.ONE, 0.5)
 
 

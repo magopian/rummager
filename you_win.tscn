@@ -34,27 +34,42 @@ theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="LevelLabel" parent="MarginContainer" instance=ExtResource("4_lhu34")]
-layout_mode = 2
-
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="MarginContainer/CenterContainer/VBoxContainer"]
+[node name="LevelLabel" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_lhu34")]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "YOU WIN!"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 64
 
-[node name="NextLevelButton" parent="MarginContainer/CenterContainer/VBoxContainer" instance=ExtResource("5_rwuot")]
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 124
+bbcode_enabled = true
+text = "[center][wave freq=5 amp=150]You
+win![/wave][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="NextLevelButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_rwuot")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
