@@ -4,7 +4,6 @@ extends CheckButton
 
 
 func _ready() -> void:
-	user_prefs = UserPreferences.load_or_create()
-	user_prefs.apply_preferences()
-	toggled.connect(user_prefs.set_muted)
-	button_pressed = user_prefs.muted
+	Global.user_prefs.apply_preferences()
+	toggled.connect(Global.user_prefs.set_muted)
+	button_pressed = Global.user_prefs.muted
