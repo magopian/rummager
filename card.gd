@@ -99,6 +99,7 @@ func show_medium() -> void:
 	position = Vector2(100, 100)
 	hide_dust()
 	hide_trail()
+	hide_confetti()
 	animate_card()
 
 
@@ -125,6 +126,10 @@ func hide_trail() -> void:
 
 func show_trail() -> void:
 	dust_trail.emitting = true
+
+
+func hide_confetti() -> void:
+	confetti.emitting = false
 
 
 func update_scale(new_scale: Vector2) -> void:
