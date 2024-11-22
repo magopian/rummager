@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=63 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -59,6 +59,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="54_71tse"]
 [ext_resource type="Texture2D" uid="uid://c74f0fstiamim" path="res://assets/sprites/shuffle_icon.png" id="54_asxbk"]
 [ext_resource type="Texture2D" uid="uid://dhvsbddv3u720" path="res://assets/sprites/shuffle_hover.png" id="55_kwsue"]
+[ext_resource type="PackedScene" path="res://shaker.tscn" id="62_dcjsq"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="65_oc4fy"]
 
@@ -213,3 +214,10 @@ visible = false
 unique_name_in_owner = true
 wait_time = 0.2
 one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CameraShaker" parent="Camera2D" instance=ExtResource("62_dcjsq")]
+unique_name_in_owner = true
+randomStrength = 10.0

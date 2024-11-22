@@ -14,6 +14,7 @@ extends Node2D
 @onready var fade_transition: ColorRect = %FadeTransition
 @onready var explanation: VBoxContainer = %Explanation
 @onready var timer: Timer = %Timer
+@onready var camera_shaker: Node2D = %CameraShaker
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -154,6 +155,7 @@ func zoom_in() -> void:
 
 func _on_card_left_screen(card: Card) -> void:
 	play_sound(sound_exit_screen)
+	screen_shake()
 	if card == held_card:
 		drop_card()
 	if thrown_out_bottom(card):
@@ -172,6 +174,10 @@ func _on_card_left_screen(card: Card) -> void:
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card = card_to_find.duplicate()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
+
+
+func screen_shake() -> void:
+	camera_shaker.apply_shake()
 
 
 func thrown_out_bottom(card: Card) -> bool:
