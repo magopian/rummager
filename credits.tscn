@@ -60,10 +60,38 @@ theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 48
-text = "Music"
+text = "Dev, graphics"
 horizontal_alignment = 1
 
 [node name="LinkButton" type="LinkButton" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_focus_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Mathieu (SikaRI games)"
+uri = "https://magopian.itch.io"
+
+[node name="Control4" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 48
+text = "Music"
+horizontal_alignment = 1
+
+[node name="LinkButton2" type="LinkButton" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
@@ -98,7 +126,8 @@ theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
-text = "To my family and friends"
+text = "To my wife, family and friends
+and especially Guillaume for his ideas and support!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
