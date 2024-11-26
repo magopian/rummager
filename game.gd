@@ -37,7 +37,7 @@ var card_datas: Array[Dictionary]
 
 
 func _ready() -> void:
-	Global.level = 100
+	# Setup
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	zones.slide_out(0)
 	fade_transition.show()
@@ -46,16 +46,21 @@ func _ready() -> void:
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	timer.timeout.connect(zoom_in)
+
+	# Instantiate cards
 	var all_permutations: Array[Dictionary] = get_all_permutations()
 	all_permutations.shuffle()
 	var level_num_cards: int = Global.level * num_cards
 	# Make sure we never try to instantiate more cards than we have.
 	var total_num_cards: int = min(level_num_cards, all_permutations.size())
-	for i in range(total_num_cards):
+	var instantiated_cards: Array[Card] = []
+	for _i in range(total_num_cards):
 		var card: Card = new_card(all_permutations)
+		instantiated_cards.append(card)
+	card_to_find = instantiated_cards[0]
+	instantiated_cards.shuffle()
+	for card in instantiated_cards:
 		cards.add_child(card)
-		if i == 0:
-			card_to_find = card
 	pick_me_canvas_layer.show()
 	display_card_to_find()
 	await fade_transition.fade_in()
