@@ -59,7 +59,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="54_71tse"]
 [ext_resource type="Texture2D" uid="uid://c74f0fstiamim" path="res://assets/sprites/shuffle_icon.png" id="54_asxbk"]
 [ext_resource type="Texture2D" uid="uid://dhvsbddv3u720" path="res://assets/sprites/shuffle_hover.png" id="55_kwsue"]
-[ext_resource type="PackedScene" path="res://shaker.tscn" id="62_dcjsq"]
+[ext_resource type="PackedScene" uid="uid://cwhy67donfiqv" path="res://shaker.tscn" id="62_dcjsq"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="65_oc4fy"]
 

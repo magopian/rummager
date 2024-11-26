@@ -37,6 +37,7 @@ var card_datas: Array[Dictionary]
 
 
 func _ready() -> void:
+	Global.level = 100
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	zones.slide_out(0)
 	fade_transition.show()
@@ -131,11 +132,22 @@ func shuffle_cards() -> void:
 	var total_num_cards: float = cards.get_child_count()
 	var speed: float = 1 / total_num_cards
 	for card in cards.get_children():
-		var tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		var random_position: Vector2 = get_random_position()
-		tween.tween_interval(x * speed)
-		tween.tween_property(card, "position", random_position, 1)
+		card.shuffle(get_random_position(), x * speed)
 		x += 1
+
+
+func unshuffle_cards() -> void:
+	var tween: Tween
+	var x: int = 0
+	var total_num_cards: float = cards.get_child_count()
+	var speed: float = 1 / total_num_cards
+	for card in (cards.get_children() as Array[Card]):
+		if card != card_to_find:
+			tween = card.explode_out(x * speed)
+		else:
+			tween = card.unshuffle(1, 1)
+		x += 1
+	await tween.finished
 
 
 func _on_card_clicked(card: Card) -> void:
@@ -162,18 +174,21 @@ func _on_card_left_screen(card: Card) -> void:
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			Music.play_win()
+			await unshuffle_cards()
 			fade_transition.fade_to_file("res://you_win.tscn")
 		else:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You chose the wrong card"
 			you_lose_scene.valid_card = card_to_find.duplicate()
 			you_lose_scene.wrong_card = card.duplicate()
+			await unshuffle_cards()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 	else:
 		if card == card_to_find:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card = card_to_find.duplicate()
+			await unshuffle_cards()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 
 
@@ -202,8 +217,8 @@ func drop_card() -> void:
 
 func get_random_position() -> Vector2:
 	return Vector2(
-		randi_range(50, Global.viewport_size.x - 50),  # The cards are 50x50
-		randi_range(150, Global.viewport_size.y - 150)  # Leave some extra space for the bottom menu
+		randf_range(50, Global.viewport_size.x - 50),  # The cards are 50x50
+		randf_range(150, Global.viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)
 
 func card_discarded(card:Card) -> void:

@@ -16,6 +16,7 @@ signal left_screen(card: Card)
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
 @export var medium_scale: Vector2 = Vector2(0.5, 0.5)
+@export var big_scale: Vector2 = Vector2(1, 1)
 @export var data: Dictionary
 
 
@@ -75,8 +76,8 @@ func zoom_in() -> void:
 	hide_trail()
 
 
-func show_big() -> void:
-	animate_scale(Vector2(1, 1))
+func show_big(speed: float = 0.15) -> void:
+	scale_to(big_scale, speed)
 	position = Vector2(200, 200)
 	animate_card()
 
@@ -87,8 +88,8 @@ func animate_card() -> void:
 	tween.tween_property(self, "rotation_degrees", rotation_degrees - 5, 1)
 
 
-func show_small() -> void:
-	animate_scale(small_scale)
+func show_small(speed: float = 0.15) -> void:
+	scale_to(small_scale, speed)
 	if tween:
 		tween.stop()
 
@@ -137,10 +138,6 @@ func update_scale(new_scale: Vector2) -> void:
 		child.scale = new_scale
 
 
-func animate_scale(new_scale: Vector2) -> Tween:
-	return scale_to(new_scale, 0.15)
-
-
 func scale_to(new_scale: Vector2, duration: float) -> Tween:
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	for child in get_children():
@@ -160,3 +157,32 @@ func discard(force: float) -> void:
 	confetti.emitting = true
 	await confetti.finished
 	call_deferred("queue_free")
+
+
+func explode_out(interval: float = 0) -> Tween:
+	if is_instance_valid(visible_on_screen_notifier_2d):
+		visible_on_screen_notifier_2d.queue_free()
+	var center: Vector2 = Global.viewport_size / 2
+	var angle_from_center: float = center.angle_to_point(position)
+	var max_size: float = max(Global.viewport_size.x, Global.viewport_size.y)
+	var distance: Vector2 = Vector2(max_size, 0).rotated(angle_from_center)
+	var new_pos: Vector2 = position + distance
+	var explode_out_tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	explode_out_tween.tween_interval(interval)
+	explode_out_tween.tween_property(self, "position", new_pos, 1)
+	return explode_out_tween
+
+
+func shuffle(pos: Vector2, interval: float = 0) -> Tween:
+	var tween_shuffle: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween_shuffle.tween_interval(interval)
+	tween_shuffle.tween_property(self, "position", pos, 1)
+	return tween_shuffle
+
+
+func unshuffle(speed: float = 1, interval: float = 0) -> Tween:
+	var center: Vector2 = Global.viewport_size / 2
+	var unshuffle_tween: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	unshuffle_tween.tween_interval(interval)
+	unshuffle_tween.tween_property(self, "position", center, speed)
+	return unshuffle_tween
