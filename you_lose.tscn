@@ -62,8 +62,7 @@ theme_override_colors/font_outline_color = Color(0.635294, 0.184314, 0.788235, 1
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 64
 bbcode_enabled = true
-text = "[center][wave freq=5 amp=150]You
-lost :([/wave][/center]"
+text = "[center][wave freq=5 amp=150]You lost :([/wave][/center]"
 fit_content = true
 scroll_active = false
 
