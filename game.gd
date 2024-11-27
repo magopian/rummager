@@ -42,7 +42,7 @@ func _ready() -> void:
 	zones.slide_out(0)
 	fade_transition.show()
 	menu_button.pressed.connect(_on_menu_button_pressed)
-	shuffle_button.pressed.connect(shuffle)
+	shuffle_button.pressed.connect(_on_shuffle_clicked)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	timer.timeout.connect(zoom_in)
@@ -63,6 +63,8 @@ func _ready() -> void:
 		cards.add_child(card)
 	pick_me_canvas_layer.show()
 	display_card_to_find()
+
+	# All ready, fade in
 	await fade_transition.fade_in()
 
 
@@ -115,7 +117,8 @@ func play_sound(sound: AudioStream) -> AudioStreamPlayer:
 	return audio_stream_player
 
 
-func shuffle() -> void:
+func _on_shuffle_clicked() -> void:
+	await unshuffle().finished
 	fade_transition.fade_to_file("res://game.tscn", sound_shuffle)
 
 
@@ -124,7 +127,7 @@ func _on_lets_go_button_pressed() -> void:
 	Global.slide_off_screen(level_label, 0.15)
 	Global.slide_off_screen(explanation, 0.15)
 	Global.slide_in_screen(menu, 0.15)
-	shuffle_cards()
+	shuffle_out()
 	var card: Card = card_display.get_child(0)
 	var tween: Tween = card.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(card, "global_position", Global.viewport_size / 2, 0.5)
@@ -132,7 +135,7 @@ func _on_lets_go_button_pressed() -> void:
 	pick_me_canvas_layer.queue_free()
 
 
-func shuffle_cards() -> void:
+func shuffle_out() -> void:
 	var x: int = 0
 	var total_num_cards: float = cards.get_child_count()
 	var speed: float = 1 / total_num_cards
@@ -141,7 +144,18 @@ func shuffle_cards() -> void:
 		x += 1
 
 
-func unshuffle_cards() -> void:
+func unshuffle() -> Tween:
+	var x: int = 0
+	var tween: Tween
+	var total_num_cards: float = cards.get_child_count()
+	var speed: float = 1 / total_num_cards
+	for card in (cards.get_children() as Array[Card]):
+		tween = card.unshuffle(1, x * speed)
+		x += 1
+	return tween
+
+
+func explode_out() -> void:
 	var tween: Tween
 	var x: int = 0
 	var total_num_cards: float = cards.get_child_count()
@@ -179,21 +193,21 @@ func _on_card_left_screen(card: Card) -> void:
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			Music.play_win()
-			await unshuffle_cards()
+			await explode_out()
 			fade_transition.fade_to_file("res://you_win.tscn")
 		else:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You chose the wrong card"
 			you_lose_scene.valid_card = card_to_find.duplicate()
 			you_lose_scene.wrong_card = card.duplicate()
-			await unshuffle_cards()
+			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 	else:
 		if card == card_to_find:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card = card_to_find.duplicate()
-			await unshuffle_cards()
+			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 
 
