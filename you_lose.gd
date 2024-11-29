@@ -20,9 +20,11 @@ func _ready() -> void:
 	lost_reason_label.text = lost_reason
 	card_display_correct.add_child(valid_card)
 	valid_card.show_medium()
+	valid_card.position = Vector2(100, 100)
 	if wrong_card:
 		card_display_wrong.add_child(wrong_card)
 		wrong_card.show_medium()
+		wrong_card.position = Vector2(100, 100)
 	else:
 		wrong_container.hide()
 	fade_transition.fade_in()

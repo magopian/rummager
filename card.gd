@@ -41,11 +41,20 @@ func compute_small_size(viewport_size: Vector2) -> void:
 
 
 func init_from_data() -> void:
-	background.modulate = data["background_color"]
-	pattern.texture = data["pattern_sprite"]
-	pattern.modulate = data["color"]
-	border.texture = data["border_sprite"]
-	border.modulate = data["color"]
+	if data["background_color"]:
+		background.modulate = data["background_color"]
+	if data["pattern_sprite"]:
+		pattern.texture = data["pattern_sprite"]
+		if data["color"]:
+			pattern.modulate = data["color"]
+		else:
+			pattern.modulate = Color.BLACK
+	if data["border_sprite"]:
+		border.texture = data["border_sprite"]
+		if data["color"]:
+			border.modulate = data["color"]
+		else:
+			border.modulate = Color.BLACK
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
@@ -98,7 +107,6 @@ func show_small(speed: float = 0.15) -> void:
 func show_medium() -> void:
 	update_scale(medium_scale)
 	freeze = true
-	position = Vector2(100, 100)
 	hide_dust()
 	hide_trail()
 	hide_confetti()

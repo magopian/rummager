@@ -33,6 +33,7 @@ func animate_max(bonus_card: Card, cards_container: Node) -> void:
 	sparks.scale = Vector2.ONE
 	sparks.lifetime = 1
 	sparks.global_position = bonus_card_spawn_point.global_position
+	sparks.scale = Vector2.ONE / 3
 	sparks.emitting = true
 
 	# Glow the progress bar
@@ -51,14 +52,18 @@ func animate_max(bonus_card: Card, cards_container: Node) -> void:
 	await tween.finished
 
 	# Animate the sparks to the center of the screen
+	sparks.add_child(bonus_card)
+	bonus_card.show_small()
+	bonus_card.modulate.a = 0
 	var tween_sparks: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween_sparks.tween_property(sparks, "global_position", Global.viewport_size / 2, 1)
 	tween_sparks.tween_property(sparks, "scale", Vector2.ONE * 3, 1)
 	tween_sparks.set_parallel(true)
 	tween_sparks.tween_property(sparks, "lifetime", 1.5, 1)
+	tween_sparks.tween_property(bonus_card, "modulate:a", 1, 1)
 	await tween_sparks.finished
 
-	# Sparks have a lifetime of 1.5, and the removal of cards should take 1s.
+	# Sparks have a lifetime of 1.5s, and the removal of cards should take 1s.
 	# Stop emitting now so the last particles will be dying short after the last card was removed.
 	sparks.emitting = false
 
@@ -68,6 +73,11 @@ func animate_max(bonus_card: Card, cards_container: Node) -> void:
 	print("reset")
 	animating_max = false
 	progress_bar.value = 0
+	var bonus_card_tween: Tween = bonus_card.scale_to(Vector2.ZERO, 0.5)
+	bonus_card_tween.set_parallel(true)
+	bonus_card_tween.tween_property(bonus_card, "modulate:a", 0, 0.5)
+	await bonus_card_tween.finished
+	bonus_card.queue_free()
 
 
 func remove_cards(bonus_card: Card, cards_container: Node) -> void:
@@ -96,7 +106,6 @@ func remove_cards(bonus_card: Card, cards_container: Node) -> void:
 		tween.tween_interval(interval)
 		tween.tween_property(card, "position", center, 1)
 		tween.tween_property(card, "scale", Vector2.ZERO, 1)
-	await tween.finished
-	for card in cards_to_remove:
-		if card.is_inside_tree() and is_instance_valid(card):
-			card.queue_free()
+		tween.set_parallel(false)
+		tween.tween_callback(card.queue_free)
+	await get_tree().create_timer(1.5).timeout
