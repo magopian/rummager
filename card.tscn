@@ -43,6 +43,7 @@ collision_mask = 0
 input_pickable = true
 mass = 2.0
 gravity_scale = 0.0
+linear_damp = 0.5
 script = ExtResource("1_00shj")
 
 [node name="DustCloud" parent="." instance=ExtResource("2_j26a1")]
