@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bifvuippivy7t"]
+[gd_scene load_steps=9 format=3 uid="uid://bifvuippivy7t"]
 
 [ext_resource type="Script" path="res://progress.gd" id="1_6gbv0"]
 
@@ -15,14 +15,26 @@ point_count = 3
 [sub_resource type="CurveTexture" id="CurveTexture_0drlj"]
 curve = SubResource("Curve_pkvdt")
 
+[sub_resource type="Curve" id="Curve_vbtkt"]
+min_value = -200.0
+max_value = 200.0
+_data = [Vector2(0.00363636, -39.4524), 0.0, 5.29676, 0, 0, Vector2(0.327273, -39.4524), 0.0, 0.0, 0, 0, Vector2(1, 200), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uukw6"]
+curve = SubResource("Curve_vbtkt")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_te77g"]
 particle_flag_disable_z = true
-angle_min = 1.07288e-05
-angle_max = 360.0
-spread = 180.0
-initial_velocity_min = 30.0
-initial_velocity_max = 40.0
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 100.0
+emission_ring_radius = 100.0
+emission_ring_inner_radius = 90.0
 gravity = Vector3(0, 0, 0)
+linear_accel_curve = SubResource("CurveTexture_uukw6")
+radial_accel_min = -200.0
+radial_accel_max = -50.0
 scale_max = 5.0
 color = Color(1, 0.956863, 0.721569, 1)
 alpha_curve = SubResource("CurveTexture_0drlj")
@@ -30,31 +42,43 @@ alpha_curve = SubResource("CurveTexture_0drlj")
 [node name="Progress" type="CanvasLayer"]
 script = ExtResource("1_6gbv0")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-unique_name_in_owner = true
-anchors_preset = 10
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
-offset_bottom = 5.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 8
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_v3igy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_06pay")
 value = 50.0
 show_percentage = false
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
+[node name="BonusCardSpawnPoint" type="Control" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_top = -445.5
-offset_bottom = -445.5
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Sparks" type="GPUParticles2D" parent="Control"]
+[node name="Sparks" type="GPUParticles2D" parent="Control/BonusCardSpawnPoint"]
 unique_name_in_owner = true
-amount = 100
+amount = 500
 process_material = SubResource("ParticleProcessMaterial_te77g")
 randomness = 0.7

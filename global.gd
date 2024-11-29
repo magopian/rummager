@@ -1,5 +1,9 @@
 extends Node2D
 
+
+signal max_progress
+
+
 @export var level: int:
 	get = get_level,
 	set = set_level

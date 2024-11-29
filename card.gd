@@ -18,6 +18,7 @@ signal left_screen(card: Card)
 @export var medium_scale: Vector2 = Vector2(0.5, 0.5)
 @export var big_scale: Vector2 = Vector2(1, 1)
 @export var data: Dictionary
+@export var to_find: bool = false
 
 
 var held = false

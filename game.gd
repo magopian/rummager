@@ -15,6 +15,7 @@ extends Node2D
 @onready var explanation: VBoxContainer = %Explanation
 @onready var timer: Timer = %Timer
 @onready var camera_shaker: Node2D = %CameraShaker
+@onready var progress: CanvasLayer = %Progress
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -46,6 +47,7 @@ func _ready() -> void:
 	shuffle_button.pressed.connect(_on_shuffle_clicked)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
+	Global.max_progress.connect(_on_max_progress)
 	timer.timeout.connect(zoom_in)
 
 	# Instantiate cards
@@ -59,6 +61,7 @@ func _ready() -> void:
 		var card: Card = new_card(all_permutations)
 		instantiated_cards.append(card)
 	card_to_find = instantiated_cards[0]
+	card_to_find.to_find = true
 	instantiated_cards.shuffle()
 	for card in instantiated_cards:
 		cards.add_child(card)
@@ -142,9 +145,9 @@ func _on_lets_go_button_pressed() -> void:
 func shuffle_out() -> void:
 	var x: int = 0
 	var total_num_cards: float = cards.get_child_count()
-	var speed: float = 1 / total_num_cards
-	for card in cards.get_children():
-		card.shuffle(get_random_position(), x * speed)
+	var interval: float = 1 / total_num_cards
+	for card in (cards.get_children() as Array[Card]):
+		card.shuffle(get_random_position(), x * interval)
 		x += 1
 
 
@@ -152,9 +155,9 @@ func unshuffle() -> Tween:
 	var x: int = 0
 	var tween: Tween
 	var total_num_cards: float = cards.get_child_count()
-	var speed: float = 1 / total_num_cards
+	var interval: float = 1 / total_num_cards
 	for card in (cards.get_children() as Array[Card]):
-		tween = card.unshuffle(1, x * speed)
+		tween = card.unshuffle(1, x * interval)
 		x += 1
 	return tween
 
@@ -163,10 +166,10 @@ func explode_out() -> void:
 	var tween: Tween
 	var x: int = 0
 	var total_num_cards: float = cards.get_child_count()
-	var speed: float = 1 / total_num_cards
+	var interval: float = 1 / total_num_cards
 	for card in (cards.get_children() as Array[Card]):
 		if card != card_to_find:
-			tween = card.explode_out(x * speed)
+			tween = card.explode_out(x * interval)
 		else:
 			tween = card.unshuffle(1, 1)
 		x += 1
@@ -198,8 +201,6 @@ func _on_card_left_screen(card: Card) -> void:
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			Music.play_win()
-			Global.time_elapsed = Time.get_ticks_msec() - Global.time_started
-			Global.time_elapsed_rummage = Time.get_ticks_msec() - Global.time_started_rummage
 			await explode_out()
 			fade_transition.fade_to_file("res://you_win.tscn")
 		else:
@@ -255,3 +256,26 @@ func card_discarded(card: Card) -> void:
 	print("score: ", Global.score)
 	camera_shaker.apply_shake(force)
 	card.discard(force)
+
+
+func _on_max_progress() -> void:
+	var characteristics: Array[String] = ["background_colors", "colors", "patterns", "borders"] 
+	var random_characteristic: String = characteristics.pick_random()
+	var bonus_card_data: Dictionary = {
+		"background_color": null,
+		"color": null,
+		"pattern_sprite": null,
+		"border_sprite": null,
+	}
+	match random_characteristic:
+		"background_colors":
+			bonus_card_data["background_color"] = background_colors.pick_random()
+		"colors":
+			bonus_card_data["color"] = colors.pick_random()
+		"patterns":
+			bonus_card_data["pattern_sprite"] = patterns.pick_random()
+		"borders":
+			bonus_card_data["border_sprite"] = borders.pick_random()
+	var bonus_card: Card = card_scene.instantiate()
+	bonus_card.data = bonus_card_data
+	progress.animate_max(bonus_card, cards)
