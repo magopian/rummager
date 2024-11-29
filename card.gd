@@ -147,7 +147,7 @@ func scale_to(new_scale: Vector2, duration: float) -> Tween:
 
 func discard(force: float) -> void:
 	var angle: float = linear_velocity.angle()
-	var confetti_scale: float = force / 5000
+	var confetti_scale: float = force / 10
 	linear_velocity = Vector2.ZERO
 	var confetti_position: Vector2 = global_position.clamp(Vector2.ZERO, Global.viewport_size)
 	confetti.global_position = confetti_position
@@ -186,3 +186,11 @@ func unshuffle(speed: float = 1, interval: float = 0) -> Tween:
 	unshuffle_tween.tween_interval(interval)
 	unshuffle_tween.tween_property(self, "position", center, speed)
 	return unshuffle_tween
+
+func get_force() -> float:
+	var force: float = linear_velocity.length()
+	# Smallest force accepted: 500. Max force: 5000. Anything above is bonus.
+	# So multiply by 2, and divide by 1000 to get a "round percentage number":
+	# 500 * 2 / 1000 = 1, 5000 * 2 / 1000 = 10. Ten cards at "max force" gives 100%.
+	var normalized_force: float = force * 2 / 1000
+	return normalized_force

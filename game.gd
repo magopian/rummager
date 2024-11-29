@@ -38,6 +38,7 @@ var card_datas: Array[Dictionary]
 
 func _ready() -> void:
 	# Setup
+	Global.score = 0
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	zones.slide_out(0)
 	fade_transition.show()
@@ -66,6 +67,7 @@ func _ready() -> void:
 
 	# All ready, fade in
 	await fade_transition.fade_in()
+	Global.time_started = Time.get_ticks_msec()
 
 
 func display_card_to_find() -> void:
@@ -93,6 +95,7 @@ func get_all_permutations() -> Array[Dictionary]:
 						"border_sprite": border,
 					})
 	return permutations
+
 
 func new_card(all_permutations: Array[Dictionary]) -> Card:
 	var card: Card = card_scene.instantiate()
@@ -133,6 +136,7 @@ func _on_lets_go_button_pressed() -> void:
 	tween.tween_property(card, "global_position", Global.viewport_size / 2, 0.5)
 	await card.scale_to(Vector2.ZERO, 0.5).finished
 	pick_me_canvas_layer.queue_free()
+	Global.time_started_rummage = Time.get_ticks_msec()
 
 
 func shuffle_out() -> void:
@@ -185,6 +189,7 @@ func zoom_in() -> void:
 
 
 func _on_card_left_screen(card: Card) -> void:
+	Global.discarded_cards += 1
 	play_sound(sound_exit_screen)
 	card_discarded(card)
 	if card == held_card:
@@ -193,6 +198,8 @@ func _on_card_left_screen(card: Card) -> void:
 	if thrown_out_bottom(card):
 		if card == card_to_find:
 			Music.play_win()
+			Global.time_elapsed = Time.get_ticks_msec() - Global.time_started
+			Global.time_elapsed_rummage = Time.get_ticks_msec() - Global.time_started_rummage
 			await explode_out()
 			fade_transition.fade_to_file("res://you_win.tscn")
 		else:
@@ -240,7 +247,11 @@ func get_random_position() -> Vector2:
 		randf_range(150, Global.viewport_size.y - 150)  # Leave some extra space for the bottom menu
 	)
 
-func card_discarded(card:Card) -> void:
-	var force: float =card.linear_velocity.length()
-	camera_shaker.apply_shake(force / 100)
+
+func card_discarded(card: Card) -> void:
+	var force: float = card.get_force()
+	Global.score += round(force)
+	print("force: ", force)
+	print("score: ", Global.score)
+	camera_shaker.apply_shake(force)
 	card.discard(force)

@@ -10,6 +10,9 @@ func _ready() -> void:
 	catch_all_click.pressed.connect(_on_button_pressed)
 	next_level_button.button_pressed.connect(_on_button_pressed)
 	fade_transition.fade_in()
+	print("time elapsed memorizing: ", Global.time_started_rummage - Global.time_started)
+	print("time elapsed rummaging: ", Time.get_ticks_msec() - Global.time_started_rummage)
+	print("number of cards discarded: ", Global.discarded_cards)
 
 
 func _on_button_pressed() -> void:

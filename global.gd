@@ -9,6 +9,11 @@ extends Node2D
 
 var viewport_size: Vector2
 
+var discarded_cards: int = 0
+var time_started: int = 0
+var time_started_rummage: int = 0
+var score: int = 0
+
 
 func _ready() -> void:
 	user_prefs = UserPreferences.load_or_create()

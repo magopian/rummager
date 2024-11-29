@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=64 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -60,6 +60,7 @@
 [ext_resource type="Texture2D" uid="uid://c74f0fstiamim" path="res://assets/sprites/shuffle_icon.png" id="54_asxbk"]
 [ext_resource type="Texture2D" uid="uid://dhvsbddv3u720" path="res://assets/sprites/shuffle_hover.png" id="55_kwsue"]
 [ext_resource type="PackedScene" uid="uid://cwhy67donfiqv" path="res://shaker.tscn" id="62_dcjsq"]
+[ext_resource type="PackedScene" uid="uid://bifvuippivy7t" path="res://progress.tscn" id="62_tbnfq"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="65_oc4fy"]
 
@@ -216,12 +217,14 @@ unique_name_in_owner = true
 unique_name_in_owner = true
 bus = &"SFX"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="FadeTransition" type="CanvasLayer" parent="."]
 layer = 100
 
-[node name="FadeTransition" parent="CanvasLayer" instance=ExtResource("65_oc4fy")]
+[node name="FadeTransition" parent="FadeTransition" instance=ExtResource("65_oc4fy")]
 unique_name_in_owner = true
 visible = false
+
+[node name="Progress" parent="." instance=ExtResource("62_tbnfq")]
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
