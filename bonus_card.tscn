@@ -1,16 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://gj5ddc3517lo"]
+[gd_scene load_steps=9 format=3 uid="uid://gj5ddc3517lo"]
 
 [ext_resource type="Texture2D" uid="uid://whm181ryabkk" path="res://assets/card_background_shadow_sprite.png" id="1_dfdjc"]
 [ext_resource type="Script" path="res://bonus_card.gd" id="1_wmpaq"]
 [ext_resource type="Texture2D" uid="uid://dgih8trwrav0f" path="res://assets/card_background_sprite.png" id="2_5sxpq"]
+[ext_resource type="Shader" path="res://bonus_card.gdshader" id="2_qvwg5"]
 [ext_resource type="Texture2D" uid="uid://c14iofacbne7e" path="res://assets/card_background_over_sprite.png" id="3_uw7kv"]
 [ext_resource type="Texture2D" uid="uid://c4p0gcr0aftkh" path="res://assets/card_bonus_color_sprite.png" id="4_m3hsp"]
 [ext_resource type="Texture2D" uid="uid://dp8y6kc0yy2n4" path="res://assets/card_bonus_sprite.png" id="5_xkh2e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqb4n"]
+shader = ExtResource("2_qvwg5")
+shader_parameter/size_effect = 0.2
+shader_parameter/speed = 1.8
+shader_parameter/highlight_strength = 0.5
+shader_parameter/color_mode_toggle = false
+shader_parameter/is_horizontal = true
+shader_parameter/pause_duration = 1.2
 
 [node name="BonusCard" type="Sprite2D"]
 script = ExtResource("1_wmpaq")
 
 [node name="Cross" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_oqb4n")
 texture = ExtResource("5_xkh2e")
 
 [node name="CardContainer" type="Node2D" parent="."]
