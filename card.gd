@@ -25,6 +25,17 @@ var held = false
 var tween: Tween
 
 
+static var charac_to_property: Dictionary = {
+		"background_colors": "background_color",
+		"colors": "color",
+		"patterns": "pattern_sprite",
+		"borders": "border_sprite",
+	}
+
+
+static var characteristics: Array = charac_to_property.keys()
+
+
 func _ready() -> void:
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
@@ -41,20 +52,11 @@ func compute_small_size(viewport_size: Vector2) -> void:
 
 
 func init_from_data() -> void:
-	if data["background_color"]:
-		background.modulate = data["background_color"]
-	if data["pattern_sprite"]:
-		pattern.texture = data["pattern_sprite"]
-		if data["color"]:
-			pattern.modulate = data["color"]
-		else:
-			pattern.modulate = Color.BLACK
-	if data["border_sprite"]:
-		border.texture = data["border_sprite"]
-		if data["color"]:
-			border.modulate = data["color"]
-		else:
-			border.modulate = Color.BLACK
+	background.modulate = data["background_color"]
+	pattern.texture = data["pattern_sprite"]
+	pattern.modulate = data["color"]
+	border.texture = data["border_sprite"]
+	border.modulate = data["color"]
 
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:

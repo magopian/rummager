@@ -26,8 +26,8 @@ func _process(_delta: float) -> void:
 		Global.max_progress.emit()
 
 
-func animate_max(bonus_card: Card, cards_container: Node) -> void:
-	print("Animate max with bonus card: ", bonus_card.data)
+func animate_max(bonus_card: BonusCard, cards_container: Node) -> void:
+	prints("Animate max with bonus card:", bonus_card.characteristic, bonus_card.bonus_value)
 
 	# Start the sparks at the end of the progress bar
 	sparks.scale = Vector2.ONE
@@ -53,7 +53,7 @@ func animate_max(bonus_card: Card, cards_container: Node) -> void:
 
 	# Animate the sparks to the center of the screen
 	sparks.add_child(bonus_card)
-	bonus_card.show_small()
+	bonus_card.scale = Vector2.ONE / 5
 	bonus_card.modulate.a = 0
 	var tween_sparks: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween_sparks.tween_property(sparks, "global_position", Global.viewport_size / 2, 1)
@@ -67,45 +67,10 @@ func animate_max(bonus_card: Card, cards_container: Node) -> void:
 	# Stop emitting now so the last particles will be dying short after the last card was removed.
 	sparks.emitting = false
 
-	await remove_cards(bonus_card, cards_container)
+	await bonus_card.remove_cards(cards_container)
 
 	# Reset
 	print("reset")
 	animating_max = false
 	progress_bar.value = 0
-	var bonus_card_tween: Tween = bonus_card.scale_to(Vector2.ZERO, 0.5)
-	bonus_card_tween.set_parallel(true)
-	bonus_card_tween.tween_property(bonus_card, "modulate:a", 0, 0.5)
-	await bonus_card_tween.finished
-	bonus_card.queue_free()
-
-
-func remove_cards(bonus_card: Card, cards_container: Node) -> void:
-	var cards_to_remove: Array[Card] = []
-	var characteristics: Array[String] = ["background_color", "color", "pattern_sprite", "border_sprite"]
-	for charac in characteristics:
-		var bonus_charac = bonus_card.data[charac]
-		if not bonus_charac:
-			continue
-		for card in (cards_container.get_children() as Array[Card]):
-			if card.to_find:  # Don't destroy the card to find!
-				continue
-			if card.data[charac] == bonus_charac:
-				cards_to_remove.push_back(card)
-	var total_cards_to_remove: int = cards_to_remove.size()
-	print("cards to remove: ", total_cards_to_remove)
-
-	var center: Vector2 = Global.viewport_size / 2
-	var interval: float = 0
-	if total_cards_to_remove:
-		interval = 1 / cards_to_remove.size()
-	var tween: Tween
-	for card in cards_to_remove:
-		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-		tween.set_parallel(true)
-		tween.tween_interval(interval)
-		tween.tween_property(card, "position", center, 1)
-		tween.tween_property(card, "scale", Vector2.ZERO, 1)
-		tween.set_parallel(false)
-		tween.tween_callback(card.queue_free)
-	await get_tree().create_timer(1.5).timeout
+	bonus_card.disappear()

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://gj5ddc3517lo"]
+
+[ext_resource type="Texture2D" uid="uid://whm181ryabkk" path="res://assets/card_background_shadow_sprite.png" id="1_dfdjc"]
+[ext_resource type="Script" path="res://bonus_card.gd" id="1_wmpaq"]
+[ext_resource type="Texture2D" uid="uid://dgih8trwrav0f" path="res://assets/card_background_sprite.png" id="2_5sxpq"]
+[ext_resource type="Texture2D" uid="uid://c14iofacbne7e" path="res://assets/card_background_over_sprite.png" id="3_uw7kv"]
+[ext_resource type="Texture2D" uid="uid://c4p0gcr0aftkh" path="res://assets/card_bonus_color_sprite.png" id="4_m3hsp"]
+[ext_resource type="Texture2D" uid="uid://dp8y6kc0yy2n4" path="res://assets/card_bonus_sprite.png" id="5_xkh2e"]
+
+[node name="BonusCard" type="Sprite2D"]
+script = ExtResource("1_wmpaq")
+
+[node name="Cross" type="Sprite2D" parent="."]
+texture = ExtResource("5_xkh2e")
+
+[node name="CardContainer" type="Node2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.75, 0.75)
+
+[node name="BackgroundShadow" type="Sprite2D" parent="CardContainer"]
+modulate = Color(1, 1, 1, 0.490196)
+texture = ExtResource("1_dfdjc")
+offset = Vector2(10, 10)
+
+[node name="Background" type="Sprite2D" parent="CardContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.490196)
+texture = ExtResource("2_5sxpq")
+
+[node name="Color" type="Sprite2D" parent="CardContainer"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("4_m3hsp")
+
+[node name="Border" type="Sprite2D" parent="CardContainer"]
+unique_name_in_owner = true
+
+[node name="Pattern" type="Sprite2D" parent="CardContainer"]
+unique_name_in_owner = true
+
+[node name="BackgroundOver" type="Sprite2D" parent="CardContainer"]
+texture = ExtResource("3_uw7kv")

@@ -18,6 +18,7 @@ extends Node2D
 @onready var progress: CanvasLayer = %Progress
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
+@onready var bonus_card_scene: PackedScene = preload("res://bonus_card.tscn")
 
 
 @export var num_cards: int = 10
@@ -39,7 +40,6 @@ var card_datas: Array[Dictionary]
 
 func _ready() -> void:
 	# Setup
-	Global.score = 0
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	zones.slide_out(0)
 	fade_transition.show()
@@ -259,23 +259,6 @@ func card_discarded(card: Card) -> void:
 
 
 func _on_max_progress() -> void:
-	var characteristics: Array[String] = ["background_colors", "colors", "patterns", "borders"] 
-	var random_characteristic: String = characteristics.pick_random()
-	var bonus_card_data: Dictionary = {
-		"background_color": null,
-		"color": null,
-		"pattern_sprite": null,
-		"border_sprite": null,
-	}
-	match random_characteristic:
-		"background_colors":
-			bonus_card_data["background_color"] = background_colors.pick_random()
-		"colors":
-			bonus_card_data["color"] = colors.pick_random()
-		"patterns":
-			bonus_card_data["pattern_sprite"] = patterns.pick_random()
-		"borders":
-			bonus_card_data["border_sprite"] = borders.pick_random()
-	var bonus_card: Card = card_scene.instantiate()
-	bonus_card.data = bonus_card_data
+	var bonus_card: BonusCard = bonus_card_scene.instantiate()
+	bonus_card.init_random(cards)
 	progress.animate_max(bonus_card, cards)

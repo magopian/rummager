@@ -61,6 +61,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(0, 5)
 theme_override_styles/background = SubResource("StyleBoxFlat_v3igy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_06pay")
 value = 50.0
