@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://gj5ddc3517lo"]
+[gd_scene load_steps=14 format=3 uid="uid://gj5ddc3517lo"]
 
 [ext_resource type="Texture2D" uid="uid://whm181ryabkk" path="res://assets/card_background_shadow_sprite.png" id="1_dfdjc"]
 [ext_resource type="Script" path="res://bonus_card.gd" id="1_wmpaq"]
@@ -6,25 +6,125 @@
 [ext_resource type="Texture2D" uid="uid://c14iofacbne7e" path="res://assets/card_background_over_sprite.png" id="3_uw7kv"]
 [ext_resource type="Texture2D" uid="uid://c4p0gcr0aftkh" path="res://assets/card_bonus_color_sprite.png" id="4_m3hsp"]
 [ext_resource type="Texture2D" uid="uid://dp8y6kc0yy2n4" path="res://assets/card_bonus_sprite.png" id="5_xkh2e"]
+[ext_resource type="Shader" path="res://bonus_card_shine.gdshader" id="6_jql0u"]
+[ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="6_pf5b0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aw7ft"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_orr21"]
+shader = ExtResource("6_jql0u")
+shader_parameter/Line_Smoothness = 0.045
+shader_parameter/Line_Width = 0.09
+shader_parameter/Brightness = 3.0
+shader_parameter/Rotation_deg = 30.0
+shader_parameter/Distortion = 1.8
+shader_parameter/Speed = 0.7
+shader_parameter/Position = 0.0
+shader_parameter/Position_Min = 0.25
+shader_parameter/Position_Max = 0.5
+shader_parameter/Alpha = 1.0
+
+[sub_resource type="Animation" id="Animation_qsnxe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_vgelv"]
+resource_name = "display_cross"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t47ri"]
+_data = {
+"RESET": SubResource("Animation_qsnxe"),
+"display_cross": SubResource("Animation_vgelv")
+}
 
 [node name="BonusCard" type="Sprite2D"]
 script = ExtResource("1_wmpaq")
-
-[node name="Cross" type="Sprite2D" parent="."]
-texture = ExtResource("5_xkh2e")
 
 [node name="CardContainer" type="Node2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.75, 0.75)
 
 [node name="BackgroundShadow" type="Sprite2D" parent="CardContainer"]
-modulate = Color(1, 1, 1, 0.490196)
+modulate = Color(1, 1, 1, 0.537255)
 texture = ExtResource("1_dfdjc")
 offset = Vector2(10, 10)
 
 [node name="Background" type="Sprite2D" parent="CardContainer"]
 unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.490196)
+modulate = Color(0.94902, 0.933333, 0, 1)
 texture = ExtResource("2_5sxpq")
 
 [node name="Color" type="Sprite2D" parent="CardContainer"]
@@ -37,6 +137,22 @@ unique_name_in_owner = true
 
 [node name="Pattern" type="Sprite2D" parent="CardContainer"]
 unique_name_in_owner = true
+modulate = Color(0, 0, 0, 1)
+material = SubResource("ShaderMaterial_aw7ft")
+texture = ExtResource("6_pf5b0")
 
 [node name="BackgroundOver" type="Sprite2D" parent="CardContainer"]
+material = SubResource("ShaderMaterial_orr21")
 texture = ExtResource("3_uw7kv")
+
+[node name="Cross" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+scale = Vector2(10, 10)
+texture = ExtResource("5_xkh2e")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Cross"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_t47ri")
+}

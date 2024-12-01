@@ -63,11 +63,7 @@ func animate_max(bonus_card: BonusCard, cards_container: Node) -> void:
 	tween_sparks.tween_property(bonus_card, "modulate:a", 1, 1)
 	await tween_sparks.finished
 
-	# Sparks have a lifetime of 1.5s, and the removal of cards should take 1s.
-	# Stop emitting now so the last particles will be dying short after the last card was removed.
-	sparks.emitting = false
-
-	await bonus_card.remove_cards(cards_container)
+	await bonus_card.remove_cards(cards_container, sparks)
 
 	# Reset
 	print("reset")
