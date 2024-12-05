@@ -261,4 +261,5 @@ func card_discarded(card: Card) -> void:
 func _on_max_progress() -> void:
 	var bonus_card: BonusCard = bonus_card_scene.instantiate()
 	bonus_card.init_random(cards)
+	add_child(bonus_card)
 	progress.animate_max(bonus_card, cards)

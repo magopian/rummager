@@ -83,3 +83,7 @@ unique_name_in_owner = true
 amount = 500
 process_material = SubResource("ParticleProcessMaterial_te77g")
 randomness = 0.7
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Control/BonusCardSpawnPoint/Sparks"]
+unique_name_in_owner = true
+update_scale = false

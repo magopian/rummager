@@ -47,13 +47,6 @@ func display_bonus() -> void:
 func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	# Display the bonus card
 	await display_bonus()
-	await get_tree().create_timer(1.5).timeout
-	# Then display the "cross stamping" to show that we remove the cards
-	animation_player.play("display_cross")
-
-	# Sparks have a lifetime of 1.5s, and the removal of cards should take 1s.
-	# Stop emitting now so the last particles will be dying short after the last card was removed.
-	sparks.emitting = false
 
 	# Remove the cards: first select those that have the bonus characteristic
 	var cards_to_remove: Array[Card] = []
@@ -72,15 +65,27 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	var tween: Tween
 	var x: int = 0
 	for card in cards_to_remove:
-		pop_number(x)
+		#pop_number(x)  # TODO: fix the display and animation
 		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_interval(x * interval)
 		# Bring all the cards to remove towards the center of the bonus card
 		tween.tween_property(card, "position", global_position, 1)
-		tween.parallel().tween_property(card, "scale", Vector2.ZERO, 1)
-		tween.tween_callback(card.queue_free)
+		tween.parallel().tween_property(card, "z_index", x + 1, 1)  # Display the card above all the others, but below the cross
 		x += 1
-	await get_tree().create_timer(1.5).timeout
+
+	# Sparks have a lifetime of 1.5s, and the removal of cards should take 1s.
+	# Stop emitting now so the last particles will be dying short after the last card was removed.
+	sparks.emitting = false
+
+	await tween.finished
+
+	# Then display the "cross stamping" to show that we remove the cards
+	animation_player.play("display_cross")
+	await animation_player.animation_finished
+	for card in cards_to_remove:
+		card.queue_free()
+
+	await get_tree().create_timer(.5).timeout
 
 
 func pop_number(number: int) -> void:

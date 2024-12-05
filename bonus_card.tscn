@@ -148,6 +148,7 @@ texture = ExtResource("3_uw7kv")
 [node name="Cross" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 4096
 scale = Vector2(10, 10)
 texture = ExtResource("5_xkh2e")
 
