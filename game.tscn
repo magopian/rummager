@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=65 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -63,6 +63,9 @@
 [ext_resource type="PackedScene" uid="uid://bifvuippivy7t" path="res://progress.tscn" id="62_tbnfq"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="65_oc4fy"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ypwvg"]
+random_pitch = 1.5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_gbsqv")
@@ -218,6 +221,7 @@ unique_name_in_owner = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_ypwvg")
 bus = &"SFX"
 
 [node name="FadeTransition" type="CanvasLayer" parent="."]

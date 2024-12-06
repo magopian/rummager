@@ -118,7 +118,10 @@ func _on_menu_button_pressed() -> void:
 
 
 func play_sound(sound: AudioStream) -> AudioStreamPlayer:
-	audio_stream_player.stream = sound
+	if audio_stream_player.stream.streams_count == 0:
+		audio_stream_player.stream.add_stream(0, sound, 1)
+	else:
+		audio_stream_player.stream.set_stream(0, sound)
 	audio_stream_player.play()
 	return audio_stream_player
 
