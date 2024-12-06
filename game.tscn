@@ -82,6 +82,9 @@ layer = -1
 
 [node name="ScrollingBackground" parent="Background" instance=ExtResource("50_2o8bk")]
 
+[node name="Progress" parent="." instance=ExtResource("62_tbnfq")]
+unique_name_in_owner = true
+
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menu" type="MarginContainer" parent="MenuCanvasLayer"]
@@ -223,9 +226,6 @@ layer = 100
 [node name="FadeTransition" parent="FadeTransition" instance=ExtResource("65_oc4fy")]
 unique_name_in_owner = true
 visible = false
-
-[node name="Progress" parent="." instance=ExtResource("62_tbnfq")]
-unique_name_in_owner = true
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true

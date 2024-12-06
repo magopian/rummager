@@ -15,6 +15,7 @@ var animating_max: bool = false
 func _ready() -> void:
 	progress_bar.value = 0
 	sparks.emitting = false
+	color_rect.hide()
 
 
 func _process(_delta: float) -> void:
@@ -28,10 +29,10 @@ func _process(_delta: float) -> void:
 	if progress_bar.value >= progress_bar.max_value:  # And now animate the "max score reached"
 		animating_max = true
 		Global.max_progress.emit()
-		color_rect.show()
 
 
 func animate_max(cards_container: Node) -> void:
+	color_rect.show()
 	var bonus_card: BonusCard = bonus_card_scene.instantiate()
 	bonus_card.init_random(cards_container)
 	sparks.add_child(bonus_card)
@@ -51,14 +52,13 @@ func animate_max(cards_container: Node) -> void:
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	var initial_color: Color = progress_bar.get("theme_override_styles/fill").bg_color
 	tween.set_parallel(true)
+	tween.tween_property(color_rect, "color:a", 0.5, 0.5)
 	tween.tween_property(progress_bar, "theme_override_styles/fill:bg_color", Color.WHITE, 0.15)
 	tween.tween_property(progress_bar, "scale", Vector2.ONE * 2, 0.15)
-	tween.set_parallel(false)
-	tween.tween_interval(0.25)
-	tween.set_parallel(true)
+	tween.chain().tween_interval(0.25)
 	tween.tween_property(progress_bar, "theme_override_styles/fill:bg_color", initial_color, 0.15)
+	tween.tween_property(progress_bar, "scale", Vector2.ONE, 0.15)
 	tween.tween_interval(0.15)
-	tween.set_loops(3)
 	await tween.finished
 
 	# Animate the sparks to the center of the screen
