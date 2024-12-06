@@ -113,6 +113,7 @@ func new_card(all_permutations: Array[Dictionary]) -> Card:
 
 
 func _on_menu_button_pressed() -> void:
+	menu_button.pressed.disconnect(_on_menu_button_pressed)
 	fade_transition.fade_to_file("res://start_menu.tscn")
 
 
@@ -123,11 +124,14 @@ func play_sound(sound: AudioStream) -> AudioStreamPlayer:
 
 
 func _on_shuffle_clicked() -> void:
+	shuffle_button.pressed.disconnect(_on_shuffle_clicked)
 	await unshuffle().finished
 	fade_transition.fade_to_file("res://game.tscn", sound_shuffle)
 
 
 func _on_lets_go_button_pressed() -> void:
+	pick_me_canvas_layer.button_pressed.disconnect(_on_lets_go_button_pressed)
+	lets_go_button.button_pressed.disconnect(_on_lets_go_button_pressed)
 	play_sound(sound_shuffle)
 	Global.slide_off_screen(level_label, 0.15)
 	Global.slide_off_screen(explanation, 0.15)
