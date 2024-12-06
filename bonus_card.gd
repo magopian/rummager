@@ -3,6 +3,7 @@ class_name BonusCard extends Sprite2D
 
 @onready var card_container: Node2D = %CardContainer
 @onready var background: Sprite2D = %Background
+@onready var background_color: Sprite2D = %BackgroundColor
 @onready var pattern: Sprite2D = %Pattern
 @onready var border: Sprite2D = %Border
 @onready var color: Sprite2D = %Color
@@ -19,7 +20,7 @@ func _ready() -> void:
 	card_container.modulate.a = 0
 	match characteristic:
 		"background_color":
-			background.modulate = bonus_value
+			background_color.modulate = bonus_value
 		"color":
 			color.modulate = bonus_value
 		"pattern_sprite":
@@ -32,7 +33,7 @@ func _ready() -> void:
 
 func init_random(cards: Node) -> void:
 	characteristic = Card.charac_to_property[Card.characteristics.pick_random()]
-	characteristic = "pattern_sprite"  # TODO: remove
+	#characteristic = "background_color"  # TODO: remove
 	var random_data: Dictionary = cards.get_children().pick_random().data
 	bonus_value = random_data[characteristic]
 
@@ -83,7 +84,8 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	animation_player.play("display_cross")
 	await animation_player.animation_finished
 	for card in cards_to_remove:
-		card.queue_free()
+		if is_instance_valid(card):
+			card.queue_free()
 
 	await get_tree().create_timer(.5).timeout
 
