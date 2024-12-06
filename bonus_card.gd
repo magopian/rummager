@@ -48,6 +48,7 @@ func display_bonus() -> void:
 func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	# Display the bonus card
 	await display_bonus()
+	await get_tree().create_timer(1).timeout
 
 	# Remove the cards: first select those that have the bonus characteristic
 	var cards_to_remove: Array[Card] = []
@@ -73,9 +74,9 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	for card in cards_to_remove:
 		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_interval(x * interval)
+		tween.tween_callback(card.reparent.bind(self))
 		# Bring all the cards to remove towards the center of the bonus card
-		tween.tween_property(card, "position", global_position, 1)
-		tween.parallel().tween_property(card, "z_index", x + 1, 1)  # Display the card above all the others, but below the cross
+		tween.tween_property(card, "position", position, 1)
 		x += 1
 
 	# Sparks have a lifetime of 1.5s, and the removal of cards should take 1s.
@@ -87,6 +88,7 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	# Then display the "cross stamping" to show that we remove the cards
 	animation_player.play("display_cross")
 	await animation_player.animation_finished
+	await get_tree().create_timer(1).timeout
 	for card in cards_to_remove:
 		if is_instance_valid(card):
 			card.queue_free()

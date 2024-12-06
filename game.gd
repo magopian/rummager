@@ -18,7 +18,6 @@ extends Node2D
 @onready var progress: CanvasLayer = %Progress
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
-@onready var bonus_card_scene: PackedScene = preload("res://bonus_card.tscn")
 
 
 @export var num_cards: int = 10
@@ -259,7 +258,4 @@ func card_discarded(card: Card) -> void:
 
 
 func _on_max_progress() -> void:
-	var bonus_card: BonusCard = bonus_card_scene.instantiate()
-	bonus_card.init_random(cards)
-	add_child(bonus_card)
-	progress.animate_max(bonus_card, cards)
+	progress.animate_max(cards)

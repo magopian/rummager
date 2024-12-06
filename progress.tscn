@@ -42,6 +42,16 @@ alpha_curve = SubResource("CurveTexture_0drlj")
 [node name="Progress" type="CanvasLayer"]
 script = ExtResource("1_6gbv0")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.521569)
+
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 5)
 layout_mode = 3
@@ -83,7 +93,3 @@ unique_name_in_owner = true
 amount = 500
 process_material = SubResource("ParticleProcessMaterial_te77g")
 randomness = 0.7
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Control/BonusCardSpawnPoint/Sparks"]
-unique_name_in_owner = true
-update_scale = false
