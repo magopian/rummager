@@ -8,6 +8,7 @@ class_name BonusCard extends Sprite2D
 @onready var border: Sprite2D = %Border
 @onready var color: Sprite2D = %Color
 @onready var cross: Sprite2D = %Cross
+@onready var cards_discarded: Label = %CardsDiscarded
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 
 
@@ -18,6 +19,7 @@ var pop_text_scene: PackedScene = preload("res://pop_text.tscn")
 
 func _ready() -> void:
 	card_container.modulate.a = 0
+	cards_discarded.hide()
 	match characteristic:
 		"background_color":
 			background_color.modulate = bonus_value
@@ -25,10 +27,8 @@ func _ready() -> void:
 			color.modulate = bonus_value
 		"pattern_sprite":
 			pattern.texture = bonus_value
-			#pattern.modulate = Color.BLACK
 		"border_sprite":
 			border.texture = bonus_value
-			#border.modulate = Color.BLACK
 
 
 func init_random(cards: Node) -> void:
@@ -59,14 +59,18 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	var total_cards_to_remove: int = cards_to_remove.size()
 	print("cards to remove: ", total_cards_to_remove)
 
+	# Animate the score counting up
+	var num_cards_tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	num_cards_tween.tween_property(cards_discarded, "score", total_cards_to_remove, 2)
+
 	# And now animate them.
 	var interval: float = 0
 	if total_cards_to_remove:
 		interval = 1.0 / cards_to_remove.size()
 	var tween: Tween
 	var x: int = 0
+	cards_discarded.show()
 	for card in cards_to_remove:
-		#pop_number(x)  # TODO: fix the display and animation
 		tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_interval(x * interval)
 		# Bring all the cards to remove towards the center of the bonus card

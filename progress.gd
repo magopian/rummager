@@ -56,14 +56,13 @@ func animate_max(bonus_card: BonusCard, cards_container: Node) -> void:
 	remote_transform_2d.remote_path = bonus_card.get_path()  # Animate the bonus card along with the sparks
 	bonus_card.scale = Vector2.ONE / 5
 	bonus_card.modulate.a = 0
-	var tween_sparks: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	var tween_sparks: Tween = create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween_sparks.set_parallel(true)
 	tween_sparks.tween_property(sparks, "global_position", Global.viewport_size / 2, 1)
 	tween_sparks.tween_property(sparks, "scale", Vector2.ONE * 3, 1)
 	tween_sparks.tween_property(sparks, "lifetime", 1.5, 1)
 	tween_sparks.tween_property(bonus_card, "modulate:a", 1, 1)
 	tween_sparks.tween_property(bonus_card, "scale", Vector2.ONE, 1)
-	await tween_sparks.finished
 
 	await bonus_card.remove_cards(cards_container, sparks)
 

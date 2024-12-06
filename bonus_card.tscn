@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://gj5ddc3517lo"]
+[gd_scene load_steps=15 format=3 uid="uid://gj5ddc3517lo"]
 
 [ext_resource type="Texture2D" uid="uid://whm181ryabkk" path="res://assets/card_background_shadow_sprite.png" id="1_dfdjc"]
 [ext_resource type="Script" path="res://bonus_card.gd" id="1_wmpaq"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c4p0gcr0aftkh" path="res://assets/card_bonus_color_sprite.png" id="4_m3hsp"]
 [ext_resource type="Texture2D" uid="uid://dp8y6kc0yy2n4" path="res://assets/card_bonus_sprite.png" id="5_xkh2e"]
 [ext_resource type="Shader" path="res://bonus_card_shine.gdshader" id="6_jql0u"]
+[ext_resource type="PackedScene" uid="uid://d1qw2nuus2g8m" path="res://counter.tscn" id="9_y60ls"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aw7ft"]
 
@@ -162,3 +163,6 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_t47ri")
 }
+
+[node name="CardsDiscarded" parent="." instance=ExtResource("9_y60ls")]
+unique_name_in_owner = true
