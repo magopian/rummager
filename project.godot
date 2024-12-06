@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Rummager"
-config/version="202412061555"
+config/version="202412061559"
 run/main_scene="res://start_menu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 boot_splash/image="res://assets/boot_splash.png"
