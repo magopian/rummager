@@ -39,6 +39,7 @@ var card_datas: Array[Dictionary]
 
 func _ready() -> void:
 	# Setup
+	#Global.score = 99 # TODO: REMOVE
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	zones.slide_out(0)
 	fade_transition.show()
