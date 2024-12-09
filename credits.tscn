@@ -126,8 +126,8 @@ theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 24
-text = "To my wife, family and friends
-and especially Guillaume for his ideas and support!"
+text = "To my wife Edwige, kids Juliette, Camille, Elora and Lou,
+and to my friends, especially Guillaume, Lauren and Samy for their ideas and support!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
