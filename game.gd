@@ -201,7 +201,11 @@ func zoom_in() -> void:
 func _on_card_left_screen(card: Card) -> void:
 	Global.discarded_cards += 1
 	play_sound(sound_exit_screen)
-	card_discarded(card)
+
+	var force: float = card.get_force()
+	print("force: ", force)
+
+	card_discarded(card, force)
 	if card == held_card:
 		card.held = false
 		drop_card()
@@ -224,6 +228,8 @@ func _on_card_left_screen(card: Card) -> void:
 			you_lose_scene.valid_card = card_to_find.duplicate()
 			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
+		else:
+			add_score(force)
 
 
 func thrown_out_bottom(card: Card) -> bool:
@@ -256,14 +262,14 @@ func get_random_position() -> Vector2:
 	)
 
 
-func card_discarded(card: Card) -> void:
-	var force: float = card.get_force()
-	Global.score += round(force)
-	print("force: ", force)
-	print("score: ", Global.score)
+func card_discarded(card: Card, force: float) -> void:
 	camera_shaker.apply_shake(force)
 	card.discard(force)
 
+
+func add_score(score: int) -> void:
+	Global.score += round(score)
+	print("score: ", Global.score)
 
 func _on_max_progress() -> void:
 	progress.animate_max(cards)
