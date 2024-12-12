@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhvsbddv3u720"
-path="res://.godot/imported/shuffle_hover.png-cfa6f6fa239d27f92aafd47853e4d4c8.ctex"
+uid="uid://d18d5fn0obqts"
+path="res://.godot/imported/shuffle_icon_background.png-7636b93e883f991d9c84a1d73a56046b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/shuffle_hover.png"
-dest_files=["res://.godot/imported/shuffle_hover.png-cfa6f6fa239d27f92aafd47853e4d4c8.ctex"]
+source_file="res://assets/sprites/shuffle_icon_background.png"
+dest_files=["res://.godot/imported/shuffle_icon_background.png-7636b93e883f991d9c84a1d73a56046b.ctex"]
 
 [params]
 

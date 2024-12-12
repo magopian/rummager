@@ -2,20 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvui57bodppg6"
-path="res://.godot/imported/sound_on.png-26b4f8ff8538bd72770dd55ed5b7d9b3.ctex"
+uid="uid://c7igfe1h18eiv"
+path="res://.godot/imported/sound_on_icon_background.png-4375eba330bf36d96cd6d4ea0df0ba67.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/sound_on.png"
-dest_files=["res://.godot/imported/sound_on.png-26b4f8ff8538bd72770dd55ed5b7d9b3.ctex"]
+source_file="res://assets/sprites/sound_on_icon_background.png"
+dest_files=["res://.godot/imported/sound_on_icon_background.png-4375eba330bf36d96cd6d4ea0df0ba67.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1

@@ -1,17 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://b50ttnmwse2tb"]
+[gd_scene load_steps=4 format=3 uid="uid://b50ttnmwse2tb"]
 
 [ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="1_agjgj"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="3_xa4t5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lh2ou"]
 
 [node name="FancyButton" type="Button"]
 offset_right = 8.0
 offset_bottom = 8.0
-theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_focus_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_hover_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_focus_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 48
@@ -28,3 +29,5 @@ theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_lh2ou")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_lh2ou")
 
 [node name="ScaleAndSound" parent="." instance=ExtResource("1_agjgj")]
+
+[node name="PaletteListener" parent="." instance=ExtResource("3_xa4t5")]

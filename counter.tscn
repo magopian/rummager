@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1qw2nuus2g8m"]
+[gd_scene load_steps=3 format=3 uid="uid://d1qw2nuus2g8m"]
 
 [ext_resource type="Script" path="res://counter.gd" id="1_d3fid"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="2_to1qs"]
 
 [node name="Counter" type="Label"]
 z_index = 4096
@@ -10,11 +11,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_colors/font_outline_color = Color(0.160784, 0.00392157, 0.262745, 1)
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_colors/font_outline_color = Color(0.0823529, 0.380392, 0.427451, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 100
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("1_d3fid")
+
+[node name="PaletteListener" parent="." instance=ExtResource("2_to1qs")]

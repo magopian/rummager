@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6tacpe7tp1de"]
+[gd_scene load_steps=3 format=3 uid="uid://c6tacpe7tp1de"]
 
 [ext_resource type="Script" path="res://animated_button.gd" id="1_k4f4n"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="2_2403o"]
 
 [node name="AnimatedButton" type="Control"]
 custom_minimum_size = Vector2(200, 100)
@@ -26,15 +27,17 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_hover_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_hover_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_pressed_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_focus_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_hover_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_focus_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 40
 text = "Placeholder
 "
 flat = true
 autowrap_mode = 2
+
+[node name="PaletteListener" parent="Button" instance=ExtResource("2_2403o")]

@@ -1,9 +1,10 @@
-extends CheckButton
+extends Control
 
-@onready var user_prefs: UserPreferences
+
+@onready var menu_icon: TextureButton = %MenuIcon
 
 
 func _ready() -> void:
 	Global.user_prefs.apply_preferences()
-	toggled.connect(Global.user_prefs.set_muted)
-	button_pressed = Global.user_prefs.muted
+	menu_icon.toggled.connect(Global.user_prefs.set_muted)
+	menu_icon.button_pressed = Global.user_prefs.muted

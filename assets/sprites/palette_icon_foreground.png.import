@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yoh5ervhre0q"
-path="res://.godot/imported/menu_hover.png-3496aa97b391d85e067df7a26481fa69.ctex"
+uid="uid://y0woxcpv56ey"
+path="res://.godot/imported/palette_icon_foreground.png-40cb5889d6960bc7c2843d672c566e60.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/menu_hover.png"
-dest_files=["res://.godot/imported/menu_hover.png-3496aa97b391d85e067df7a26481fa69.ctex"]
+source_file="res://assets/sprites/palette_icon_foreground.png"
+dest_files=["res://.godot/imported/palette_icon_foreground.png-40cb5889d6960bc7c2843d672c566e60.ctex"]
 
 [params]
 

@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=3 uid="uid://c74mokjvytaxx"]
 
 [ext_resource type="Script" path="res://start_menu.gd" id="1_lbbar"]
-[ext_resource type="PackedScene" uid="uid://t6pokx6riwkc" path="res://mute_sound_button.tscn" id="2_88lsy"]
+[ext_resource type="PackedScene" uid="uid://do6kkn5pcc51w" path="res://mute_sound_button.tscn" id="2_88lsy"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_mmat7"]
-[ext_resource type="Texture2D" uid="uid://dvui57bodppg6" path="res://assets/sprites/sound_on.png" id="2_wi4kh"]
-[ext_resource type="Texture2D" uid="uid://b74tn4615ikn3" path="res://assets/sprites/sound_off.png" id="3_klq30"]
-[ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="6_36ro2"]
+[ext_resource type="PackedScene" uid="uid://cwkinl7dsa2my" path="res://palette_button.tscn" id="4_55abo"]
+[ext_resource type="PackedScene" uid="uid://8h7y1byudhtm" path="res://title.tscn" id="5_3o4cj"]
 [ext_resource type="PackedScene" uid="uid://b50ttnmwse2tb" path="res://fancy_button.tscn" id="6_n0hxg"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="7_cca12"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="8_d4p7d"]
 
 [node name="StartMenu" type="Control"]
@@ -36,34 +36,26 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MuteSoundButton" parent="MarginContainer/VBoxContainer/Control2" instance=ExtResource("2_88lsy")]
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 1
-offset_right = 62.0
-offset_bottom = 53.1977
-scale = Vector2(1, 1)
-theme_override_constants/icon_max_width = 50
-theme_override_icons/checked = ExtResource("3_klq30")
-theme_override_icons/unchecked = ExtResource("2_wi4kh")
-
-[node name="ScaleAndSound" parent="MarginContainer/VBoxContainer/Control2/MuteSoundButton" instance=ExtResource("6_36ro2")]
-
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
-clip_contents = false
+[node name="MuteSoundButton2" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_88lsy")]
+custom_minimum_size = Vector2(75, 75)
 layout_mode = 2
-theme_override_colors/default_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/normal_font_size = 92
-bbcode_enabled = true
-text = "[center][wave freq=5 amp=150]Rumm
-ager[/wave][/center]"
-fit_content = true
-scroll_active = false
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PaletteButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("4_55abo")]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Title" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_3o4cj")]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 
 [node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -73,12 +65,14 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_top = NodePath("../QuitButton")
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_font_sizes/font_size = 32
 text = "Continue"
 
 [node name="StartButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_font_sizes/font_size = 32
 text = "START
 "
@@ -86,12 +80,14 @@ text = "START
 [node name="HowToPlayButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_font_sizes/font_size = 32
 text = "How to play"
 
 [node name="CreditsButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("6_n0hxg")]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_font_sizes/font_size = 32
 text = "Credits"
 
@@ -99,16 +95,20 @@ text = "Credits"
 unique_name_in_owner = true
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../ContinueButton")
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_font_sizes/font_size = 32
 text = "QUIT"
 
 [node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.635294, 0.184314, 0.788235, 1)
-theme_override_constants/outline_size = -2
+theme_override_colors/font_color = Color(0, 0.780392, 0.964706, 1)
 text = "Version: "
 horizontal_alignment = 1
+
+[node name="PaletteListener" parent="MarginContainer/VBoxContainer/VersionLabel" instance=ExtResource("7_cca12")]
+background_color = 2
+background_hover_color = 2
 
 [node name="FadeTransition" parent="." instance=ExtResource("8_d4p7d")]
 unique_name_in_owner = true

@@ -9,21 +9,12 @@ signal button_pressed
 
 @export var text: String = "placeholder"
 @export var font_size: int = 40
-@export var color: Color = Color("#290143")
-@export var outline_color: Color = Color("#fff4b8")
 @export var outline_size: int = 8
-@export var focus_color: Color = Color("#a22fc9")
 
 
 func _ready() -> void:
 	button.pressed.connect(_on_button_pressed)
 	button.text = text
-	button.add_theme_color_override("font_hover_pressed_color", focus_color)
-	button.add_theme_color_override("font_hover_color", focus_color)
-	button.add_theme_color_override("font_pressed_color", focus_color)
-	button.add_theme_color_override("font_focus_color", focus_color)
-	button.add_theme_color_override("font_color", color)
-	button.add_theme_color_override("font_outline_color", outline_color)
 	button.add_theme_constant_override("outline_size", outline_size)
 	button.add_theme_constant_override("font_size",  font_size)
 	button.pivot_offset = Vector2(button.size.x / 2, button.size.y / 2)

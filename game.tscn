@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=67 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -54,11 +54,13 @@
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="50_2o8bk"]
 [ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="50_uxbrs"]
 [ext_resource type="PackedScene" uid="uid://dcxjxqadvhk87" path="res://level_label.tscn" id="51_n831h"]
-[ext_resource type="Texture2D" uid="uid://b2fiv6h3e56d4" path="res://assets/sprites/menu_icon.png" id="52_83ybm"]
-[ext_resource type="Texture2D" uid="uid://yoh5ervhre0q" path="res://assets/sprites/menu_hover.png" id="53_wty3r"]
+[ext_resource type="PackedScene" uid="uid://bmba1pqq4wqxb" path="res://menu_icon.tscn" id="53_anti7"]
 [ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="54_71tse"]
-[ext_resource type="Texture2D" uid="uid://c74f0fstiamim" path="res://assets/sprites/shuffle_icon.png" id="54_asxbk"]
-[ext_resource type="Texture2D" uid="uid://dhvsbddv3u720" path="res://assets/sprites/shuffle_hover.png" id="55_kwsue"]
+[ext_resource type="Texture2D" uid="uid://b7e4ndhm2g66m" path="res://assets/sprites/menu_icon_background.png" id="54_vpjvv"]
+[ext_resource type="Texture2D" uid="uid://cejxu0bh2fvbc" path="res://assets/sprites/menu_icon_foreground.png" id="55_48u8x"]
+[ext_resource type="Texture2D" uid="uid://d18d5fn0obqts" path="res://assets/sprites/shuffle_icon_background.png" id="57_ad8br"]
+[ext_resource type="Texture2D" uid="uid://cr0pcp8avgwj4" path="res://assets/sprites/shuffle_icon_foreground.png" id="58_lvsui"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="61_qn7xe"]
 [ext_resource type="PackedScene" uid="uid://cwhy67donfiqv" path="res://shaker.tscn" id="62_dcjsq"]
 [ext_resource type="PackedScene" uid="uid://bifvuippivy7t" path="res://progress.tscn" id="62_tbnfq"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
@@ -69,8 +71,6 @@ random_pitch = 1.5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_gbsqv")
-background_colors = Array[Color]([Color(1, 0.545098, 0.25098, 1), Color(1, 0.956863, 0.721569, 1)])
-colors = Array[Color]([Color(0.160784, 0.00392157, 0.262745, 1), Color(0.635294, 0.184314, 0.788235, 1)])
 patterns = Array[CompressedTexture2D]([ExtResource("2_7bc5u"), ExtResource("3_55dva"), ExtResource("4_5ks1k"), ExtResource("5_w1y4l"), ExtResource("6_75nwq"), ExtResource("7_0kwsy"), ExtResource("8_2o8ig"), ExtResource("9_hxdip"), ExtResource("10_dqyje"), ExtResource("42_m8heu"), ExtResource("11_xpvxe"), ExtResource("12_cmlxy"), ExtResource("13_nbh1o"), ExtResource("14_oosrc"), ExtResource("15_hlrxj"), ExtResource("16_qt3fp"), ExtResource("17_oerp1"), ExtResource("18_jq83f"), ExtResource("19_1mt7k"), ExtResource("20_r0x6w"), ExtResource("21_wq5ga"), ExtResource("22_kkj0a"), ExtResource("23_r7qew"), ExtResource("24_ufq52"), ExtResource("25_ctg3x"), ExtResource("26_fsxx8"), ExtResource("27_dlll0"), ExtResource("28_ol7dy"), ExtResource("29_2j3s0"), ExtResource("30_va8ca"), ExtResource("31_o556c"), ExtResource("32_5c536"), ExtResource("33_3i2c8"), ExtResource("34_rstjs")])
 borders = Array[CompressedTexture2D]([ExtResource("35_4ho8v"), ExtResource("37_7d0oc"), ExtResource("38_d3qxw"), ExtResource("39_12bjf"), ExtResource("40_6qurk"), ExtResource("41_l4yag"), ExtResource("43_vxykk"), ExtResource("44_6rrlq"), ExtResource("46_7s2qb"), ExtResource("47_co188")])
 sound_shuffle = ExtResource("45_sxixt")
@@ -105,36 +105,43 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MenuButton" type="TextureButton" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+[node name="MenuButton" parent="MenuCanvasLayer/Menu/HBoxContainer" instance=ExtResource("53_anti7")]
 unique_name_in_owner = true
+self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("52_83ybm")
-texture_pressed = ExtResource("53_wty3r")
-texture_hover = ExtResource("53_wty3r")
-texture_focused = ExtResource("53_wty3r")
-ignore_texture_size = true
-stretch_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_pressed = ExtResource("54_vpjvv")
+texture_hover = ExtResource("54_vpjvv")
+texture_disabled = ExtResource("54_vpjvv")
+texture_focused = ExtResource("54_vpjvv")
+background_texture = ExtResource("54_vpjvv")
+foreground_texture = ExtResource("55_48u8x")
 
-[node name="ScaleAndSound" parent="MenuCanvasLayer/Menu/HBoxContainer/MenuButton" instance=ExtResource("54_71tse")]
+[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/MenuButton" instance=ExtResource("54_71tse")]
 
 [node name="Control" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ShuffleButton" type="TextureButton" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+[node name="ShuffleButton" parent="MenuCanvasLayer/Menu/HBoxContainer" instance=ExtResource("53_anti7")]
 unique_name_in_owner = true
+self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
-texture_normal = ExtResource("54_asxbk")
-texture_pressed = ExtResource("55_kwsue")
-texture_hover = ExtResource("55_kwsue")
-texture_focused = ExtResource("55_kwsue")
-ignore_texture_size = true
-stretch_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource("57_ad8br")
+texture_pressed = ExtResource("57_ad8br")
+texture_hover = ExtResource("57_ad8br")
+texture_disabled = ExtResource("57_ad8br")
+texture_focused = ExtResource("57_ad8br")
+background_texture = ExtResource("57_ad8br")
+foreground_texture = ExtResource("58_lvsui")
 
-[node name="ScaleAndSound" parent="MenuCanvasLayer/Menu/HBoxContainer/ShuffleButton" instance=ExtResource("54_71tse")]
+[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/ShuffleButton" instance=ExtResource("54_71tse")]
 
 [node name="PickMeCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
@@ -160,7 +167,7 @@ mouse_filter = 2
 [node name="LevelLabel" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("51_n831h")]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 64
@@ -189,21 +196,29 @@ mouse_filter = 2
 
 [node name="Label" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 40
 text = "Find Me!"
 horizontal_alignment = 1
 
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label" instance=ExtResource("61_qn7xe")]
+
 [node name="Label2" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 20
 text = "And drag me to
 the bottom of
 the screen"
 horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label2" instance=ExtResource("61_qn7xe")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
 
 [node name="LetsGoButton" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
@@ -211,7 +226,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "Let's go!"
-color = Color(1, 0.545098, 0.25098, 1)
 
 [node name="Zones" parent="." instance=ExtResource("64_rxnl2")]
 unique_name_in_owner = true

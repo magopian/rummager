@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmba1pqq4wqxb"]
+
+[ext_resource type="Script" path="res://menu_icon.gd" id="1_ht1d7"]
+
+[node name="MenuIcon" type="TextureButton"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_ht1d7")
+
+[node name="Foreground" type="TextureButton" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+focus_mode = 0
+mouse_filter = 2

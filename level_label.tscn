@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcxjxqadvhk87"]
+[gd_scene load_steps=3 format=3 uid="uid://dcxjxqadvhk87"]
 
 [ext_resource type="Script" path="res://level_label.gd" id="1_uk7fa"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="2_k1yx4"]
 
 [node name="LevelLabel" type="Label"]
 size_flags_horizontal = 4
@@ -10,3 +11,6 @@ theme_override_font_sizes/font_size = 20
 text = "Level "
 horizontal_alignment = 1
 script = ExtResource("1_uk7fa")
+
+[node name="PaletteListener" parent="." instance=ExtResource("2_k1yx4")]
+background_hover_color = 0

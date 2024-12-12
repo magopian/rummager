@@ -1,13 +1,35 @@
-[gd_scene load_steps=4 format=3 uid="uid://t6pokx6riwkc"]
+[gd_scene load_steps=8 format=3 uid="uid://do6kkn5pcc51w"]
 
-[ext_resource type="Texture2D" uid="uid://dvui57bodppg6" path="res://assets/sprites/sound_on.png" id="1_wj5na"]
-[ext_resource type="Texture2D" uid="uid://b74tn4615ikn3" path="res://assets/sprites/sound_off.png" id="2_4rg2f"]
+[ext_resource type="PackedScene" uid="uid://bmba1pqq4wqxb" path="res://menu_icon.tscn" id="2_oitwj"]
+[ext_resource type="Texture2D" uid="uid://c7igfe1h18eiv" path="res://assets/sprites/sound_on_icon_background.png" id="3_2j38k"]
+[ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="3_82p1u"]
 [ext_resource type="Script" path="res://mute_sound_button.gd" id="3_v1tn2"]
+[ext_resource type="Texture2D" uid="uid://bk5rfndm7sn72" path="res://assets/sprites/sound_on_icon_foreground.png" id="4_3bltk"]
+[ext_resource type="Texture2D" uid="uid://c5xtjmuiq534y" path="res://assets/sprites/sound_off_icon_background.png" id="5_aqy6e"]
+[ext_resource type="Texture2D" uid="uid://b3dxwabdfloht" path="res://assets/sprites/sound_off_icon_foreground.png" id="6_kno8y"]
 
-[node name="MuteSoundButton" type="CheckButton"]
-offset_right = 44.0
-offset_bottom = 24.0
-scale = Vector2(0.3, 0.3)
-theme_override_icons/checked = ExtResource("1_wj5na")
-theme_override_icons/unchecked = ExtResource("2_4rg2f")
+[node name="MuteSoundButton" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("3_v1tn2")
+
+[node name="MenuIcon" parent="." instance=ExtResource("2_oitwj")]
+unique_name_in_owner = true
+self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
+layout_mode = 0
+offset_right = 66.0
+offset_bottom = 60.0
+toggle_mode = true
+texture_normal = ExtResource("3_2j38k")
+texture_pressed = ExtResource("3_2j38k")
+texture_hover = ExtResource("3_2j38k")
+texture_disabled = ExtResource("3_2j38k")
+texture_focused = ExtResource("3_2j38k")
+background_texture = ExtResource("3_2j38k")
+foreground_texture = ExtResource("4_3bltk")
+background_texture_pressed = ExtResource("5_aqy6e")
+foreground_texture_pressed = ExtResource("6_kno8y")
+
+[node name="ScaleAndSound" parent="MenuIcon" instance=ExtResource("3_82p1u")]

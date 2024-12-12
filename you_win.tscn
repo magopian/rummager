@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://bd3dh78rgvc5y"]
+[gd_scene load_steps=12 format=3 uid="uid://bd3dh78rgvc5y"]
 
 [ext_resource type="Script" path="res://you_win.gd" id="1_1piuq"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_daxe7"]
 [ext_resource type="Texture2D" uid="uid://bwm31tuymnoxs" path="res://assets/sprites/background_win.png" id="3_w121e"]
 [ext_resource type="PackedScene" uid="uid://dcxjxqadvhk87" path="res://level_label.tscn" id="4_lhu34"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="5_14sff"]
 [ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="5_rwuot"]
 [ext_resource type="PackedScene" uid="uid://quspx8oqeob8" path="res://confetti.tscn" id="6_3dxxo"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="6_a0ny3"]
@@ -69,8 +70,8 @@ mouse_filter = 2
 
 [node name="LevelLabel" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_lhu34")]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.160784, 0.00392157, 0.262745, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 64
 
@@ -83,8 +84,8 @@ mouse_filter = 2
 clip_contents = false
 layout_mode = 2
 mouse_filter = 2
-theme_override_colors/default_color = Color(1, 0.545098, 0.25098, 1)
-theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_colors/default_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/normal_font_size = 124
 bbcode_enabled = true
@@ -92,6 +93,8 @@ text = "[center][wave freq=5 amp=150]You
 win![/wave][/center]"
 fit_content = true
 scroll_active = false
+
+[node name="PaletteListener" parent="MarginContainer/VBoxContainer/RichTextLabel" instance=ExtResource("5_14sff")]
 
 [node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

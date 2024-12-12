@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwkinl7dsa2my"]
+
+[ext_resource type="Script" path="res://palette_button.gd" id="1_8007e"]
+[ext_resource type="PackedScene" uid="uid://bmba1pqq4wqxb" path="res://menu_icon.tscn" id="1_b8vyy"]
+[ext_resource type="Texture2D" uid="uid://cr2qdqygloxd0" path="res://assets/sprites/palette_icon_background.png" id="3_jd2hl"]
+[ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="4_7vby1"]
+[ext_resource type="Texture2D" uid="uid://y0woxcpv56ey" path="res://assets/sprites/palette_icon_foreground.png" id="4_x3qrj"]
+
+[node name="PaletteButton" type="Control"]
+custom_minimum_size = Vector2(62, 60)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 62.0
+offset_bottom = 60.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_8007e")
+
+[node name="Card1" parent="." instance=ExtResource("1_b8vyy")]
+unique_name_in_owner = true
+layout_mode = 1
+background_texture = ExtResource("3_jd2hl")
+foreground_texture = ExtResource("4_x3qrj")
+
+[node name="ScaleAndSound" parent="Card1" instance=ExtResource("4_7vby1")]
+
+[node name="Card2" parent="." instance=ExtResource("1_b8vyy")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -32.0
+offset_right = -13.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+rotation = 0.331613
+background_texture = ExtResource("3_jd2hl")
+foreground_texture = ExtResource("4_x3qrj")
+
+[node name="ScaleAndSound2" parent="Card2" instance=ExtResource("4_7vby1")]

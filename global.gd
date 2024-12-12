@@ -2,14 +2,26 @@ extends Node2D
 
 
 signal max_progress
+signal palette_changed(palette_index: int)
 
 
 @export var level: int:
-	get = get_level,
-	set = set_level
+	get:
+		return user_prefs.level
+	set(new_level):
+		user_prefs.level = new_level
+		user_prefs.save()
+@export var palette: int:
+	get:
+		return user_prefs.palette
+	set(new_palette):
+		user_prefs.palette = new_palette
+		user_prefs.save()
+		palette_changed.emit(new_palette)
 
 
 @onready var user_prefs: UserPreferences
+@onready var palettes: Palettes = load("res://palettes.tres")
 
 var viewport_size: Vector2
 
@@ -25,17 +37,17 @@ func _ready() -> void:
 	get_tree().root.size_changed.connect(_on_viewport_resized)
 
 
+func change_palette() -> void:
+	palette = get_next_palette()
+
+
+func get_next_palette() -> int:
+	var num_palettes: int = palettes.palettes.size()
+	return (palette + 1) % num_palettes
+
+
 func _on_viewport_resized() -> void:
 	viewport_size = get_viewport_rect().size
-
-
-func get_level() -> int:
-	return user_prefs.level
-
-
-func set_level(new_level: int) -> void:
-	user_prefs.level = new_level
-	user_prefs.save()
 
 
 func slide_in_screen(node: Node, duration: float) -> Tween:

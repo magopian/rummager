@@ -3,6 +3,7 @@ class_name UserPreferences extends Resource
 enum AUDIO_BUS { MASTER }
 @export var muted: bool = false
 @export var level: int = 1
+@export var palette: int = 0
 
 
 const USER_PREFERENCES_FILE = "user://user_preferences.tres"

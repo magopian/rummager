@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_mouse_entered() -> void:
 	audio_stream_player.play()
-	parent.pivot_offset = parent.size / 2 * initial_scale
+	parent.pivot_offset = parent.size * initial_scale / 2
 	var tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(parent, "scale", initial_scale + Vector2(0.1, 0.1), 0.1)
 

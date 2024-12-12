@@ -21,8 +21,6 @@ extends Node2D
 
 
 @export var num_cards: int = 10
-@export var background_colors: Array[Color]
-@export var colors: Array[Color]
 @export var patterns: Array[CompressedTexture2D]
 @export var borders: Array[CompressedTexture2D]
 @export var sound_shuffle: AudioStream
@@ -87,13 +85,13 @@ func animate_button(button: Button) -> void:
 
 func get_all_permutations() -> Array[Dictionary]:
 	var permutations: Array[Dictionary] = []
-	for background_color in background_colors:
-		for color in colors:
+	for background_color in Palettes.background_colors:
+		for color in Palettes.foreground_colors:
 			for pattern in patterns:
 				for border in borders:
 					permutations.push_back({
-						"background_color": background_color,
-						"color": color,
+						"background_color": Global.palettes.get_color(Global.palette, background_color),
+						"color":  Global.palettes.get_color(Global.palette, color),
 						"pattern_sprite": pattern,
 						"border_sprite": border,
 					})

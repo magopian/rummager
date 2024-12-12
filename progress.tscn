@@ -6,7 +6,7 @@
 bg_color = Color(1, 0.956863, 0.721569, 0.223529)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06pay"]
-bg_color = Color(1, 0.956863, 0.721569, 1)
+bg_color = Color(0.945098, 0.945098, 0.901961, 1)
 
 [sub_resource type="Curve" id="Curve_pkvdt"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.661818, 0.785626), 0.0, 0.0, 0, 0, Vector2(1, 0.122278), 0.0, 0.0, 0, 0]
@@ -36,7 +36,7 @@ linear_accel_curve = SubResource("CurveTexture_uukw6")
 radial_accel_min = -200.0
 radial_accel_max = -50.0
 scale_max = 5.0
-color = Color(1, 0.956863, 0.721569, 1)
+color = Color(0.945098, 0.945098, 0.901961, 1)
 alpha_curve = SubResource("CurveTexture_0drlj")
 
 [node name="Progress" type="CanvasLayer"]

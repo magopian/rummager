@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx5qekwsln2yr"]
+
+[ext_resource type="Script" path="res://palette_listener.gd" id="1_ohg58"]
+
+[node name="PaletteListener" type="Node"]
+script = ExtResource("1_ohg58")

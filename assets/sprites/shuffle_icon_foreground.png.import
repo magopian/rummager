@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://fy4d22tetdxl"
-path="res://.godot/imported/zones.png-4cd8565a1f608614c46aa7ed3229f42d.ctex"
+uid="uid://cr0pcp8avgwj4"
+path="res://.godot/imported/shuffle_icon_foreground.png-3ed1cf932ae62449bd35fe205060e073.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/zones.png"
-dest_files=["res://.godot/imported/zones.png-4cd8565a1f608614c46aa7ed3229f42d.ctex"]
+source_file="res://assets/sprites/shuffle_icon_foreground.png"
+dest_files=["res://.godot/imported/shuffle_icon_foreground.png-3ed1cf932ae62449bd35fe205060e073.ctex"]
 
 [params]
 
