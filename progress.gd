@@ -54,7 +54,7 @@ func animate_max(cards_container: Node) -> void:
 	tween.set_parallel(true)
 	tween.tween_property(color_rect, "color:a", 0.5, 0.5)
 	tween.tween_property(progress_bar, "theme_override_styles/fill:bg_color", Color.WHITE, 0.15)
-	tween.tween_property(progress_bar, "scale", Vector2.ONE * 2, 0.15)
+	tween.tween_property(progress_bar, "scale", Vector2.ONE * 1.5, 0.15)
 	tween.chain().tween_interval(0.25)
 	tween.tween_property(progress_bar, "theme_override_styles/fill:bg_color", initial_color, 0.15)
 	tween.tween_property(progress_bar, "scale", Vector2.ONE, 0.15)

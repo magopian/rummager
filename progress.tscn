@@ -6,7 +6,7 @@
 bg_color = Color(1, 0.956863, 0.721569, 0.223529)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06pay"]
-bg_color = Color(0.945098, 0.945098, 0.901961, 1)
+bg_color = Color(0.407843, 0.768627, 0.513726, 1)
 
 [sub_resource type="Curve" id="Curve_pkvdt"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.661818, 0.785626), 0.0, 0.0, 0, 0, Vector2(1, 0.122278), 0.0, 0.0, 0, 0]
@@ -66,12 +66,14 @@ size_flags_vertical = 8
 [node name="ProgressBar" type="ProgressBar" parent="Control"]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -10.0
 grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(0, 5)
+grow_vertical = 0
+pivot_offset = Vector2(0, 10)
 theme_override_styles/background = SubResource("StyleBoxFlat_v3igy")
 theme_override_styles/fill = SubResource("StyleBoxFlat_06pay")
 value = 50.0
