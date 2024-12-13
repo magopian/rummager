@@ -105,11 +105,27 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MenuButton" parent="MenuCanvasLayer/Menu/HBoxContainer" instance=ExtResource("53_anti7")]
+[node name="Control2" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MenuButton" parent="MenuCanvasLayer/Menu/HBoxContainer/Control2" instance=ExtResource("53_anti7")]
 unique_name_in_owner = true
 self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 184.5
+offset_bottom = 174.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture_pressed = ExtResource("54_vpjvv")
@@ -119,18 +135,35 @@ texture_focused = ExtResource("54_vpjvv")
 background_texture = ExtResource("54_vpjvv")
 foreground_texture = ExtResource("55_48u8x")
 
-[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/MenuButton" instance=ExtResource("54_71tse")]
+[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/Control2/MenuButton" instance=ExtResource("54_71tse")]
 
 [node name="Control" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ShuffleButton" parent="MenuCanvasLayer/Menu/HBoxContainer" instance=ExtResource("53_anti7")]
+[node name="Control3" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ShuffleButton" parent="MenuCanvasLayer/Menu/HBoxContainer/Control3" instance=ExtResource("53_anti7")]
 unique_name_in_owner = true
 self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 212.5
+offset_bottom = 202.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 texture_normal = ExtResource("57_ad8br")
@@ -141,7 +174,7 @@ texture_focused = ExtResource("57_ad8br")
 background_texture = ExtResource("57_ad8br")
 foreground_texture = ExtResource("58_lvsui")
 
-[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/ShuffleButton" instance=ExtResource("54_71tse")]
+[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/Control3/ShuffleButton" instance=ExtResource("54_71tse")]
 
 [node name="PickMeCanvasLayer" parent="." instance=ExtResource("50_uxbrs")]
 unique_name_in_owner = true
