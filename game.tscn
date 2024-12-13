@@ -96,6 +96,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 90.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -104,6 +105,7 @@ theme_override_constants/margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="MenuCanvasLayer/Menu"]
 layout_mode = 2
 size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="Control2" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
@@ -141,6 +143,7 @@ foreground_texture = ExtResource("55_48u8x")
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Control3" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
 custom_minimum_size = Vector2(75, 75)
