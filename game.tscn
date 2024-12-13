@@ -255,6 +255,7 @@ foreground_color = 3
 
 [node name="LetsGoButton" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation" instance=ExtResource("45_5qh7m")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4

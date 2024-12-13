@@ -13,7 +13,7 @@
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250751, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74102, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_3m78u"]
+[sub_resource type="CurveTexture" id="CurveTexture_g4vh1"]
 curve = SubResource("Curve_hkm28")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_asff1"]
@@ -31,7 +31,7 @@ angular_velocity_max = 283.69
 gravity = Vector3(0, 250, 0)
 scale_min = 0.1
 scale_max = 0.7
-scale_curve = SubResource("CurveTexture_3m78u")
+scale_curve = SubResource("CurveTexture_g4vh1")
 color = Color(1, 0.166667, 0, 1)
 hue_variation_min = -2.23517e-08
 hue_variation_max = 1.0
@@ -105,6 +105,8 @@ mouse_filter = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 text = "Next level"
 
 [node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
