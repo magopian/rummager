@@ -227,7 +227,7 @@ func _on_card_left_screen(card: Card) -> void:
 			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 		else:
-			add_score(force)
+			add_score(round(force))
 
 
 func thrown_out_bottom(card: Card) -> bool:
