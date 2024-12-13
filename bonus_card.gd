@@ -14,7 +14,6 @@ class_name BonusCard extends Sprite2D
 
 var characteristic: String
 var bonus_value
-var pop_text_scene: PackedScene = preload("res://pop_text.tscn")
 
 
 func _ready() -> void:
@@ -93,15 +92,6 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 	for card in cards_to_remove:
 		if is_instance_valid(card):
 			card.queue_free()
-
-
-func pop_number(number: int) -> void:
-	var pop_text: PopText = pop_text_scene.instantiate()
-	pop_text.text = str(number)
-	pop_text.rotation_degrees = randf_range(-5, 5)
-	add_child(pop_text)
-	await pop_text.pop()
-	pop_text.queue_free()
 
 
 func disappear() -> void:

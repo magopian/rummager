@@ -23,6 +23,7 @@ signal left_screen(card: Card)
 
 var held = false
 var tween: Tween
+var pop_text_scene: PackedScene = preload("res://pop_text.tscn")
 
 
 static var charac_to_property: Dictionary = {
@@ -157,17 +158,27 @@ func scale_to(new_scale: Vector2, duration: float) -> Tween:
 
 
 func discard(force: float) -> void:
-	var angle: float = linear_velocity.angle()
-	var confetti_scale: float = force / 10
+	var eject_angle: float = linear_velocity.angle() + PI
+	var eject_position: Vector2 = global_position.clamp(Vector2.ZERO, Global.viewport_size)
+	var eject_scale: float = force / 10
 	linear_velocity = Vector2.ZERO
-	var confetti_position: Vector2 = global_position.clamp(Vector2.ZERO, Global.viewport_size)
-	confetti.global_position = confetti_position
-	confetti.scale = Vector2(confetti_scale, confetti_scale)
-	confetti.process_material.scale_max = confetti_scale
-	confetti.rotation = angle + PI
+	confetti.global_position = eject_position
+	confetti.scale = Vector2.ONE * eject_scale
+	confetti.process_material.scale_max = eject_scale
+	confetti.rotation = eject_angle
 	confetti.emitting = true
+	pop_number(force, eject_position, eject_angle)
 	await confetti.finished
 	call_deferred("queue_free")
+
+
+func pop_number(force: float, eject_position: Vector2, eject_angle: float) -> void:
+	var pop_text: PopText = pop_text_scene.instantiate()
+	get_tree().root.add_child(pop_text)
+	await pop_text.pop(force, eject_position, eject_angle)
+	#await pop_text.pop(1, eject_position, eject_angle)
+	await get_tree().create_timer(2).timeout
+	pop_text.call_deferred("queue_free")
 
 
 func explode_out(interval: float = 0) -> Tween:

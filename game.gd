@@ -203,7 +203,6 @@ func _on_card_left_screen(card: Card) -> void:
 	var force: float = card.get_force()
 	print("force: ", force)
 
-	card_discarded(card, force)
 	if card == held_card:
 		card.held = false
 		drop_card()
@@ -228,6 +227,7 @@ func _on_card_left_screen(card: Card) -> void:
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 		else:
 			add_score(round(force))
+			card_discarded(card, force)
 
 
 func thrown_out_bottom(card: Card) -> bool:

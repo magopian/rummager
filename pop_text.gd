@@ -1,33 +1,24 @@
-class_name PopText extends Path2D
+class_name PopText extends Label
 
 
-@onready var label: Label = %Label
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+func pop(number: float, from: Vector2, with_angle: float) -> void:
+	global_position = from
+	scale = Vector2.ONE * 0.1
+	modulate.a = 0
+	text = str(round(number * 10))
+	set("theme_override_font_sizes/font_size", round(number * 20))
+	set("theme_override_constants/outline_size", clamp(round(number * 2), 1, 10))
+	var real_size: Vector2 = get_minimum_size()
+	position -= (real_size / 2)
+	pivot_offset = real_size / 2
 
+	var direction: Vector2 = Vector2(number * 50, 0)  # Corresponds to angle 0
+	direction = direction.rotated(with_angle)
 
-@export var text: String
-@export var color: Color
-@export var outline_color: Color
-@export var font_size: int
-@export var outline_size: int
-
-
-func _ready() -> void:
-	label.text = text
-	if color:
-		label.set("theme_override_colors/font_color", color)
-	if outline_color:
-		label.set("theme_override_colors/font_outline_color", outline_color)
-	if font_size:
-		label.set("theme_override_font_sizes/font_size", font_size)
-	if outline_size:
-		label.set("theme_override_constants/outline_size", outline_size)
-	label.rotation = -rotation  # "Unrotate" the text so i stays horizontal
-	label.position = -(label.size / 2)  # Move the label so its center is at the center of the root node
-	label.pivot_offset = label.size / 2  # Scaling happens around the pivot, so center it on the label
-
-
-func pop() -> void:
-	prints("popping:", label.text)
-	animation_player.play("pop")
-	await animation_player.animation_finished
+	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SPRING)
+	tween.set_parallel(true)
+	tween.tween_property(self, "position", position + direction, 1)
+	tween.tween_property(self, "modulate:a", 1, 0.3)
+	tween.tween_property(self, "scale", Vector2.ONE, 0.6)
+	tween.chain().tween_property(self, "modulate:a", 0, 1)
+	tween.tween_property(self, "position", position, 1)
