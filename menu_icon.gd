@@ -44,12 +44,12 @@ func _ready() -> void:
 
 func _on_pressed() -> void:
 	# TODO: animate a squash and stretch
-	print("pressed")
+	pass
 
 
 func _on_toggled(toggled_on: bool) -> void:
-	set_textures(self, background_texture if not button_pressed else background_texture_pressed)
-	set_textures(foreground, foreground_texture if not button_pressed else foreground_texture_pressed)
+	set_textures(self, background_texture if not toggled_on else background_texture_pressed)
+	set_textures(foreground, foreground_texture if not toggled_on else foreground_texture_pressed)
 
 
 func _on_hover(hovering: bool) -> void:
