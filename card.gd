@@ -176,7 +176,6 @@ func pop_number(force: float, eject_position: Vector2, eject_angle: float) -> vo
 	var pop_text: PopText = pop_text_scene.instantiate()
 	get_tree().root.add_child(pop_text)
 	await pop_text.pop(force, eject_position, eject_angle)
-	#await pop_text.pop(1, eject_position, eject_angle)
 	await get_tree().create_timer(2).timeout
 	pop_text.call_deferred("queue_free")
 
