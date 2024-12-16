@@ -176,7 +176,7 @@ func explode_out() -> void:
 		if card != card_to_find:
 			tween = card.explode_out(x * interval)
 		else:
-			tween = card.unshuffle(1, 1)
+			tween = card.unshuffle(2, 0)
 		x += 1
 	await tween.finished
 
