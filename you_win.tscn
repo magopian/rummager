@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd3dh78rgvc5y"]
+[gd_scene load_steps=13 format=3 uid="uid://bd3dh78rgvc5y"]
 
 [ext_resource type="Script" path="res://you_win.gd" id="1_1piuq"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_daxe7"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="5_rwuot"]
 [ext_resource type="PackedScene" uid="uid://quspx8oqeob8" path="res://confetti.tscn" id="6_3dxxo"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="6_a0ny3"]
+[ext_resource type="PackedScene" uid="uid://b50ttnmwse2tb" path="res://fancy_button.tscn" id="7_vripg"]
 
 [sub_resource type="Curve" id="Curve_hkm28"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250751, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74102, 0.0, 0, 0]
@@ -103,11 +104,26 @@ mouse_filter = 2
 
 [node name="NextLevelButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("5_rwuot")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(300, 100)
+custom_minimum_size = Vector2(400, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-text = "Next level"
+text = "10 more cards!"
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "or"
+horizontal_alignment = 1
+
+[node name="PaletteListener2" parent="MarginContainer/VBoxContainer/Label" instance=ExtResource("5_14sff")]
+foreground_color = 3
+
+[node name="ReplayButton" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_vripg")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Replay"
 
 [node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
