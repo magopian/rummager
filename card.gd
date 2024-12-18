@@ -175,7 +175,9 @@ func discard(force: float) -> void:
 func pop_number(force: float, eject_position: Vector2, eject_angle: float) -> void:
 	var pop_text: PopText = pop_text_scene.instantiate()
 	get_tree().root.add_child(pop_text)
-	await pop_text.pop(force, eject_position, eject_angle)
+	var score_percentage: float = Global.score % 100
+	var score_pos: float = Global.viewport_size.x * score_percentage / 100
+	await pop_text.pop(force, eject_position, eject_angle, Vector2(score_pos, Global.viewport_size.y))
 	await get_tree().create_timer(2).timeout
 	pop_text.call_deferred("queue_free")
 
