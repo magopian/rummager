@@ -52,4 +52,18 @@ func _on_target_hit(body: Node2D) -> void:
 	if speed < 100:
 		return
 	Global.target_hit.emit(body)
+	body.collision_layer = 0
+	var animated_target: Sprite2D = target.duplicate()
+	call_deferred("animate_target_hit", animated_target, target.global_position)
 	random_target()
+
+
+func animate_target_hit(animated_target: Sprite2D, initial_position: Vector2) -> void:
+	add_child(animated_target)
+	animated_target.position = initial_position
+	var tween: Tween = animated_target.create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
+	tween.set_parallel()
+	tween.tween_property(animated_target, "scale", Vector2.ONE * 1, 0.5)
+	tween.tween_property(animated_target, "modulate:a", 0, 0.5)
+	await tween.finished
+	animated_target.queue_free()
