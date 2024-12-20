@@ -51,6 +51,7 @@ func _ready() -> void:
 	Global.max_progress.connect(_on_max_progress)
 	timer.timeout.connect(zoom_in)
 	Global.card_left_screen.connect(_on_card_left_screen)
+	Global.target_hit.connect(_on_target_hit)
 
 	# Instantiate cards
 	var all_permutations: Array[Dictionary] = get_all_permutations()
@@ -146,7 +147,7 @@ func _on_lets_go_button_pressed() -> void:
 	var card: Card = card_display.get_child(0)
 	var tween: Tween = card.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(card, "global_position", Global.viewport_size / 2, 0.5)
-	await card.scale_to(Vector2.ZERO, 0.5).finished
+	await card.scale_to(Vector2.ZERO, 0.5)
 	pick_me_canvas_layer.queue_free()
 	Global.time_started_rummage = Time.get_ticks_msec()
 
@@ -236,6 +237,14 @@ func _on_card_left_screen(card: Card) -> void:
 		else:
 			add_score(round(force))
 			card_discarded(card, force)
+
+
+func _on_target_hit(card: Card) -> void:
+	Global.score += 5
+	var eject_angle: float = card.linear_velocity.angle() + PI + (PI / 10)
+	var eject_position: Vector2 = card.global_position.clamp(Vector2.ZERO, Global.viewport_size)
+	card.pop_number(5, eject_position, eject_angle)
+
 
 
 func thrown_out_bottom(card: Card) -> bool:
