@@ -35,6 +35,8 @@ var held_card: Card
 var card_to_find: Card
 var card_datas: Array[Dictionary]
 
+var card_initial_position: Vector2
+
 
 func _ready() -> void:
 	# Setup
@@ -192,10 +194,16 @@ func _on_card_clicked(card: Card) -> void:
 		card.pickup()
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
+		card_initial_position = card.global_position
 		timer.start()
 
 
 func zoom_in() -> void:
+	var distance_travelled: float = (held_card.global_position - card_initial_position).length()
+	prints("distance travelled:", distance_travelled)
+	if distance_travelled > 100:
+		# We moved the held card, so don't zoom in.
+			return
 	held_card.zoom_in()
 	zones.slide_in(0.15)
 	Global.slide_off_screen(menu, 0.15)
@@ -244,7 +252,6 @@ func thrown_out_bottom(card: Card) -> bool:
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
-			timer.stop()
 			play_sound(sound_drop)
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
