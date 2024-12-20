@@ -51,5 +51,5 @@ func _on_target_hit(body: Node2D) -> void:
 	var speed: float = body.linear_velocity.length()
 	if speed < 100:
 		return
-	Global.target_hit.emit()
+	Global.target_hit.emit(body)
 	random_target()

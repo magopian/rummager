@@ -154,6 +154,7 @@ func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int 
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	for child in get_children():
 		scale_tween.tween_property(child, "scale", new_scale, duration)
+	await scale_tween.finished
 	collision_layer = updated_collision_layer
 	return scale_tween
 

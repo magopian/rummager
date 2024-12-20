@@ -3,7 +3,7 @@ extends Node2D
 
 signal max_progress
 signal palette_changed(palette_index: int)
-signal target_hit
+signal target_hit(card: Card)
 signal card_left_screen(card: Card)
 
 
@@ -44,7 +44,7 @@ func _ready() -> void:
 	max_progress.connect(_on_max_progress)
 
 
-func _on_target_hit() -> void:
+func _on_target_hit(_card: Card) -> void:
 	target_hit_count += 1
 
 
