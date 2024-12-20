@@ -90,6 +90,7 @@ func zoom_in() -> void:
 
 
 func show_big(speed: float = 0.15) -> void:
+	collision_layer = 0
 	scale_to(big_scale, speed)
 	position = Vector2(200, 200)
 	animate_card()
@@ -102,12 +103,14 @@ func animate_card() -> void:
 
 
 func show_small(speed: float = 0.15) -> void:
-	scale_to(small_scale, speed)
+	await scale_to(small_scale, speed).finished
+	collision_layer = 1
 	if tween:
 		tween.stop()
 
 
 func show_medium() -> void:
+	collision_layer = 0
 	update_scale(medium_scale)
 	freeze = true
 	hide_dust()

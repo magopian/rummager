@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dqnu3qnf4ntyy"]
+[gd_scene load_steps=68 format=3 uid="uid://dqnu3qnf4ntyy"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_gbsqv"]
 [ext_resource type="Texture2D" uid="uid://jdjj218s55w0" path="res://assets/cards_patterns/circles.png" id="2_7bc5u"]
@@ -65,6 +65,7 @@
 [ext_resource type="PackedScene" uid="uid://bifvuippivy7t" path="res://progress.tscn" id="62_tbnfq"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="64_rxnl2"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="65_oc4fy"]
+[ext_resource type="PackedScene" uid="uid://bpfj34u8qsxra" path="res://target.tscn" id="66_hyrw8"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ypwvg"]
 random_pitch = 1.5
@@ -293,3 +294,6 @@ anchor_mode = 0
 [node name="CameraShaker" parent="Camera2D" instance=ExtResource("62_dcjsq")]
 unique_name_in_owner = true
 randomStrength = 10.0
+
+[node name="Target" parent="." instance=ExtResource("66_hyrw8")]
+unique_name_in_owner = true

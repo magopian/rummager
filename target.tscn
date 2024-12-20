@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpfj34u8qsxra"]
+
+[ext_resource type="Script" path="res://target.gd" id="1_kcnj3"]
+[ext_resource type="Texture2D" uid="uid://b8fju5rcmx24c" path="res://assets/sprites/target.png" id="2_5uyg4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knqbp"]
+radius = 57.0
+
+[node name="Target" type="CanvasLayer"]
+script = ExtResource("1_kcnj3")
+
+[node name="Path2D" type="Path2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+unique_name_in_owner = true
+
+[node name="Target" type="Sprite2D" parent="Path2D/PathFollow2D"]
+unique_name_in_owner = true
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_5uyg4")
+
+[node name="Area2D" type="Area2D" parent="Path2D/PathFollow2D/Target"]
+unique_name_in_owner = true
+position = Vector2(-50, -50)
+scale = Vector2(4, 4)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Path2D/PathFollow2D/Target/Area2D"]
+position = Vector2(12.5, 12.5)
+shape = SubResource("CircleShape2D_knqbp")

@@ -16,6 +16,7 @@ extends Node2D
 @onready var timer: Timer = %Timer
 @onready var camera_shaker: Node2D = %CameraShaker
 @onready var progress: CanvasLayer = %Progress
+@onready var target: CanvasLayer = %Target
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
@@ -145,6 +146,9 @@ func _on_lets_go_button_pressed() -> void:
 	await card.scale_to(Vector2.ZERO, 0.5).finished
 	pick_me_canvas_layer.queue_free()
 	Global.time_started_rummage = Time.get_ticks_msec()
+
+	# Random target to aim at when discarding a card
+	target.random_target()
 
 
 func shuffle_out() -> void:
