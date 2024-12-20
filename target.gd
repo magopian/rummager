@@ -17,10 +17,10 @@ func _ready() -> void:
 
 
 func setup_curve():
-	var bottom_left: Vector2 = Vector2(0, Global.viewport_size.y)
+	var bottom_left: Vector2 = Vector2(0, Global.viewport_size.y - 100)
 	var top_left: Vector2 = Vector2.ZERO
 	var top_right: Vector2 = Vector2(Global.viewport_size.x, 0)
-	var bottom_right: Vector2 = Global.viewport_size
+	var bottom_right: Vector2 = Vector2(Global.viewport_size.x, Global.viewport_size.y - 100)
 	path_2d.curve = Curve2D.new()
 	path_2d.curve.add_point(bottom_left, Vector2.ZERO, Vector2.ZERO)
 	path_2d.curve.add_point(top_left, Vector2.ZERO, Vector2.ZERO)
