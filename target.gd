@@ -30,13 +30,11 @@ func setup_curve():
 
 func random_target() -> void:
 	var random_progress_ratio: float = randf()
-	area_2d.set_deferred("monitoring", false)
 	
 	var tween: Tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 	tween.tween_property(path_follow_2d, "progress_ratio", random_progress_ratio, 1)
 	tween.tween_property(target, "modulate:a", 0.5, 1)
 	await tween.finished
-	area_2d.set_deferred("monitoring", true)
 
 
 func _on_target_hit(body: Node2D) -> void:

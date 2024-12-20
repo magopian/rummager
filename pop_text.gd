@@ -2,7 +2,6 @@ class_name PopText extends Label
 
 
 func pop(number: float, from: Vector2, with_angle: float, to: Vector2) -> void:
-	prints("poping text and going to:", to)
 	global_position = from
 	scale = Vector2.ONE * 0.1
 	modulate.a = 0

@@ -91,7 +91,7 @@ func zoom_in() -> void:
 
 func show_big(speed: float = 0.15) -> void:
 	collision_layer = 0
-	scale_to(big_scale, speed)
+	scale_to(big_scale, speed, 0)
 	animate_card()
 
 
@@ -163,7 +163,6 @@ func discard(force: float) -> void:
 	var eject_angle: float = linear_velocity.angle() + PI
 	var eject_position: Vector2 = global_position.clamp(Vector2.ZERO, Global.viewport_size)
 	var eject_scale: float = force / 10
-	linear_velocity = Vector2.ZERO
 	confetti.global_position = eject_position
 	confetti.scale = Vector2.ONE * eject_scale
 	confetti.process_material.scale_max = eject_scale
