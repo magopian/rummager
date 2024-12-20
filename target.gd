@@ -1,9 +1,6 @@
 extends CanvasLayer
 
 
-signal target_hit
-
-
 @onready var path_2d: Path2D = %Path2D
 @onready var path_follow_2d: PathFollow2D = %PathFollow2D
 @onready var target: Sprite2D = %Target
@@ -17,8 +14,8 @@ func _ready() -> void:
 
 
 func setup_curve():
-	var height: int = Global.viewport_size.y - 100
-	var width: int = Global.viewport_size.x
+	var height: float = Global.viewport_size.y - 100
+	var width: float = Global.viewport_size.x
 	var bottom_left: Vector2 = Vector2(0, height)
 	var top_left: Vector2 = Vector2.ZERO
 	var top_right: Vector2 = Vector2(width, 0)
@@ -54,5 +51,5 @@ func _on_target_hit(body: Node2D) -> void:
 	var speed: float = body.linear_velocity.length()
 	if speed < 100:
 		return
-	target_hit.emit()
+	Global.target_hit.emit()
 	random_target()

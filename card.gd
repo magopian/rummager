@@ -2,7 +2,6 @@ class_name Card extends RigidBody2D
 
 
 signal clicked(card: Card)
-signal left_screen(card: Card)
 
 
 @onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = %VisibleOnScreenNotifier2D
@@ -69,7 +68,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 
 func _on_exit_screen() -> void:
 	visible_on_screen_notifier_2d.queue_free()
-	left_screen.emit(self)
+	Global.card_left_screen.emit(self)
 
 
 func _physics_process(_delta) -> void:

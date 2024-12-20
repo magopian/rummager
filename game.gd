@@ -50,6 +50,7 @@ func _ready() -> void:
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	Global.max_progress.connect(_on_max_progress)
 	timer.timeout.connect(zoom_in)
+	Global.card_left_screen.connect(_on_card_left_screen)
 
 	# Instantiate cards
 	var all_permutations: Array[Dictionary] = get_all_permutations()
@@ -105,7 +106,6 @@ func get_all_permutations() -> Array[Dictionary]:
 func new_card(all_permutations: Array[Dictionary]) -> Card:
 	var card: Card = card_scene.instantiate()
 	card.clicked.connect(_on_card_clicked)
-	card.left_screen.connect(_on_card_left_screen)
 	card.position = Global.viewport_size / 2
 	card.rotation_degrees = randf_range(-20, 20)
 	var card_data: Dictionary = all_permutations.pop_back()
@@ -200,7 +200,6 @@ func _on_card_clicked(card: Card) -> void:
 
 func zoom_in() -> void:
 	var distance_travelled: float = (held_card.global_position - card_initial_position).length()
-	prints("distance travelled:", distance_travelled)
 	if distance_travelled > 100:
 		# We moved the held card, so don't zoom in.
 			return
@@ -210,12 +209,8 @@ func zoom_in() -> void:
 
 
 func _on_card_left_screen(card: Card) -> void:
-	Global.discarded_cards += 1
 	play_sound(sound_exit_screen)
-
 	var force: float = card.get_force()
-	print("force: ", force)
-
 	if card == held_card:
 		card.held = false
 		drop_card()
@@ -279,7 +274,7 @@ func card_discarded(card: Card, force: float) -> void:
 
 func add_score(score: int) -> void:
 	Global.score += round(score)
-	print("score: ", Global.score)
+
 
 func _on_max_progress() -> void:
 	progress.animate_max(cards)

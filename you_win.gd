@@ -15,6 +15,7 @@ func _ready() -> void:
 	print("time elapsed memorizing: ", Global.time_started_rummage - Global.time_started)
 	print("time elapsed rummaging: ", Time.get_ticks_msec() - Global.time_started_rummage)
 	print("number of cards discarded: ", Global.discarded_cards)
+	print("number of bonus cards: ", Global.bonus_cards)
 
 
 func _on_next_level_pressed() -> void:

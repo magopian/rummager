@@ -3,6 +3,8 @@ extends Node2D
 
 signal max_progress
 signal palette_changed(palette_index: int)
+signal target_hit
+signal card_left_screen(card: Card)
 
 
 @export var level: int:
@@ -26,15 +28,32 @@ signal palette_changed(palette_index: int)
 var viewport_size: Vector2
 
 var discarded_cards: int = 0
+var target_hit_count: int = 0
 var time_started: int = 0
 var time_started_rummage: int = 0
 var score: int = 0
+var bonus_cards: int = 0
 
 
 func _ready() -> void:
 	user_prefs = UserPreferences.load_or_create()
 	viewport_size = get_viewport_rect().size
 	get_tree().root.size_changed.connect(_on_viewport_resized)
+	target_hit.connect(_on_target_hit)
+	card_left_screen.connect(_on_card_left_screen)
+	max_progress.connect(_on_max_progress)
+
+
+func _on_target_hit() -> void:
+	target_hit_count += 1
+
+
+func _on_card_left_screen(_card: Card) -> void:
+	discarded_cards += 1
+
+
+func _on_max_progress() -> void:
+	bonus_cards += 1
 
 
 func change_palette() -> void:
