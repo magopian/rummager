@@ -103,8 +103,7 @@ func animate_card() -> void:
 
 
 func show_small(speed: float = 0.15) -> void:
-	await scale_to(small_scale, speed).finished
-	collision_layer = 1
+	scale_to(small_scale, speed, 1)
 	if tween:
 		tween.stop()
 
@@ -153,10 +152,11 @@ func update_scale(new_scale: Vector2) -> void:
 		child.scale = new_scale
 
 
-func scale_to(new_scale: Vector2, duration: float) -> Tween:
+func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int = 1) -> Tween:
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	for child in get_children():
 		scale_tween.tween_property(child, "scale", new_scale, duration)
+	collision_layer = updated_collision_layer
 	return scale_tween
 
 
