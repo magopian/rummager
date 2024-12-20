@@ -75,6 +75,7 @@ func _ready() -> void:
 func display_card_to_find() -> void:
 	var card_to_display: Card = card_to_find.duplicate()
 	card_display.add_child(card_to_display)
+	card_to_display.position = Vector2(200, 200)
 	card_to_display.show_big()
 
 
