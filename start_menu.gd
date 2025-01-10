@@ -5,7 +5,6 @@ extends Control
 @onready var how_to_play_button: Button = %HowToPlayButton
 @onready var credits_button: Button = %CreditsButton
 @onready var quit_button: Button = %QuitButton
-@onready var version_label: Label = %VersionLabel
 @onready var fade_transition: ColorRect = %FadeTransition
 
 
@@ -25,7 +24,6 @@ func _ready() -> void:
 	how_to_play_button.pressed.connect(_on_how_to_play)
 	credits_button.pressed.connect(_on_credits_pressed)
 	quit_button.pressed.connect(_on_quit_button_pressed)
-	version_label.text += ProjectSettings.get_setting("application/config/version")
 	# Only display the "quit" button on desktop.
 	if OS.has_feature("web") or OS.has_feature("mobile"):
 		quit_button.hide()

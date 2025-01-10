@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://yn2bj36p0xrd"]
+
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="1_bm4ka"]
+[ext_resource type="Script" path="res://version_label.gd" id="1_tborv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tquw8"]
+
+[node name="Button" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_tquw8")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tquw8")
+text = "Version:"
+script = ExtResource("1_tborv")
+
+[node name="PaletteListener" parent="." instance=ExtResource("1_bm4ka")]
+background_color = 2
+background_hover_color = 2
+
+[node name="LineEdit" type="LineEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

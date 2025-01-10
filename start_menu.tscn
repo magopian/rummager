@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cwkinl7dsa2my" path="res://palette_button.tscn" id="4_55abo"]
 [ext_resource type="PackedScene" uid="uid://8h7y1byudhtm" path="res://title.tscn" id="5_3o4cj"]
 [ext_resource type="PackedScene" uid="uid://b50ttnmwse2tb" path="res://fancy_button.tscn" id="6_n0hxg"]
-[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="7_cca12"]
+[ext_resource type="PackedScene" uid="uid://yn2bj36p0xrd" path="res://version_label.tscn" id="7_n64ss"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="8_d4p7d"]
 
 [node name="StartMenu" type="Control"]
@@ -99,16 +99,12 @@ theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1
 theme_override_font_sizes/font_size = 32
 text = "QUIT"
 
-[node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0.780392, 0.964706, 1)
-text = "Version: "
-horizontal_alignment = 1
 
-[node name="PaletteListener" parent="MarginContainer/VBoxContainer/VersionLabel" instance=ExtResource("7_cca12")]
-background_color = 2
-background_hover_color = 2
+[node name="VersionLabel" parent="MarginContainer/VBoxContainer" instance=ExtResource("7_n64ss")]
+layout_mode = 2
 
 [node name="FadeTransition" parent="." instance=ExtResource("8_d4p7d")]
 unique_name_in_owner = true
