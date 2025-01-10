@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://brofk6oqxlvu6"]
+[gd_scene load_steps=13 format=3 uid="uid://brofk6oqxlvu6"]
 
 [ext_resource type="Script" path="res://card.gd" id="1_00shj"]
 [ext_resource type="PackedScene" uid="uid://btw4apieubt2i" path="res://dust_cloud.tscn" id="2_j26a1"]
@@ -10,6 +10,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlpa3"]
 size = Vector2(300, 300)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rv30c"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Curve" id="Curve_hkm28"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250751, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74102, 0.0, 0, 0]
@@ -43,6 +46,9 @@ collision_mask = 0
 input_pickable = true
 mass = 2.0
 gravity_scale = 0.0
+sleeping = true
+lock_rotation = true
+freeze = true
 linear_damp = 0.5
 script = ExtResource("1_00shj")
 
@@ -63,22 +69,38 @@ shape = SubResource("RectangleShape2D_tlpa3")
 unique_name_in_owner = true
 rect = Rect2(-150, -150, 300, 300)
 
-[node name="BackgroundShadow" type="Sprite2D" parent="."]
-texture = ExtResource("2_s53wd")
-offset = Vector2(10, 10)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_rv30c")
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(350, 350)
+render_target_clear_mode = 2
+render_target_update_mode = 1
+
+[node name="BackgroundShadow" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("2_s53wd")
+offset = Vector2(175, 175)
+
+[node name="Background" type="Sprite2D" parent="SubViewport"]
 unique_name_in_owner = true
 texture = ExtResource("2_rr0sm")
+offset = Vector2(175, 175)
 
-[node name="Pattern" type="Sprite2D" parent="."]
+[node name="Pattern" type="Sprite2D" parent="SubViewport"]
 unique_name_in_owner = true
+offset = Vector2(175, 175)
 
-[node name="Border" type="Sprite2D" parent="."]
+[node name="Border" type="Sprite2D" parent="SubViewport"]
 unique_name_in_owner = true
+offset = Vector2(175, 175)
 
-[node name="BackgroundOver" type="Sprite2D" parent="."]
+[node name="BackgroundOver" type="Sprite2D" parent="SubViewport"]
 texture = ExtResource("3_5ebab")
+offset = Vector2(175, 175)
 
 [node name="Confetti" parent="." instance=ExtResource("7_ultda")]
 unique_name_in_owner = true

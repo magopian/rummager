@@ -71,7 +71,7 @@ func _on_exit_screen() -> void:
 	Global.card_left_screen.emit(self)
 
 
-func _physics_process(_delta) -> void:
+func _process(_delta: float) -> void:
 	if held:
 		global_transform.origin = get_global_mouse_position()
 
@@ -153,7 +153,8 @@ func update_scale(new_scale: Vector2) -> void:
 func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int = 1) -> Tween:
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	for child in get_children():
-		scale_tween.tween_property(child, "scale", new_scale, duration)
+		if "scale" in child:
+			scale_tween.tween_property(child, "scale", new_scale, duration)
 	await scale_tween.finished
 	collision_layer = updated_collision_layer
 	return scale_tween
