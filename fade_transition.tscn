@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dftsvelpx2cta"]
+[gd_scene load_steps=3 format=3 uid="uid://dftsvelpx2cta"]
 
 [ext_resource type="Script" path="res://fade_transition.gd" id="1_sak0l"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="2_s8gdb"]
 
 [node name="FadeTransition" type="ColorRect"]
 anchors_preset = 15
@@ -15,3 +16,29 @@ transition_time = 0.2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
+
+[node name="ProgressContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ProgressLabel" type="Label" parent="ProgressContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Generating cards"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="ProgressContainer/ProgressLabel" instance=ExtResource("2_s8gdb")]
+
+[node name="ProgressBar" type="ProgressBar" parent="ProgressContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+step = 1.0
+
+[node name="PaletteListener" parent="ProgressContainer/ProgressBar" instance=ExtResource("2_s8gdb")]

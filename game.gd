@@ -18,6 +18,7 @@ extends Node2D
 @onready var progress: CanvasLayer = %Progress
 @onready var target: CanvasLayer = %Target
 
+
 @onready var card_scene: PackedScene = preload("res://card.tscn")
 
 
@@ -43,7 +44,7 @@ func _ready() -> void:
 	#Global.score = 99 # TODO: REMOVE
 	Global.slide_off_screen(menu, 0)  # Move the menu out of the screen
 	zones.slide_out(0)
-	fade_transition.show()
+	fade_transition.show_with_progress("Generating cards")
 	menu_button.pressed.connect(_on_menu_button_pressed)
 	shuffle_button.pressed.connect(_on_shuffle_clicked)
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
@@ -59,15 +60,30 @@ func _ready() -> void:
 	var level_num_cards: int = Global.level * num_cards
 	# Make sure we never try to instantiate more cards than we have.
 	var total_num_cards: int = min(level_num_cards, all_permutations.size())
+	call_deferred("generate_cards", total_num_cards, all_permutations)
+
+
+func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -> void:
 	var instantiated_cards: Array[Card] = []
-	for _i in range(total_num_cards):
+	var time_since_last_frame: int = Time.get_ticks_msec()
+	var small_scale: Vector2 = Card.compute_small_size(Global.viewport_size)
+	for i in range(total_num_cards):
 		var card: Card = new_card(all_permutations)
+		card.small_scale = small_scale
 		instantiated_cards.append(card)
+		var current_time: int = Time.get_ticks_msec()
+		if current_time - time_since_last_frame > 16:  # 60fps -> 16ms per frame
+			await get_tree().physics_frame
+			var generation_progress: float = i * 100 / total_num_cards
+			fade_transition.progress_value = generation_progress
+			time_since_last_frame = current_time
 	card_to_find = instantiated_cards[0]
 	card_to_find.to_find = true
 	instantiated_cards.shuffle()
 	for card in instantiated_cards:
 		cards.add_child(card)
+		card.call_deferred("show_small")
+	fade_transition.progress_value = 100
 	pick_me_canvas_layer.show()
 	display_card_to_find()
 
@@ -112,7 +128,6 @@ func new_card(all_permutations: Array[Dictionary]) -> Card:
 	var card_data: Dictionary = all_permutations.pop_back()
 	card_datas.append(card_data)
 	card.data = card_data
-	card.call_deferred("show_small")
 	return card
 
 
