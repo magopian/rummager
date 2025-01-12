@@ -73,8 +73,10 @@ func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -
 		instantiated_cards.append(card)
 		var current_time: int = Time.get_ticks_msec()
 		if current_time - time_since_last_frame > 16:  # 60fps -> 16ms per frame
+			# Pause every physics frame so the game can continue updating (eg the progress bar)
+			# otherwise it would just freeze until all the cards are generated.
 			await get_tree().physics_frame
-			var generation_progress: float = i * 100 / total_num_cards
+			var generation_progress: float = i * 100.0 / total_num_cards
 			fade_transition.progress_value = generation_progress
 			time_since_last_frame = current_time
 	card_to_find = instantiated_cards[0]
@@ -238,15 +240,15 @@ func _on_card_left_screen(card: Card) -> void:
 		else:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You chose the wrong card"
-			you_lose_scene.valid_card = card_to_find.duplicate()
-			you_lose_scene.wrong_card = card.duplicate()
+			you_lose_scene.valid_card_data = card_to_find.data
+			you_lose_scene.wrong_card_data = card.data
 			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 	else:
 		if card == card_to_find:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
-			you_lose_scene.valid_card = card_to_find.duplicate()
+			you_lose_scene.valid_card_data = card_to_find.data
 			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, sound_lose)
 		else:

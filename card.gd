@@ -87,9 +87,9 @@ func zoom_in() -> void:
 	hide_trail()
 
 
-func show_big(speed: float = 0.15) -> void:
+func show_big(duration: float = 0.15) -> void:
 	collision_layer = 0
-	scale_to(big_scale, speed, 0)
+	scale_to(big_scale, duration, 0)
 	animate_card()
 
 
@@ -99,15 +99,15 @@ func animate_card() -> void:
 	tween.tween_property(self, "rotation_degrees", rotation_degrees - 5, 1)
 
 
-func show_small(speed: float = 0.15) -> void:
-	scale_to(small_scale, speed, 1)
+func show_small(duration: float = 0.15) -> void:
+	scale_to(small_scale, duration, 1)
 	if tween:
 		tween.stop()
 
 
-func show_medium() -> void:
+func show_medium(duration: float = 0) -> void:
 	collision_layer = 0
-	update_scale(medium_scale)
+	scale_to(medium_scale, duration)
 	freeze = true
 	hide_dust()
 	hide_trail()
@@ -142,11 +142,6 @@ func show_trail() -> void:
 
 func hide_confetti() -> void:
 	confetti.emitting = false
-
-
-func update_scale(new_scale: Vector2) -> void:
-	for child in get_children():
-		child.scale = new_scale
 
 
 func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int = 1) -> Tween:
@@ -210,6 +205,7 @@ func unshuffle(speed: float = 1, interval: float = 0) -> Tween:
 	unshuffle_tween.tween_interval(interval)
 	unshuffle_tween.tween_property(self, "position", center, speed)
 	return unshuffle_tween
+
 
 func get_force() -> float:
 	var force: float = linear_velocity.length()
