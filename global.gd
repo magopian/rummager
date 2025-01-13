@@ -24,6 +24,8 @@ signal card_left_screen(card: Card)
 
 @onready var user_prefs: UserPreferences
 @onready var palettes: Palettes = load("res://palettes.tres")
+@onready var card_elements: CardElements = load("res://card_elements.tres")
+@onready var sounds: Sounds = load("res://sounds.tres")
 
 var viewport_size: Vector2
 

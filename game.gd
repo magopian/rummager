@@ -23,13 +23,6 @@ extends Node2D
 
 
 @export var num_cards: int = 10
-@export var patterns: Array[CompressedTexture2D]
-@export var borders: Array[CompressedTexture2D]
-@export var sound_shuffle: AudioStream
-@export var sound_lose: AudioStream
-@export var sound_pickup: AudioStream
-@export var sound_drop: AudioStream
-@export var sound_exit_screen: AudioStream
 
 
 var held_card: Card
@@ -111,8 +104,8 @@ func get_all_permutations() -> Array[Dictionary]:
 	var permutations: Array[Dictionary] = []
 	for background_color in Palettes.background_colors:
 		for color in Palettes.foreground_colors:
-			for pattern in patterns:
-				for border in borders:
+			for pattern in Global.card_elements.patterns:
+				for border in Global.card_elements.borders:
 					permutations.push_back({
 						"background_color": Global.palettes.get_color(Global.palette, background_color),
 						"color":  Global.palettes.get_color(Global.palette, color),
@@ -150,13 +143,13 @@ func play_sound(sound: AudioStream) -> AudioStreamPlayer:
 func _on_shuffle_clicked() -> void:
 	shuffle_button.pressed.disconnect(_on_shuffle_clicked)
 	await unshuffle().finished
-	fade_transition.fade_to_file("res://game.tscn", sound_shuffle)
+	fade_transition.fade_to_file("res://game.tscn", Global.sounds.sound_shuffle)
 
 
 func _on_lets_go_button_pressed() -> void:
 	pick_me_canvas_layer.button_pressed.disconnect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.disconnect(_on_lets_go_button_pressed)
-	play_sound(sound_shuffle)
+	play_sound(Global.sounds.sound_shuffle)
 	Global.slide_off_screen(level_label, 0.15)
 	Global.slide_off_screen(explanation, 0.15)
 	Global.slide_in_screen(menu, 0.15)
@@ -208,7 +201,7 @@ func explode_out() -> void:
 
 func _on_card_clicked(card: Card) -> void:
 	if !held_card:
-		play_sound(sound_pickup)
+		play_sound(Global.sounds.sound_pickup)
 		card.pickup()
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
@@ -227,7 +220,7 @@ func zoom_in() -> void:
 
 
 func _on_card_left_screen(card: Card) -> void:
-	play_sound(sound_exit_screen)
+	play_sound(Global.sounds.sound_exit_screen)
 	var force: float = card.get_force()
 	if card == held_card:
 		card.held = false
@@ -243,14 +236,14 @@ func _on_card_left_screen(card: Card) -> void:
 			you_lose_scene.valid_card_data = card_to_find.data
 			you_lose_scene.wrong_card_data = card.data
 			await explode_out()
-			fade_transition.fade_to_node(you_lose_scene, sound_lose)
+			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 	else:
 		if card == card_to_find:
 			var you_lose_scene = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card_data = card_to_find.data
 			await explode_out()
-			fade_transition.fade_to_node(you_lose_scene, sound_lose)
+			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 		else:
 			add_score(round(force))
 			card_discarded(card, force)
@@ -273,7 +266,7 @@ func thrown_out_bottom(card: Card) -> bool:
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
-			play_sound(sound_drop)
+			play_sound(Global.sounds.sound_drop)
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
 			drop_card()

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Sounds" load_steps=7 format=3 uid="uid://dvvdsuoey7arh"]
+
+[ext_resource type="Script" path="res://sounds.gd" id="1_81rap"]
+[ext_resource type="AudioStream" uid="uid://d3jpbah8ihbnr" path="res://assets/sounds/drop.wav" id="2_f22cs"]
+[ext_resource type="AudioStream" uid="uid://dpg078ihlfk80" path="res://assets/sounds/exit_screen.wav" id="3_kuktr"]
+[ext_resource type="AudioStream" uid="uid://b0bos3blcxi6j" path="res://assets/sounds/lose.wav" id="4_8kdl4"]
+[ext_resource type="AudioStream" uid="uid://ufon2ppmslv7" path="res://assets/sounds/pickup.wav" id="5_amake"]
+[ext_resource type="AudioStream" uid="uid://b2se2e8pslvuh" path="res://assets/sounds/start.wav" id="6_xfc8p"]
+
+[resource]
+script = ExtResource("1_81rap")
+sound_shuffle = ExtResource("6_xfc8p")
+sound_lose = ExtResource("4_8kdl4")
+sound_pickup = ExtResource("5_amake")
+sound_drop = ExtResource("2_f22cs")
+sound_exit_screen = ExtResource("3_kuktr")
