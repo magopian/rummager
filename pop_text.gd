@@ -27,3 +27,7 @@ func pop(number: float, from: Vector2, with_angle: float, to: Vector2) -> void:
 	tween.tween_property(self, "scale", Vector2.ONE * 0.5, 1)
 	tween.tween_property(self, "modulate:a", 0, 1.5)
 	await tween.finished
+
+	# After 2 seconds, queue_free
+	await get_tree().create_timer(2).timeout
+	queue_free.call_deferred()
