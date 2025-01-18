@@ -72,7 +72,7 @@ func animate_max(cards_container: Node) -> void:
 	await bonus_card.remove_cards(cards_container, sparks)
 
 	# Reset
-	print("reset")
+	print("reset progress")
 	animating_max = false
 	progress_bar.value = 0
 	bonus_card.disappear()

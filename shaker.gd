@@ -6,7 +6,7 @@ extends Node2D
 var parent: Node
 var is_shaking: bool = false
 var initial_position: Vector2
-var rng = RandomNumberGenerator.new()
+var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var shake_strength: float = 0.0
 var shake_fade: float = 0.0
 
@@ -18,7 +18,7 @@ func _ready() -> void:
 	shake_offset = "offset" in parent
 
 
-func apply_shake(strength = randomStrength, fade = shakeFade):
+func apply_shake(strength: float = randomStrength, fade: float = shakeFade) -> void:
 	initial_position = parent.position
 	is_shaking = true
 	shake_strength = strength

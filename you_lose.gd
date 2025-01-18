@@ -1,4 +1,4 @@
-extends CanvasLayer
+class_name YouLose extends CanvasLayer
 
 @onready var catch_all_click: TextureButton = %CatchAllClick
 @onready var lost_reason_label: Label = %LostReason
@@ -15,6 +15,7 @@ extends CanvasLayer
 var wrong_card_data: Dictionary
 var valid_card_data: Dictionary
 var lost_reason: String
+var next_scene: String = "res://game.tscn"
 
 
 func _ready() -> void:
@@ -47,4 +48,4 @@ func instantiate_card(card_data: Dictionary) -> Card:
 	return card
 
 func _on_button_pressed() -> void:
-	fade_transition.fade_to_file("res://game.tscn")
+	fade_transition.fade_to_file(next_scene)

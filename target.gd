@@ -13,7 +13,7 @@ func _ready() -> void:
 	area_2d.body_entered.connect(_on_target_hit)
 
 
-func setup_curve():
+func setup_curve() -> void:
 	var height: float = Global.viewport_size.y - 100
 	var width: float = Global.viewport_size.x
 	var bottom_left: Vector2 = Vector2(0, height)

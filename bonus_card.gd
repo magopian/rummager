@@ -13,7 +13,7 @@ class_name BonusCard extends Sprite2D
 
 
 var characteristic: String
-var bonus_value
+var bonus_value: Variant
 
 
 func _ready() -> void:

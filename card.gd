@@ -20,7 +20,7 @@ signal clicked(card: Card)
 @export var to_find: bool = false
 
 
-var held = false
+var held: bool = false
 var tween: Tween
 var pop_text_scene: PackedScene = preload("res://pop_text.tscn")
 
@@ -115,7 +115,7 @@ func show_medium(duration: float = 0) -> void:
 	animate_card()
 
 
-func drop(impulse=Vector2.ZERO) -> void:
+func drop(impulse: Vector2=Vector2.ZERO) -> void:
 	if held:
 		freeze = false
 		apply_central_impulse(impulse)

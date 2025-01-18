@@ -1,9 +1,12 @@
-extends CanvasLayer
+class_name YouWin extends CanvasLayer
 
 @onready var catch_all_click: TextureButton = %CatchAllClick
 @onready var fade_transition: ColorRect = %FadeTransition
 @onready var next_level_button: AnimatedButton = %NextLevelButton
 @onready var replay_button: Button = %ReplayButton
+
+
+var next_scene: String = "res://game.tscn"
 
 
 func _ready() -> void:
@@ -21,9 +24,9 @@ func _ready() -> void:
 func _on_next_level_pressed() -> void:
 	Global.level += 1
 	Music.play_theme()
-	fade_transition.fade_to_file("res://game.tscn")
+	fade_transition.fade_to_file(next_scene)
 
 
 func _on_replay_pressed() -> void:
 	Music.play_theme()
-	fade_transition.fade_to_file("res://game.tscn")
+	fade_transition.fade_to_file(next_scene)

@@ -15,7 +15,7 @@ var progress_value: int:
 		progress_bar.value = value
 
 
-func show_with_progress(progress_title: String):
+func show_with_progress(progress_title: String) -> void:
 	show()
 	progress_container.show()
 	progress_label.text = progress_title

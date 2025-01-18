@@ -48,7 +48,7 @@ func _ready() -> void:
 	Global.target_hit.connect(_on_target_hit)
 
 	# Instantiate cards
-	var all_permutations: Array[Dictionary] = get_all_permutations()
+	var all_permutations: Array[Dictionary] = Global.get_all_permutations()
 	all_permutations.shuffle()
 	var level_num_cards: int = Global.level * num_cards
 	# Make sure we never try to instantiate more cards than we have.
@@ -92,27 +92,6 @@ func display_card_to_find() -> void:
 	card_display.add_child(card_to_display)
 	card_to_display.position = Vector2(200, 200)
 	card_to_display.show_big()
-
-
-func animate_button(button: Button) -> void:
-	var tween: Tween = button.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
-	tween.tween_property(button, "scale", Vector2(1.5, 1.5), 0.5)
-	tween.tween_property(button, "scale", Vector2.ONE, 0.5)
-
-
-func get_all_permutations() -> Array[Dictionary]:
-	var permutations: Array[Dictionary] = []
-	for background_color in Palettes.background_colors:
-		for color in Palettes.foreground_colors:
-			for pattern in Global.card_elements.patterns:
-				for border in Global.card_elements.borders:
-					permutations.push_back({
-						"background_color": Global.palettes.get_color(Global.palette, background_color),
-						"color":  Global.palettes.get_color(Global.palette, color),
-						"pattern_sprite": pattern,
-						"border_sprite": border,
-					})
-	return permutations
 
 
 func new_card(all_permutations: Array[Dictionary]) -> Card:
@@ -231,7 +210,7 @@ func _on_card_left_screen(card: Card) -> void:
 			await explode_out()
 			fade_transition.fade_to_file("res://you_win.tscn")
 		else:
-			var you_lose_scene = load("res://you_lose.tscn").instantiate()
+			var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You chose the wrong card"
 			you_lose_scene.valid_card_data = card_to_find.data
 			you_lose_scene.wrong_card_data = card.data
@@ -239,7 +218,7 @@ func _on_card_left_screen(card: Card) -> void:
 			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 	else:
 		if card == card_to_find:
-			var you_lose_scene = load("res://you_lose.tscn").instantiate()
+			var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card_data = card_to_find.data
 			await explode_out()
@@ -263,7 +242,7 @@ func thrown_out_bottom(card: Card) -> bool:
 			card.position.y > Global.viewport_size.y)
 
 
-func _unhandled_input(event):
+func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
 			play_sound(Global.sounds.sound_drop)

@@ -25,6 +25,8 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if not is_inside_tree():
 		return
+	# TODO: this causes race conditions when a parent button is clicked that ends up with the button beeing freed
+	# which causes the following log: "start: Target object freed before starting, aborting Tweener."
 	var tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
 	tween.tween_property(parent, "scale", initial_scale, 0.1)
 

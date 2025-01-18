@@ -71,6 +71,21 @@ func _on_viewport_resized() -> void:
 	viewport_size = get_viewport_rect().size
 
 
+func get_all_permutations() -> Array[Dictionary]:
+	var permutations: Array[Dictionary] = []
+	for background_color in Palettes.background_colors:
+		for color in Palettes.foreground_colors:
+			for pattern in card_elements.patterns:
+				for border in card_elements.borders:
+					permutations.push_back({
+						"background_color": Global.palettes.get_color(Global.palette, background_color),
+						"color":  Global.palettes.get_color(Global.palette, color),
+						"pattern_sprite": pattern,
+						"border_sprite": border,
+					})
+	return permutations
+
+
 func slide_in_screen(node: Node, duration: float) -> Tween:
 	var initial_position: Vector2 = node.get_meta("initial_position", Vector2.ZERO)
 	#print("metadata: ", initial_position)
