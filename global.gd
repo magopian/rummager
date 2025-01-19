@@ -134,7 +134,7 @@ func slide_off_screen(node: Node, duration: float) -> Tween:
 	#print("new position: ", new_position)
 	
 	if not node.has_meta("initial_position"):
-		#print("setting metadata: ", node.global_position)
+		#prints("setting metadata for", node, ":",  node.global_position)
 		node.set_meta("initial_position", node.global_position)
 	var tween: Tween = node.create_tween().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(node, "global_position", new_position, duration)

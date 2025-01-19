@@ -88,26 +88,28 @@ func zoom_in() -> void:
 
 
 func show_big(duration: float = 0.15) -> void:
-	collision_layer = 0
 	scale_to(big_scale, duration, 0)
+	freeze = true
 	animate_card()
 
 
-func animate_card() -> void:	
+func animate_card() -> void:
+	if tween:
+		tween.stop()
 	tween = get_tree().create_tween().bind_node(self).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC).set_loops()
 	tween.tween_property(self, "rotation_degrees", rotation_degrees + 5, 1)
 	tween.tween_property(self, "rotation_degrees", rotation_degrees - 5, 1)
 
 
 func show_small(duration: float = 0.15) -> void:
-	scale_to(small_scale, duration, 1)
+	freeze = false
 	if tween:
 		tween.stop()
+	scale_to(small_scale, duration, 1)
 
 
 func show_medium(duration: float = 0) -> void:
-	collision_layer = 0
-	scale_to(medium_scale, duration)
+	scale_to(medium_scale, duration, 0)
 	freeze = true
 	hide_dust()
 	hide_trail()

@@ -1,0 +1,152 @@
+[gd_scene load_steps=11 format=3 uid="uid://lbetont0f6pt"]
+
+[ext_resource type="Script" path="res://tutorial_well_done.gd" id="1_4wv46"]
+[ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_rnyy6"]
+[ext_resource type="Texture2D" uid="uid://bwm31tuymnoxs" path="res://assets/sprites/background_win.png" id="3_dp7gy"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="5_ivegk"]
+[ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="6_37ntk"]
+[ext_resource type="PackedScene" uid="uid://quspx8oqeob8" path="res://confetti.tscn" id="8_v86xa"]
+[ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="9_u452m"]
+
+[sub_resource type="Curve" id="Curve_hkm28"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.250751, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.74102, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_g4vh1"]
+curve = SubResource("Curve_hkm28")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_asff1"]
+resource_local_to_scene = true
+lifetime_randomness = 0.27
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 15.0
+initial_velocity_min = 379.08
+initial_velocity_max = 750.0
+angular_velocity_min = 60.65
+angular_velocity_max = 283.69
+gravity = Vector3(0, 250, 0)
+scale_min = 0.1
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_g4vh1")
+color = Color(1, 0.166667, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 1.0
+anim_offset_max = 1.0
+
+[node name="Tutorial_well_done" type="CanvasLayer"]
+script = ExtResource("1_4wv46")
+
+[node name="CatchAllClick" type="TextureButton" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollingBackground" parent="." instance=ExtResource("2_rnyy6")]
+mouse_filter = 2
+texture = ExtResource("3_dp7gy")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+clip_contents = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/default_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/normal_font_size = 124
+bbcode_enabled = true
+text = "[center][wave freq=5 amp=150]Well
+done![/wave][/center]"
+fit_content = true
+scroll_active = false
+
+[node name="PaletteListener" parent="MarginContainer/VBoxContainer/RichTextLabel" instance=ExtResource("5_ivegk")]
+
+[node name="Control2" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="MessageLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 30
+text = "message"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PaletteListener2" parent="MarginContainer/VBoxContainer/MessageLabel" instance=ExtResource("5_ivegk")]
+
+[node name="Control3" type="Control" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+
+[node name="Confetti" parent="MarginContainer/VBoxContainer/Control3" instance=ExtResource("8_v86xa")]
+position = Vector2(0, 0)
+process_material = SubResource("ParticleProcessMaterial_asff1")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackToMenu" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_colors/font_hover_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_hover_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_focus_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Back"
+flat = true
+alignment = 0
+autowrap_mode = 2
+
+[node name="PaletteListener" parent="MarginContainer/VBoxContainer/HBoxContainer/BackToMenu" instance=ExtResource("5_ivegk")]
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NextLevelButton" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("6_37ntk")]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Next"
+
+[node name="FadeTransition" parent="." instance=ExtResource("9_u452m")]
+unique_name_in_owner = true
+visible = false
