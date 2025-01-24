@@ -52,7 +52,7 @@ func _ready() -> void:
 	var all_permutations: Array[Dictionary] = Global.get_all_permutations()
 	all_permutations.shuffle()
 	# Generate cards to scroll through.
-	call_deferred("generate_cards", 10, all_permutations)
+	generate_cards.call_deferred(10, all_permutations)
 
 
 func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -> void:

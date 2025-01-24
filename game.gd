@@ -53,7 +53,7 @@ func _ready() -> void:
 	var level_num_cards: int = Global.level * num_cards
 	# Make sure we never try to instantiate more cards than we have.
 	var total_num_cards: int = min(level_num_cards, all_permutations.size())
-	call_deferred("generate_cards", total_num_cards, all_permutations)
+	generate_cards.call_deferred(total_num_cards, all_permutations)
 
 
 func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -> void:
