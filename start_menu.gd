@@ -35,7 +35,12 @@ func _on_continue_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	Global.level = 1
-	fade_transition.fade_to_file("res://game.tscn")
+	if Global.user_prefs.tutorial_started:
+		fade_transition.fade_to_file("res://game.tscn")
+	else:
+		fade_transition.fade_to_file("res://tutorial_1_memorize.tscn")
+		Global.user_prefs.tutorial_started = true
+		Global.user_prefs.save()
 
 
 func _on_how_to_play() -> void:
