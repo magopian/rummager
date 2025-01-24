@@ -14,5 +14,5 @@ texture = ExtResource("2_b3003")
 
 [node name="Icon" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(22, 117)
 texture = ExtResource("2_wx5kb")
+offset = Vector2(22, 117)

@@ -158,12 +158,35 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 20
-text = "And drag me to
-the bottom of
-the screen"
+text = "And throw me through the"
 horizontal_alignment = 1
 
 [node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label2" instance=ExtResource("61_572qf")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="Label3" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "BOTTOM"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label3" instance=ExtResource("61_572qf")]
+
+[node name="Label4" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "of the screen to
+validate this level"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label4" instance=ExtResource("61_572qf")]
 background_color = 1
 background_hover_color = 0
 foreground_color = 3

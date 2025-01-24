@@ -72,6 +72,10 @@ func scroll_through_cards() -> void:
 	card_to_find.show_big()
 	# Enable the click.
 	Global.slide_in_screen(explanation, 0.15)
+	await get_tree().create_timer(0.5).timeout
+	card_to_find.add_child(throw_animation)
+	var bottom_middle: Vector2 = Vector2(Global.viewport_size.x / 2, Global.viewport_size.y + 200)
+	throw_animation.animate_through([bottom_middle, bottom_middle])  # Make it loop continuously through the same "bottom" direction
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 
@@ -99,9 +103,6 @@ func _on_lets_go_button_pressed() -> void:
 	pick_me_canvas_layer.queue_free()
 	# Add the throw animation, ready to be played
 	await get_tree().create_timer(2).timeout
-	card_to_find.add_child(throw_animation)
-	var bottom_middle: Vector2 = Vector2(Global.viewport_size.x / 2, Global.viewport_size.y + 200)
-	throw_animation.animate(bottom_middle)
 
 
 func _on_menu_button_pressed() -> void:
@@ -199,7 +200,7 @@ func _on_card_left_screen(card: Card) -> void:
 			you_lose_scene.lost_reason = "You chose the wrong card"
 			you_lose_scene.valid_card_data = card_to_find.data
 			you_lose_scene.wrong_card_data = card.data
-			you_lose_scene.next_scene = "res://tutorial_1_memorize.tscn"
+			you_lose_scene.next_scene = get_tree().current_scene.scene_file_path
 			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 	else:
@@ -208,7 +209,7 @@ func _on_card_left_screen(card: Card) -> void:
 			var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
 			you_lose_scene.lost_reason = "You discarded the card you were looking for"
 			you_lose_scene.valid_card_data = card_to_find.data
-			you_lose_scene.next_scene = "res://tutorial_1_memorize.tscn"
+			you_lose_scene.next_scene = get_tree().current_scene.scene_file_path
 			await explode_out()
 			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 		else:

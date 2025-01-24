@@ -23,6 +23,8 @@ signal clicked(card: Card)
 var held: bool = false
 var tween: Tween
 var pop_text_scene: PackedScene = preload("res://pop_text.tscn")
+var current_scale: Vector2
+var is_discarded: bool = false
 
 
 static var charac_to_property: Dictionary = {
@@ -147,6 +149,7 @@ func hide_confetti() -> void:
 
 
 func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int = 1) -> Tween:
+	current_scale = new_scale
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
 	for child in get_children():
 		if "scale" in child:
@@ -157,6 +160,7 @@ func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int 
 
 
 func discard(force: float) -> void:
+	is_discarded = true
 	var eject_angle: float = linear_velocity.angle() + PI
 	var eject_position: Vector2 = global_position.clamp(Vector2.ZERO, Global.viewport_size)
 	var eject_scale: float = force / 10
