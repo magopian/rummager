@@ -179,7 +179,7 @@ alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 0
 size_flags_vertical = 6
 mouse_filter = 2
 
@@ -249,9 +249,6 @@ alignment = 0
 autowrap_mode = 2
 
 [node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/BackToMenu" instance=ExtResource("9_rqqa1")]
-
-[node name="CenterContainer" type="CenterContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="Zones" parent="." instance=ExtResource("11_r8dxh")]
 unique_name_in_owner = true

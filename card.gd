@@ -36,6 +36,7 @@ static var charac_to_property: Dictionary = {
 
 
 static var characteristics: Array = charac_to_property.keys()
+static var properties: Array = charac_to_property.values()
 
 
 func _ready() -> void:

@@ -30,8 +30,10 @@ func _ready() -> void:
 			border.texture = bonus_value
 
 
-func init_random(cards: Node) -> void:
-	characteristic = Card.charac_to_property[Card.characteristics.pick_random()]
+func init_random(cards: Node, charac: String= "") -> void:
+	characteristic = charac
+	if not characteristic:
+		characteristic = Card.charac_to_property[Card.characteristics.pick_random()]
 	#characteristic = "background_color"  # TODO: remove
 	var random_data: Dictionary = cards.get_children().pick_random().data
 	bonus_value = random_data[characteristic]
@@ -80,7 +82,8 @@ func remove_cards(cards_container: Node, sparks: GPUParticles2D) -> void:
 
 	# Sparks have a lifetime of 1.5s, and the removal of cards should take 1s.
 	# Stop emitting now so the last particles will be dying short after the last card was removed.
-	sparks.emitting = false
+	if is_instance_valid(sparks):
+		sparks.emitting = false
 
 	await tween.finished
 	await get_tree().create_timer(0.5).timeout
