@@ -4,6 +4,7 @@ extends Node2D
 signal max_progress
 signal palette_changed(palette_index: int)
 signal target_hit(card: Card)
+signal new_target(target_position: Vector2)
 signal card_left_screen(card: Card)
 
 
@@ -42,6 +43,7 @@ func _ready() -> void:
 	viewport_size = get_viewport_rect().size
 	get_tree().root.size_changed.connect(_on_viewport_resized)
 	target_hit.connect(_on_target_hit)
+	new_target.connect(func(_pos: Vector2) -> void: return)  # Noop
 	card_left_screen.connect(_on_card_left_screen)
 	max_progress.connect(_on_max_progress)
 

@@ -35,6 +35,7 @@ func random_target() -> void:
 	tween.tween_property(path_follow_2d, "progress_ratio", random_progress_ratio, tween_duration)
 	tween.parallel().tween_property(target, "modulate:a", 0.5, tween_duration)
 	await tween.finished
+	Global.new_target.emit(target.global_position)
 
 
 func compute_tween_duration(ratio1: float, ratio2: float) -> float:
