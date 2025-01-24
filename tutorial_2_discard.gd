@@ -202,6 +202,8 @@ func explode_out() -> void:
 
 func _on_card_clicked(card: Card) -> void:
 	if !held_card:
+		if is_instance_valid(throw_animation):
+			throw_animation.queue_free()
 		play_sound(Global.sounds.sound_pickup)
 		card.pickup()
 		held_card = card
@@ -255,7 +257,7 @@ func _on_card_left_screen(card: Card) -> void:
 		else:
 			add_score(round(force))
 			card_discarded(card, force)
-			if throw_animation.get_parent() == card:
+			if is_instance_valid(throw_animation) and throw_animation.get_parent() == card:
 				# Was the card discarded the one playing the throw animation?
 				throw_animation.queue_free()
 				play_next_throw_animation()
@@ -274,6 +276,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
 			drop_card()
+			play_next_throw_animation()
 
 
 func drop_card() -> void:

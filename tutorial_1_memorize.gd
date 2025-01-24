@@ -17,7 +17,9 @@ extends Node2D
 
 
 @onready var card_scene: PackedScene = preload("res://card.tscn")
-@onready var throw_animation: ThrowAnimation = load("res://throw_animation.tscn").instantiate()
+@onready var throw_animation_scene: PackedScene = load("res://throw_animation.tscn")
+@onready var throw_animation: ThrowAnimation = throw_animation_scene.instantiate()
+@onready var bottom_middle: Vector2 = Vector2(Global.viewport_size.x / 2, Global.viewport_size.y + 200)
 
 
 var held_card: Card
@@ -74,7 +76,6 @@ func scroll_through_cards() -> void:
 	Global.slide_in_screen(explanation, 0.15)
 	await get_tree().create_timer(0.5).timeout
 	card_to_find.add_child(throw_animation)
-	var bottom_middle: Vector2 = Vector2(Global.viewport_size.x / 2, Global.viewport_size.y + 200)
 	throw_animation.animate_through([bottom_middle, bottom_middle])  # Make it loop continuously through the same "bottom" direction
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
@@ -162,6 +163,8 @@ func explode_out() -> void:
 
 func _on_card_clicked(card: Card) -> void:
 	if !held_card:
+		if is_instance_valid(throw_animation):
+			throw_animation.queue_free()
 		play_sound(Global.sounds.sound_pickup)
 		card.pickup()
 		held_card = card
@@ -229,6 +232,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			if held_card.is_inside_tree():
 				held_card.drop(Input.get_last_mouse_velocity())
 			drop_card()
+			throw_animation = throw_animation_scene.instantiate()
+			card_to_find.add_child(throw_animation)
+			card_to_find.show_small()
+			throw_animation.animate_through([bottom_middle, bottom_middle])
 
 
 func drop_card() -> void:
