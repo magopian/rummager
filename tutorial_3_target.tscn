@@ -259,8 +259,8 @@ theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
 theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 40
-text = "TO EARN MORE
-POINTS"
+text = "TO FILL THE BONUS
+CARD BAR FASTER"
 horizontal_alignment = 1
 
 [node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label" instance=ExtResource("9_rqqa1")]

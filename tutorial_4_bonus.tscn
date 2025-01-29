@@ -163,8 +163,8 @@ theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
 theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 40
-text = "GET BONUS
-CARDS"
+text = "GET A BONUS
+CARD"
 horizontal_alignment = 1
 
 [node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/LabelDiscard" instance=ExtResource("9_rsa56")]
@@ -174,8 +174,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 20
-text = "when you have enough
-points to fill the bottom bar"
+text = "when the bottom bar is
+completely full"
 horizontal_alignment = 1
 
 [node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Label3" instance=ExtResource("9_rsa56")]
