@@ -1,12 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://d1q80rolx3cja"]
+[gd_scene load_steps=19 format=3 uid="uid://d1q80rolx3cja"]
 
-[ext_resource type="Texture2D" uid="uid://d1wfi08ygsqwd" path="res://assets/sprites/zone_top.png" id="1_0bsb2"]
 [ext_resource type="Script" path="res://zones.gd" id="1_4v5gn"]
 [ext_resource type="Texture2D" uid="uid://c8l5keot2655x" path="res://assets/sprites/sprite_wrong_arrow_top_1.png" id="3_21s1j"]
-[ext_resource type="Texture2D" uid="uid://vbcjyik2uigp" path="res://assets/sprites/zone_left.png" id="3_rtgyv"]
 [ext_resource type="Texture2D" uid="uid://d3tmhak7x0761" path="res://assets/sprites/sprite_wrong_arrow_top_2.png" id="4_hkl5g"]
 [ext_resource type="Texture2D" uid="uid://mqgjw40hohg6" path="res://assets/sprites/sprite_wrong_arrow_left_1.png" id="5_6v0d0"]
-[ext_resource type="Texture2D" uid="uid://b07565f21t8sv" path="res://assets/sprites/zone_right.png" id="5_cxjk3"]
 [ext_resource type="Texture2D" uid="uid://351doeipyco6" path="res://assets/sprites/sprite_wrong_arrow_top_3.png" id="5_xel14"]
 [ext_resource type="Texture2D" uid="uid://mg41slwixbk7" path="res://assets/sprites/sprite_wrong_arrow_left_2.png" id="6_1vd2g"]
 [ext_resource type="Texture2D" uid="uid://v31dbghfih45" path="res://assets/sprites/sprite_wrong_arrow_left_3.png" id="7_2vwlo"]
@@ -66,12 +63,6 @@ offset_bottom = 150.0
 grow_horizontal = 2
 size_flags_vertical = 0
 
-[node name="ZoneTop" type="TextureRect" parent="PanelContainerTop"]
-unique_name_in_owner = true
-layout_mode = 2
-texture = ExtResource("1_0bsb2")
-expand_mode = 2
-
 [node name="ArrowTop" type="TextureRect" parent="PanelContainerTop"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -85,12 +76,6 @@ anchor_bottom = 1.0
 offset_right = 150.0
 grow_vertical = 2
 size_flags_horizontal = 0
-
-[node name="ZoneLeft" type="TextureRect" parent="PanelContainerLeft"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-texture = ExtResource("3_rtgyv")
 
 [node name="ArrowLeft" type="TextureRect" parent="PanelContainerLeft"]
 layout_mode = 2
@@ -109,12 +94,6 @@ offset_left = -150.0
 grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 0
-
-[node name="ZoneRight" type="TextureRect" parent="PanelContainerRight"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(150, 0)
-layout_mode = 2
-texture = ExtResource("5_cxjk3")
 
 [node name="ArrowRight" type="TextureRect" parent="PanelContainerRight"]
 layout_mode = 2
