@@ -115,8 +115,6 @@ func _on_lets_go_button_pressed() -> void:
 	# Reparent all the other cards to discard
 	for card in (card_display.get_children() as Array[Card]):
 		card.reparent(cards)
-	# Pick up the highest card from the stack to play the throw animation.
-	play_next_throw_animation()
 	# Hide explanation, display menu: game time.
 	Global.slide_off_screen(explanation, 0.15)
 	Global.slide_in_screen(menu, 0.15)
@@ -124,6 +122,8 @@ func _on_lets_go_button_pressed() -> void:
 	pick_me_canvas_layer.queue_free()
 	# Add the throw animation, ready to be played
 	await get_tree().create_timer(2).timeout
+	# Pick up the highest card from the stack to play the throw animation.
+	play_next_throw_animation()
 
 
 func play_next_throw_animation() -> void:

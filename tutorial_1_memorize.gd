@@ -95,6 +95,7 @@ func _on_lets_go_button_pressed() -> void:
 	pick_me_canvas_layer.button_pressed.disconnect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.disconnect(_on_lets_go_button_pressed)
 	play_sound(Global.sounds.sound_shuffle)
+	throw_animation.hide()
 	for card in (card_display.get_children() as Array[Card]):
 		card.reparent(cards)
 		card.show_small()
@@ -104,6 +105,7 @@ func _on_lets_go_button_pressed() -> void:
 	pick_me_canvas_layer.queue_free()
 	# Add the throw animation, ready to be played
 	await get_tree().create_timer(2).timeout
+	throw_animation.show()
 
 
 func _on_menu_button_pressed() -> void:

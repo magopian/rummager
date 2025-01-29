@@ -147,10 +147,10 @@ func _on_lets_go_button_pressed() -> void:
 	Global.slide_off_screen(explanation, 0.15)
 	Global.slide_in_screen(menu, 0.15)
 	shuffle_out()
-	# Random target to aim at when discarding a card
-	target.random_target()
 	pick_me_canvas_layer.queue_free()
 	await get_tree().create_timer(2).timeout
+	# Random target to aim at when discarding a card
+	target.random_target()
 
 
 func play_next_throw_animation() -> void:
