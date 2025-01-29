@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cqtlv70nkglfp"]
+[gd_scene load_steps=15 format=3 uid="uid://cqtlv70nkglfp"]
 
 [ext_resource type="Script" path="res://tutorial_1_memorize.gd" id="1_u16hx"]
+[ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="9_1a1jb"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="51_2t2lw"]
 [ext_resource type="PackedScene" uid="uid://bmba1pqq4wqxb" path="res://menu_icon.tscn" id="53_iti4d"]
 [ext_resource type="Texture2D" uid="uid://b7e4ndhm2g66m" path="res://assets/sprites/menu_icon_background.png" id="54_c1fvn"]
@@ -108,7 +109,19 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="LabelMemorize" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("9_1a1jb")
+expand_mode = 1
+
+[node name="LabelMemorize" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
 theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
@@ -117,7 +130,15 @@ theme_override_font_sizes/font_size = 40
 text = "Memorize"
 horizontal_alignment = 1
 
-[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/LabelMemorize" instance=ExtResource("61_572qf")]
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/LabelMemorize" instance=ExtResource("61_572qf")]
+
+[node name="TextureRect2" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("9_1a1jb")
+expand_mode = 1
 
 [node name="Control3" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -142,16 +163,36 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("9_1a1jb")
+expand_mode = 1
+
+[node name="LabelMemorize" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
 theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 40
-text = "Find Me!"
+text = "Find Me"
 horizontal_alignment = 1
 
-[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label" instance=ExtResource("61_572qf")]
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/HBoxContainer/LabelMemorize" instance=ExtResource("61_572qf")]
+
+[node name="TextureRect2" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("9_1a1jb")
+expand_mode = 1
 
 [node name="Label2" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
 layout_mode = 2
@@ -195,7 +236,6 @@ foreground_color = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
-size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "Let's go!"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dlylgncg1gina"]
+[gd_scene load_steps=17 format=3 uid="uid://dlylgncg1gina"]
 
 [ext_resource type="Script" path="res://tutorial_4_bonus.gd" id="1_q4yrk"]
 [ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_k3k7l"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="7_5qgom"]
 [ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="8_dnif0"]
 [ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="9_rsa56"]
+[ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="9_tie6p"]
 [ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="11_y2cha"]
 [ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="12_8xbj3"]
 [ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="13_3k7ri"]
@@ -113,7 +114,19 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="LabelMemorize" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("9_tie6p")
+expand_mode = 1
+
+[node name="LabelMemorize" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
 theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
@@ -122,7 +135,15 @@ theme_override_font_sizes/font_size = 20
 text = "Memorize"
 horizontal_alignment = 1
 
-[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/LabelMemorize" instance=ExtResource("9_rsa56")]
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/LabelMemorize" instance=ExtResource("9_rsa56")]
+
+[node name="TextureRect2" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture = ExtResource("9_tie6p")
+expand_mode = 1
 
 [node name="MemorizeCardDisplay" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
