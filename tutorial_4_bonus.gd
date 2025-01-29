@@ -33,6 +33,7 @@ var card_datas: Array[Dictionary]
 
 var card_initial_position: Vector2
 var bonus_properties: Array = Card.properties
+var click_enabled: bool = false
 
 
 func _ready() -> void:
@@ -53,9 +54,6 @@ func _ready() -> void:
 	# Generate cards.
 	generate_card_to_find.call_deferred()
 	animate_bonus.call_deferred()
-
-	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
-	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 
 
 func animate_bonus() -> void:
@@ -88,6 +86,10 @@ func animate_bonus() -> void:
 
 
 func enable_click() -> void:
+	if not click_enabled:
+		click_enabled = true
+		pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
+		lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	Global.slide_in_screen(explanation, 0.15)
 
 
@@ -99,6 +101,7 @@ func generate_card_to_find() -> void:
 	memorize_card_display.add_child(card_to_find)
 	card_to_find.position = memorize_card_display.size / 2
 	card_to_find.show_medium()
+	card_to_find.to_find = true
 
 
 func generate_discard_cards(num_cards: int) -> void:
@@ -132,7 +135,10 @@ func _on_lets_go_button_pressed() -> void:
 	# Reparent the card to memorize, and place it  lowest so it's at the bottom of the pile
 	card_to_find.reparent(cards)
 	card_to_find.show_small()
-	# Reparent all the other cards to discard
+	# Regenerate all the discard cards, then reparent them all
+	for card in card_display.get_children():
+		card.queue_free()
+	generate_discard_cards(10)
 	for card in (card_display.get_children() as Array[Card]):
 		card.reparent(cards)
 	# Hide explanation, display menu: game time.
