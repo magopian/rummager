@@ -1,0 +1,283 @@
+[gd_scene load_steps=10 format=3 uid="uid://qthh4ltf6wdm"]
+
+[ext_resource type="Script" path="res://tutorial_0.gd" id="1_vug7y"]
+[ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_dau5c"]
+[ext_resource type="PackedScene" uid="uid://8h7y1byudhtm" path="res://title.tscn" id="3_hj6dp"]
+[ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="7_b42xy"]
+[ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="8_d68so"]
+[ext_resource type="Texture2D" uid="uid://dydmvh0c4fan8" path="res://assets/sprites/sprite_wrong.png" id="9_bbyiq"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="9_i8tyk"]
+[ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="12_eae0c"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ypwvg"]
+random_pitch = 1.5
+
+[node name="Tutorial_0" type="Node2D"]
+script = ExtResource("1_vug7y")
+metadata/_edit_horizontal_guides_ = [620.0]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ScrollingBackground" parent="Background" instance=ExtResource("2_dau5c")]
+
+[node name="PickMeCanvasLayer" parent="." instance=ExtResource("7_b42xy")]
+unique_name_in_owner = true
+layer = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PickMeCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="Title" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("3_hj6dp")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+
+[node name="Control" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Label2" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "is a game about"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Label2" instance=ExtResource("9_i8tyk")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_d68so")
+expand_mode = 1
+
+[node name="LabelMemorize" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Memorizing"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/LabelMemorize" instance=ExtResource("9_i8tyk")]
+
+[node name="TextureRect2" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("8_d68so")
+expand_mode = 1
+
+[node name="Label3" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "and about"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Label3" instance=ExtResource("9_i8tyk")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_bbyiq")
+expand_mode = 1
+
+[node name="LabelDiscard" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "DiscardING"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2/LabelDiscard" instance=ExtResource("9_i8tyk")]
+
+[node name="TextureRect2" type="TextureRect" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("9_bbyiq")
+expand_mode = 1
+
+[node name="Label4" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "a bunch of cards that you will"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Label4" instance=ExtResource("9_i8tyk")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="LabelThrowOut" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "THROW OUT"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/LabelThrowOut" instance=ExtResource("9_i8tyk")]
+
+[node name="Label5" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "the sides of the screen"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Label5" instance=ExtResource("9_i8tyk")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="Control2" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="LabelEachLevel" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "EACH LEVEL"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/LabelEachLevel" instance=ExtResource("9_i8tyk")]
+
+[node name="Label6" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "will display 10 more cards
+than the previous one"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Label6" instance=ExtResource("9_i8tyk")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="LabelHowFar" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "HOW FAR WILL
+YOU GO?"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/LabelHowFar" instance=ExtResource("9_i8tyk")]
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+alignment = 1
+
+[node name="BackToMenu" type="Button" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_hover_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_hover_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_focus_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Back"
+flat = true
+alignment = 0
+autowrap_mode = 2
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/BackToMenu" instance=ExtResource("9_i8tyk")]
+
+[node name="Next" type="Button" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/font_hover_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_hover_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_focus_color = Color(0, 0.780392, 0.964706, 1)
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 20
+text = "Next"
+flat = true
+alignment = 2
+autowrap_mode = 2
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/HBoxContainer3/Next" instance=ExtResource("9_i8tyk")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_ypwvg")
+bus = &"SFX"
+
+[node name="FadeTransition" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="FadeTransition" parent="FadeTransition" instance=ExtResource("12_eae0c")]
+unique_name_in_owner = true
+visible = false

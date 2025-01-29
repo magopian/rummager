@@ -44,7 +44,7 @@ func _on_start_button_pressed() -> void:
 
 
 func _on_how_to_play() -> void:
-	fade_transition.fade_to_file("res://tutorial_1_memorize.tscn")
+	fade_transition.fade_to_file("res://tutorial_0.tscn")
 
 
 func _on_credits_pressed() -> void:
