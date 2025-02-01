@@ -6,6 +6,7 @@ signal palette_changed(palette_index: int)
 signal target_hit(card: Card)
 signal new_target(target_position: Vector2)
 signal card_left_screen(card: Card)
+signal card_validated(card: Card)
 
 
 @export var level: int:
@@ -31,6 +32,7 @@ signal card_left_screen(card: Card)
 var viewport_size: Vector2
 
 var discarded_cards: int = 0
+var validated_cards: int = 0
 var target_hit_count: int = 0
 var time_started: int = 0
 var time_started_rummage: int = 0
@@ -46,6 +48,7 @@ func _ready() -> void:
 	new_target.connect(func(_pos: Vector2) -> void: return)  # Noop
 	card_left_screen.connect(_on_card_left_screen)
 	max_progress.connect(_on_max_progress)
+	card_validated.connect(_on_card_validated)
 
 
 func _on_target_hit(_card: Card) -> void:
@@ -58,6 +61,10 @@ func _on_card_left_screen(_card: Card) -> void:
 
 func _on_max_progress() -> void:
 	bonus_cards += 1
+
+
+func _on_card_validated(_card: Card) -> void:
+	validated_cards += 1
 
 
 func change_palette() -> void:

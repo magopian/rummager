@@ -13,6 +13,9 @@ signal clicked(card: Card)
 @onready var confetti: GPUParticles2D = %Confetti
 @onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 @onready var sprite_2d: Sprite2D = %Sprite2D
+@onready var timer_zoom_in: Timer = %TimerZoomIn
+@onready var timer_validation: Timer = %TimerValidation
+@onready var validating_label: Label = %ValidatingLabel
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
@@ -27,6 +30,7 @@ var tween: Tween
 var pop_text_scene: PackedScene = preload("res://pop_text.tscn")
 var current_scale: Vector2
 var is_discarded: bool = false
+var previous_position: Vector2
 
 
 static var charac_to_property: Dictionary = {
@@ -48,6 +52,8 @@ func _ready() -> void:
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
 	get_viewport().physics_object_picking_sort = true
 	init_from_data()
+	timer_zoom_in.timeout.connect(zoom_in)
+	timer_validation.timeout.connect(_on_validated)
 
 
 static func compute_small_size(viewport_size: Vector2) -> Vector2:
@@ -80,11 +86,28 @@ func _on_exit_screen() -> void:
 func _process(_delta: float) -> void:
 	if held:
 		global_transform.origin = get_global_mouse_position()
+		var distance: Vector2 = global_position - previous_position
+		if distance.length() > 5:
+			timer_zoom_in.start()
+		previous_position = global_position
+		display_validating()
+
+
+func display_validating() -> void:
+	if not timer_validation.is_stopped():
+		validating_label.show()
+		var validating_elapsed_time: float = timer_validation.wait_time - timer_validation.time_left
+		var validating_percentage: int = round(validating_elapsed_time / timer_validation.wait_time * 100)
+		validating_label.text = "Validating:\n" + str(validating_percentage) + "%"
+	else:
+		validating_label.hide()
 
 
 func pickup() -> void:
 	if held:
 		return
+	timer_zoom_in.start()
+	previous_position = global_position
 	freeze = true
 	held = true
 
@@ -92,6 +115,8 @@ func pickup() -> void:
 func zoom_in() -> void:
 	show_big()
 	hide_trail()
+	if timer_validation.is_stopped():
+		timer_validation.start()
 
 
 func show_big(duration: float = 0.15) -> void:
@@ -126,6 +151,9 @@ func show_medium(duration: float = 0) -> void:
 
 func drop(impulse: Vector2=Vector2.ZERO) -> void:
 	if held:
+		timer_zoom_in.stop()
+		timer_validation.stop()
+		validating_label.hide()
 		freeze = false
 		apply_central_impulse(impulse)
 		held = false
@@ -224,3 +252,7 @@ func get_force() -> float:
 	# 500 * 2 / 1000 = 1, 5000 * 2 / 1000 = 10. Ten cards at "max force" gives 100%.
 	var normalized_force: float = force * 2 / 1000
 	return normalized_force
+
+
+func _on_validated() -> void:
+	Global.card_validated.emit(self)

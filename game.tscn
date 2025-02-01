@@ -191,9 +191,8 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 20
-text = "And drag me to
-the bottom of
-the screen"
+text = "Click and hold me to
+validate your choice"
 horizontal_alignment = 1
 
 [node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label2" instance=ExtResource("61_qn7xe")]
@@ -226,11 +225,6 @@ layer = 100
 [node name="FadeTransition" parent="FadeTransition" instance=ExtResource("65_oc4fy")]
 unique_name_in_owner = true
 visible = false
-
-[node name="Timer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.15
-one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0

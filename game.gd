@@ -13,7 +13,6 @@ extends Node2D
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 @onready var fade_transition: ColorRect = %FadeTransition
 @onready var explanation: VBoxContainer = %Explanation
-@onready var timer: Timer = %Timer
 @onready var camera_shaker: Node2D = %CameraShaker
 @onready var progress: CanvasLayer = %Progress
 @onready var target: CanvasLayer = %Target
@@ -43,8 +42,8 @@ func _ready() -> void:
 	pick_me_canvas_layer.button_pressed.connect(_on_lets_go_button_pressed)
 	lets_go_button.button_pressed.connect(_on_lets_go_button_pressed)
 	Global.max_progress.connect(_on_max_progress)
-	timer.timeout.connect(zoom_in)
 	Global.card_left_screen.connect(_on_card_left_screen)
+	Global.card_validated.connect(_on_card_validated)
 	Global.target_hit.connect(_on_target_hit)
 
 	# Instantiate cards
@@ -183,47 +182,46 @@ func _on_card_clicked(card: Card) -> void:
 		held_card = card
 		cards.move_child(card, -1)  # The card will be drawn over the others
 		card_initial_position = card.global_position
-		timer.start()
 
 
 func zoom_in() -> void:
 	var distance_travelled: float = (held_card.global_position - card_initial_position).length()
 	if distance_travelled > 100:
 		# We moved the held card, so don't zoom in.
-			return
+		return
 	held_card.zoom_in()
 	zones.slide_in(0.15)
 	Global.slide_off_screen(menu, 0.15)
+
+
+func _on_card_validated(card: Card) -> void:
+	if card == card_to_find:
+		Music.play_win()
+		await explode_out()
+		fade_transition.fade_to_file("res://you_win.tscn")
+	else:
+		var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
+		you_lose_scene.lost_reason = "You chose the wrong card"
+		you_lose_scene.valid_card_data = card_to_find.data
+		you_lose_scene.wrong_card_data = card.data
+		await explode_out()
+		fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 
 
 func _on_card_left_screen(card: Card) -> void:
 	play_sound(Global.sounds.sound_exit_screen)
 	var force: float = card.get_force()
 	if card == held_card:
-		card.held = false
 		drop_card()
-	if thrown_out_bottom(card):
-		if card == card_to_find:
-			Music.play_win()
-			await explode_out()
-			fade_transition.fade_to_file("res://you_win.tscn")
-		else:
-			var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
-			you_lose_scene.lost_reason = "You chose the wrong card"
-			you_lose_scene.valid_card_data = card_to_find.data
-			you_lose_scene.wrong_card_data = card.data
-			await explode_out()
-			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
+	if card == card_to_find:
+		var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
+		you_lose_scene.lost_reason = "You discarded the card you were looking for"
+		you_lose_scene.valid_card_data = card_to_find.data
+		await explode_out()
+		fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
 	else:
-		if card == card_to_find:
-			var you_lose_scene: YouLose = load("res://you_lose.tscn").instantiate()
-			you_lose_scene.lost_reason = "You discarded the card you were looking for"
-			you_lose_scene.valid_card_data = card_to_find.data
-			await explode_out()
-			fade_transition.fade_to_node(you_lose_scene, Global.sounds.sound_lose)
-		else:
-			add_score(round(force))
-			card_discarded(card, force)
+		add_score(round(force))
+		card_discarded(card, force)
 
 
 func _on_target_hit(card: Card) -> void:
@@ -231,7 +229,6 @@ func _on_target_hit(card: Card) -> void:
 	var eject_angle: float = card.linear_velocity.angle() + PI + (PI / 10)
 	var eject_position: Vector2 = card.global_position.clamp(Vector2.ZERO, Global.viewport_size)
 	card.pop_number(5, eject_position, eject_angle)
-
 
 
 func thrown_out_bottom(card: Card) -> bool:
@@ -244,13 +241,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if held_card and !event.pressed:
 			play_sound(Global.sounds.sound_drop)
-			if held_card.is_inside_tree():
-				held_card.drop(Input.get_last_mouse_velocity())
 			drop_card()
 
 
 func drop_card() -> void:
-	timer.stop()
+	if held_card.is_inside_tree():
+		held_card.drop(Input.get_last_mouse_velocity())
 	held_card = null
 	zones.slide_out(0.15)
 	Global.slide_in_screen(menu, 0.15)
