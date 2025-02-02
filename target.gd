@@ -49,6 +49,8 @@ func compute_tween_duration(ratio1: float, ratio2: float) -> float:
 func _on_target_hit(body: Node2D) -> void:
 	if body is not Card:
 		return
+	if body.to_find:
+		return
 	var speed: float = body.linear_velocity.length()
 	if speed < 100:
 		return
