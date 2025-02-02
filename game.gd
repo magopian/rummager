@@ -13,7 +13,7 @@ extends Node2D
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 @onready var fade_transition: ColorRect = %FadeTransition
 @onready var explanation: VBoxContainer = %Explanation
-@onready var camera_shaker: Node2D = %CameraShaker
+@onready var camera_shaker: Shaker = %CameraShaker
 @onready var progress: CanvasLayer = %Progress
 @onready var target: CanvasLayer = %Target
 

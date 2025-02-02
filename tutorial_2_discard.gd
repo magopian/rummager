@@ -14,7 +14,7 @@ extends Node2D
 @onready var explanation: VBoxContainer = %Explanation
 @onready var back_to_menu: Button = %BackToMenu
 @onready var timer: Timer = %Timer
-@onready var camera_shaker: Node2D = %CameraShaker
+@onready var camera_shaker: Shaker = %CameraShaker
 @onready var progress: CanvasLayer = %Progress
 
 

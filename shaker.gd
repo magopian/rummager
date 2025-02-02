@@ -1,4 +1,4 @@
-extends Node2D
+class_name Shaker extends Node2D
 
 @export var randomStrength: float = 100.0
 @export var shakeFade: float = 10.0
