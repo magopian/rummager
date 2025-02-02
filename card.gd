@@ -15,7 +15,10 @@ signal clicked(card: Card)
 @onready var sprite_2d: Sprite2D = %Sprite2D
 @onready var timer_zoom_in: Timer = %TimerZoomIn
 @onready var timer_validation: Timer = %TimerValidation
+@onready var validation_progress: ProgressBar = %ValidationProgress
 @onready var validating_label: Label = %ValidatingLabel
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var shaker: Shaker = %Shaker
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
@@ -52,6 +55,7 @@ func _ready() -> void:
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
 	get_viewport().physics_object_picking_sort = true
 	init_from_data()
+	reset_validation()
 	timer_zoom_in.timeout.connect(zoom_in)
 	timer_validation.timeout.connect(_on_validated)
 
@@ -95,12 +99,13 @@ func _process(_delta: float) -> void:
 
 func display_validating() -> void:
 	if not timer_validation.is_stopped():
-		validating_label.show()
+		validation_progress.show()
 		var validating_elapsed_time: float = timer_validation.wait_time - timer_validation.time_left
 		var validating_percentage: int = round(validating_elapsed_time / timer_validation.wait_time * 100)
 		validating_label.text = "Validating:\n" + str(validating_percentage) + "%"
+		validation_progress.value = validating_percentage
 	else:
-		validating_label.hide()
+		validation_progress.hide()
 
 
 func pickup() -> void:
@@ -151,9 +156,7 @@ func show_medium(duration: float = 0) -> void:
 
 func drop(impulse: Vector2=Vector2.ZERO) -> void:
 	if held:
-		timer_zoom_in.stop()
-		timer_validation.stop()
-		validating_label.hide()
+		reset_validation()
 		freeze = false
 		apply_central_impulse(impulse)
 		held = false
@@ -254,5 +257,18 @@ func get_force() -> float:
 	return normalized_force
 
 
+func reset_validation() -> void:
+		timer_zoom_in.stop()
+		timer_validation.stop()
+		validation_progress.hide()
+		validation_progress.value = 0
+
+
 func _on_validated() -> void:
+	if to_find:
+		animation_player.play("display_validated")
+		await animation_player.animation_finished
+	else:
+		shaker.apply_shake(30)
+		await get_tree().create_timer(0.5).timeout
 	Global.card_validated.emit(self)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://brofk6oqxlvu6"]
+[gd_scene load_steps=21 format=3 uid="uid://brofk6oqxlvu6"]
 
 [ext_resource type="Script" path="res://card.gd" id="1_00shj"]
 [ext_resource type="PackedScene" uid="uid://btw4apieubt2i" path="res://dust_cloud.tscn" id="2_j26a1"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://biyssf7mfv1mf" path="res://dust_trail.tscn" id="4_rjo7v"]
 [ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="7_pg547"]
 [ext_resource type="PackedScene" uid="uid://quspx8oqeob8" path="res://confetti.tscn" id="7_ultda"]
+[ext_resource type="Texture2D" uid="uid://b5utddt3asrh6" path="res://assets/sprites/sprite_valid.png" id="9_x62gj"]
+[ext_resource type="PackedScene" uid="uid://cwhy67donfiqv" path="res://shaker.tscn" id="10_wfnlt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlpa3"]
 size = Vector2(300, 300)
@@ -41,6 +43,101 @@ color = Color(1, 0.166667, 0, 1)
 hue_variation_min = -2.23517e-08
 hue_variation_max = 1.0
 anim_offset_max = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_trnux"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sy13v"]
+bg_color = Color(0.109804, 0.768627, 0.301961, 0.501961)
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="Animation" id="Animation_qsnxe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_vgelv"]
+resource_name = "display_validated"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(10, 10), Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t47ri"]
+_data = {
+"RESET": SubResource("Animation_qsnxe"),
+"display_validated": SubResource("Animation_vgelv")
+}
 
 [node name="Card" type="RigidBody2D"]
 collision_mask = 0
@@ -105,25 +202,6 @@ offset = Vector2(175, 175)
 texture = ExtResource("3_5ebab")
 offset = Vector2(175, 175)
 
-[node name="ValidatingLabel" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-offset_left = -150.0
-offset_top = -150.0
-offset_right = 150.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/outline_size = 8
-theme_override_font_sizes/font_size = 40
-text = "Validating"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PaletteListener" parent="ValidatingLabel" instance=ExtResource("7_pg547")]
-background_color = 1
-background_hover_color = 0
-foreground_color = 3
-
 [node name="Confetti" parent="." instance=ExtResource("7_ultda")]
 unique_name_in_owner = true
 position = Vector2(0, 0)
@@ -142,3 +220,54 @@ one_shot = true
 unique_name_in_owner = true
 wait_time = 1.5
 one_shot = true
+
+[node name="ValidationProgress" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -150.0
+offset_top = -150.0
+offset_right = 150.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxEmpty_trnux")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sy13v")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ValidatingLabel" type="Label" parent="ValidationProgress"]
+unique_name_in_owner = true
+offset_right = 300.0
+offset_bottom = 150.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Validating"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PaletteListener" parent="ValidationProgress/ValidatingLabel" instance=ExtResource("7_pg547")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="Validated" type="Sprite2D" parent="."]
+visible = false
+z_index = 4096
+scale = Vector2(10, 10)
+texture = ExtResource("9_x62gj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Validated"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_t47ri")
+}
+
+[node name="Shaker" parent="." instance=ExtResource("10_wfnlt")]
+unique_name_in_owner = true
