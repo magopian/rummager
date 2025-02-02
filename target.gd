@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func setup_curve() -> void:
-	var height: float = Global.viewport_size.y - 100
+	var height: float = Global.viewport_size.y
 	var width: float = Global.viewport_size.x
 	var bottom_left: Vector2 = Vector2(0, height)
 	var top_left: Vector2 = Vector2.ZERO
@@ -25,6 +25,7 @@ func setup_curve() -> void:
 	path_2d.curve.add_point(top_left, Vector2.ZERO, Vector2.ZERO)
 	path_2d.curve.add_point(top_right, Vector2.ZERO, Vector2.ZERO)
 	path_2d.curve.add_point(bottom_right, Vector2.ZERO, Vector2.ZERO)
+	path_2d.curve.add_point(bottom_left, Vector2.ZERO, Vector2.ZERO)
 
 
 func random_target() -> void:
