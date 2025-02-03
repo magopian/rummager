@@ -14,10 +14,7 @@ signal clicked(card: Card)
 @onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
 @onready var sprite_2d: Sprite2D = %Sprite2D
 @onready var timer_zoom_in: Timer = %TimerZoomIn
-@onready var timer_validation: Timer = %TimerValidation
-@onready var validation_progress: ProgressBar = %ValidationProgress
-@onready var validating_label: Label = %ValidatingLabel
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var validation: CardValidation = %Validation
 @onready var shaker: Shaker = %Shaker
 
 
@@ -57,7 +54,7 @@ func _ready() -> void:
 	init_from_data()
 	reset_validation()
 	timer_zoom_in.timeout.connect(zoom_in)
-	timer_validation.timeout.connect(_on_validated)
+	validation.on_validation_finished.connect(_on_validated)
 
 
 static func compute_small_size(viewport_size: Vector2) -> Vector2:
@@ -98,14 +95,10 @@ func _process(_delta: float) -> void:
 
 
 func display_validating() -> void:
-	if not timer_validation.is_stopped():
-		validation_progress.show()
-		var validating_elapsed_time: float = timer_validation.wait_time - timer_validation.time_left
-		var validating_percentage: int = round(validating_elapsed_time / timer_validation.wait_time * 100)
-		validating_label.text = "Validating:\n" + str(validating_percentage) + "%"
-		validation_progress.value = validating_percentage
+	if validation.is_validating():
+		validation.show()
 	else:
-		validation_progress.hide()
+		validation.hide()
 
 
 func pickup() -> void:
@@ -120,8 +113,7 @@ func pickup() -> void:
 func zoom_in() -> void:
 	show_big()
 	hide_trail()
-	if timer_validation.is_stopped():
-		timer_validation.start()
+	validation.start_validating()
 
 
 func show_big(duration: float = 0.15) -> void:
@@ -259,15 +251,12 @@ func get_force() -> float:
 
 func reset_validation() -> void:
 		timer_zoom_in.stop()
-		timer_validation.stop()
-		validation_progress.hide()
-		validation_progress.value = 0
+		validation.reset()
 
 
 func _on_validated() -> void:
 	if to_find:
-		animation_player.play("display_validated")
-		await animation_player.animation_finished
+		await validation.play_validated()
 	else:
 		shaker.apply_shake(30)
 		await get_tree().create_timer(0.5).timeout
