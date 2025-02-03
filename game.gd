@@ -86,9 +86,13 @@ func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -
 
 func display_card_to_find() -> void:
 	var card_to_display: Card = card_to_find.duplicate()
+	var validation_animation: ThrowAnimation = load("res://throw_animation.tscn").instantiate()
+	card_to_display.add_child(validation_animation)
 	card_display.add_child(card_to_display)
 	card_to_display.position = Vector2(200, 200)
+	card_to_display.rotation = 0
 	card_to_display.show_big()
+	validation_animation.animate_validation(Vector2(100, 200))
 
 
 func new_card(all_permutations: Array[Dictionary]) -> Card:

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdsl2kbqdthxv"]
+[gd_scene load_steps=5 format=3 uid="uid://bdsl2kbqdthxv"]
 
 [ext_resource type="Script" path="res://throw_animation.gd" id="1_av4bs"]
 [ext_resource type="Texture2D" uid="uid://whm181ryabkk" path="res://assets/card_background_shadow_sprite.png" id="2_b3003"]
 [ext_resource type="Texture2D" uid="uid://c5rk76eomj8s7" path="res://assets/icon_click_1.png" id="2_wx5kb"]
+[ext_resource type="PackedScene" uid="uid://bcaxgj0vxesvd" path="res://card_validation.tscn" id="3_2girg"]
 
 [node name="ThrowAnimation" type="Node2D"]
 script = ExtResource("1_av4bs")
@@ -11,6 +12,10 @@ script = ExtResource("1_av4bs")
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.435294)
 texture = ExtResource("2_b3003")
+
+[node name="CardValidation" parent="." instance=ExtResource("3_2girg")]
+unique_name_in_owner = true
+mouse_filter = 2
 
 [node name="Icon" type="Sprite2D" parent="."]
 unique_name_in_owner = true

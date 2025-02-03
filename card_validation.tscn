@@ -61,7 +61,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -74,47 +74,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_xyvn6"]
-resource_name = "validating"
-length = 1.5
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:value")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 100.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:theme_override_styles/fill:bg_color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.109804, 0.768627, 0.301961, 0.501961), Color(0.109804, 0.768627, 0.301961, 0.984314), Color(0.109804, 0.768627, 0.301961, 0.501961), Color(0.109804, 0.768627, 0.301961, 0.984314), Color(0.109804, 0.768627, 0.301961, 0.501961)]
 }
 
 [sub_resource type="Animation" id="Animation_vgelv"]
@@ -181,6 +140,59 @@ tracks/4/keys = {
 "values": [100.0]
 }
 
+[sub_resource type="Animation" id="Animation_xyvn6"]
+resource_name = "validating"
+length = 1.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 100.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:theme_override_styles/fill:bg_color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.109804, 0.768627, 0.301961, 0.501961), Color(0.109804, 0.768627, 0.301961, 0.984314), Color(0.109804, 0.768627, 0.301961, 0.501961), Color(0.109804, 0.768627, 0.301961, 0.984314), Color(0.109804, 0.768627, 0.301961, 0.501961)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Validated:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t47ri"]
 _data = {
 "RESET": SubResource("Animation_qsnxe"),
@@ -188,7 +200,7 @@ _data = {
 "validating": SubResource("Animation_xyvn6")
 }
 
-[node name="ValidationProgress" type="ProgressBar"]
+[node name="CardValidation" type="ProgressBar"]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -201,6 +213,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxEmpty_trnux")
 theme_override_styles/fill = SubResource("StyleBoxFlat_sy13v")
 fill_mode = 3
@@ -226,6 +239,7 @@ background_hover_color = 0
 foreground_color = 3
 
 [node name="Validated" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 z_index = 4096
 position = Vector2(150, 150)

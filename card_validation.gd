@@ -19,6 +19,7 @@ func is_validating() -> bool:
 
 
 func start_validating() -> void:
+	animation_player.play("RESET")
 	animation_player.play("validating")
 	await animation_player.animation_finished
 	on_validation_finished.emit()

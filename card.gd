@@ -111,6 +111,7 @@ func pickup() -> void:
 
 
 func zoom_in() -> void:
+	animate_card()
 	show_big()
 	hide_trail()
 	validation.start_validating()
@@ -119,7 +120,6 @@ func zoom_in() -> void:
 func show_big(duration: float = 0.15) -> void:
 	scale_to(big_scale, duration, 0)
 	freeze = true
-	animate_card()
 
 
 func animate_card() -> void:
