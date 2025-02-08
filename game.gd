@@ -59,10 +59,8 @@ func _ready() -> void:
 func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -> void:
 	var instantiated_cards: Array[Card] = []
 	var time_since_last_frame: int = Time.get_ticks_msec()
-	var small_scale: Vector2 = Card.compute_small_size(Global.viewport_size)
 	for i in range(total_num_cards):
 		var card: Card = new_card(all_permutations)
-		card.small_scale = small_scale
 		instantiated_cards.append(card)
 		var current_time: int = Time.get_ticks_msec()
 		if current_time - time_since_last_frame > 16:  # 60fps -> 16ms per frame

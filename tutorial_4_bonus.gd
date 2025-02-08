@@ -94,10 +94,8 @@ func enable_click() -> void:
 
 
 func generate_card_to_find() -> void:
-	var small_scale: Vector2 = Card.compute_small_size(Global.viewport_size)
 	# Create the card to memorize
 	card_to_find = new_card()
-	card_to_find.small_scale = small_scale
 	memorize_card_display.add_child(card_to_find)
 	card_to_find.position = memorize_card_display.size / 2
 	card_to_find.show_medium()
@@ -105,10 +103,8 @@ func generate_card_to_find() -> void:
 
 
 func generate_discard_cards(num_cards: int) -> void:
-	var small_scale: Vector2 = Card.compute_small_size(Global.viewport_size)
 	for _i in num_cards:
 		var card: Card = new_card()
-		card.small_scale = small_scale
 		card_display.add_child(card)
 		card.position = card_display.size / 2
 		card.show_small()

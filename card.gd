@@ -11,6 +11,8 @@ signal clicked(card: Card)
 @onready var dust_cloud: GPUParticles2D = %DustCloud
 @onready var dust_trail: GPUParticles2D = %DustTrail
 @onready var confetti: GPUParticles2D = %Confetti
+@onready var collision_shape_2d: CollisionShape2D = %CollisionShape2D
+@onready var sprite_2d: Sprite2D = %Sprite2D
 
 
 @export var small_scale: Vector2 = Vector2(0.16, 0.16)
@@ -40,6 +42,8 @@ static var properties: Array = charac_to_property.values()
 
 
 func _ready() -> void:
+	small_scale = compute_small_size(Global.viewport_size)
+	collision_shape_2d.scale = small_scale
 	input_event.connect(_on_input_event)
 	visible_on_screen_notifier_2d.screen_exited.connect(_on_exit_screen)
 	get_viewport().physics_object_picking_sort = true
@@ -152,8 +156,9 @@ func hide_confetti() -> void:
 func scale_to(new_scale: Vector2, duration: float, updated_collision_layer: int = 1) -> Tween:
 	current_scale = new_scale
 	var scale_tween: Tween = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC).set_parallel(true)
+	scale_tween.tween_property(sprite_2d, "scale", new_scale, duration)
 	for child in get_children():
-		if "scale" in child:
+		if child is ThrowAnimation:
 			scale_tween.tween_property(child, "scale", new_scale, duration)
 	await scale_tween.finished
 	collision_layer = updated_collision_layer

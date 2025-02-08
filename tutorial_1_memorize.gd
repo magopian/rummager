@@ -48,10 +48,8 @@ func _ready() -> void:
 
 
 func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -> void:
-	var small_scale: Vector2 = Card.compute_small_size(Global.viewport_size)
 	for _i in total_num_cards:
 		var card: Card = new_card(all_permutations)
-		card.small_scale = small_scale
 		card_display.add_child(card)
 		card.position = Vector2(200, 200)
 		card.show_medium()

@@ -87,11 +87,9 @@ func animate_target() -> void:
 
 
 func generate_cards(total_num_cards: int, all_permutations: Array[Dictionary]) -> void:
-	var small_scale: Vector2 = Card.compute_small_size(Global.viewport_size)
 	for _i in total_num_cards:
 		var card: Card = new_card(all_permutations)
 		var container: Node = card_display
-		card.small_scale = small_scale
 		if _i == 0:  # First card (bottom-most one) is the one we'll memorize
 			container = memorize_card_display
 			card_to_find = card
