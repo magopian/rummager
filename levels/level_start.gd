@@ -123,7 +123,7 @@ func play_sound(sound: AudioStream) -> AudioStreamPlayer:
 func _on_shuffle_clicked() -> void:
 	shuffle_button.pressed.disconnect(_on_shuffle_clicked)
 	await unshuffle().finished
-	fade_transition.fade_to_file("res://game.tscn", Global.sounds.sound_shuffle)
+	fade_transition.fade_to_file(LevelSelector.next_level(), Global.sounds.sound_shuffle)
 
 
 func _on_lets_go_button_pressed() -> void:

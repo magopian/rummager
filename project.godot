@@ -21,6 +21,7 @@ config/icon="res://assets/icon.svg"
 
 Global="*res://global.gd"
 Music="*res://music.tscn"
+LevelSelector="*res://levels/level_selector.gd"
 
 [debug]
 
@@ -39,6 +40,11 @@ window/handheld/orientation=6
 [gui]
 
 theme/custom_font="res://Socafe/Socafe.ttf"
+
+[layer_names]
+
+2d_physics/layer_1="cards"
+2d_physics/layer_2="walls"
 
 [rendering]
 

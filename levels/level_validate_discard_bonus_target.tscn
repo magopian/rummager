@@ -21,7 +21,7 @@
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ypwvg"]
 random_pitch = 1.5
 
-[node name="Game" type="Node2D"]
+[node name="Level Validate Discard Bonus Target" type="Node2D"]
 script = ExtResource("1_x05a4")
 metadata/_edit_horizontal_guides_ = [620.0]
 
