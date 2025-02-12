@@ -1,0 +1,237 @@
+[gd_scene load_steps=19 format=3 uid="uid://pwse7d53bcti"]
+
+[ext_resource type="Script" path="res://levels/level_validate_discard_bonus_target.gd" id="1_x05a4"]
+[ext_resource type="PackedScene" uid="uid://hbrjciajmnpf" path="res://scrolling_background.tscn" id="2_d0kox"]
+[ext_resource type="PackedScene" uid="uid://bifvuippivy7t" path="res://progress.tscn" id="3_gtjrt"]
+[ext_resource type="PackedScene" uid="uid://bmba1pqq4wqxb" path="res://menu_icon.tscn" id="4_1bmjj"]
+[ext_resource type="Texture2D" uid="uid://b7e4ndhm2g66m" path="res://assets/sprites/menu_icon_background.png" id="5_xu81n"]
+[ext_resource type="Texture2D" uid="uid://cejxu0bh2fvbc" path="res://assets/sprites/menu_icon_foreground.png" id="6_45wl3"]
+[ext_resource type="PackedScene" uid="uid://cg0xtfp4bp48s" path="res://scale_and_sound.tscn" id="7_nvjwh"]
+[ext_resource type="Texture2D" uid="uid://d18d5fn0obqts" path="res://assets/sprites/shuffle_icon_background.png" id="8_ktgwq"]
+[ext_resource type="Texture2D" uid="uid://cr0pcp8avgwj4" path="res://assets/sprites/shuffle_icon_foreground.png" id="9_wtyen"]
+[ext_resource type="PackedScene" uid="uid://dfmg6das6l6cp" path="res://click_to_change_scene.tscn" id="10_6loar"]
+[ext_resource type="PackedScene" uid="uid://dcxjxqadvhk87" path="res://level_label.tscn" id="11_6pma7"]
+[ext_resource type="PackedScene" uid="uid://bx5qekwsln2yr" path="res://palette_listener.tscn" id="12_2mxqb"]
+[ext_resource type="PackedScene" uid="uid://c6tacpe7tp1de" path="res://animated_button.tscn" id="13_nnulu"]
+[ext_resource type="PackedScene" uid="uid://d1q80rolx3cja" path="res://zones.tscn" id="14_ihsow"]
+[ext_resource type="PackedScene" uid="uid://dftsvelpx2cta" path="res://fade_transition.tscn" id="15_a3a4n"]
+[ext_resource type="PackedScene" uid="uid://cwhy67donfiqv" path="res://shaker.tscn" id="16_ei315"]
+[ext_resource type="PackedScene" uid="uid://bpfj34u8qsxra" path="res://target.tscn" id="17_7k816"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ypwvg"]
+random_pitch = 1.5
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_x05a4")
+metadata/_edit_horizontal_guides_ = [620.0]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ScrollingBackground" parent="Background" instance=ExtResource("2_d0kox")]
+
+[node name="Progress" parent="." instance=ExtResource("3_gtjrt")]
+unique_name_in_owner = true
+
+[node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menu" type="MarginContainer" parent="MenuCanvasLayer"]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 90.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MenuCanvasLayer/Menu"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MenuButton" parent="MenuCanvasLayer/Menu/HBoxContainer/Control2" instance=ExtResource("4_1bmjj")]
+unique_name_in_owner = true
+self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 184.5
+offset_bottom = 174.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_pressed = ExtResource("5_xu81n")
+texture_hover = ExtResource("5_xu81n")
+texture_disabled = ExtResource("5_xu81n")
+texture_focused = ExtResource("5_xu81n")
+background_texture = ExtResource("5_xu81n")
+foreground_texture = ExtResource("6_45wl3")
+
+[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/Control2/MenuButton" instance=ExtResource("7_nvjwh")]
+
+[node name="Control" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Control3" type="Control" parent="MenuCanvasLayer/Menu/HBoxContainer"]
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ShuffleButton" parent="MenuCanvasLayer/Menu/HBoxContainer/Control3" instance=ExtResource("4_1bmjj")]
+unique_name_in_owner = true
+self_modulate = Color(0.0823529, 0.380392, 0.427451, 1)
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.5
+offset_top = -37.5
+offset_right = 212.5
+offset_bottom = 202.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture_normal = ExtResource("8_ktgwq")
+texture_pressed = ExtResource("8_ktgwq")
+texture_hover = ExtResource("8_ktgwq")
+texture_disabled = ExtResource("8_ktgwq")
+texture_focused = ExtResource("8_ktgwq")
+background_texture = ExtResource("8_ktgwq")
+foreground_texture = ExtResource("9_wtyen")
+
+[node name="ScaleAndSound2" parent="MenuCanvasLayer/Menu/HBoxContainer/Control3/ShuffleButton" instance=ExtResource("7_nvjwh")]
+
+[node name="PickMeCanvasLayer" parent="." instance=ExtResource("10_6loar")]
+unique_name_in_owner = true
+layer = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="PickMeCanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PickMeCanvasLayer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+
+[node name="LevelLabel" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer" instance=ExtResource("11_6pma7")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.513726, 0.156863, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0.956863, 0.721569, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 64
+
+[node name="Control" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="CardDisplay" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 2
+size_flags_vertical = 6
+mouse_filter = 2
+
+[node name="Control2" type="Control" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="Explanation" type="VBoxContainer" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.996078, 0.556863, 0.235294, 1)
+theme_override_colors/font_outline_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 40
+text = "Find Me!"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label" instance=ExtResource("12_2mxqb")]
+
+[node name="Label2" type="Label" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.945098, 0.945098, 0.901961, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 20
+text = "Click and hold me to
+validate your choice"
+horizontal_alignment = 1
+
+[node name="PaletteListener" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation/Label2" instance=ExtResource("12_2mxqb")]
+background_color = 1
+background_hover_color = 0
+foreground_color = 3
+
+[node name="LetsGoButton" parent="PickMeCanvasLayer/MarginContainer/VBoxContainer/Explanation" instance=ExtResource("13_nnulu")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Let's go!"
+
+[node name="Zones" parent="." instance=ExtResource("14_ihsow")]
+unique_name_in_owner = true
+
+[node name="Cards" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_ypwvg")
+bus = &"SFX"
+
+[node name="FadeTransition" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="FadeTransition" parent="FadeTransition" instance=ExtResource("15_a3a4n")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="CameraShaker" parent="Camera2D" instance=ExtResource("16_ei315")]
+unique_name_in_owner = true
+randomStrength = 10.0
+
+[node name="Target" parent="." instance=ExtResource("17_7k816")]
+unique_name_in_owner = true

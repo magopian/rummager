@@ -235,7 +235,7 @@ func _on_card_left_screen(card: Card) -> void:
 			Music.play_win()
 			await explode_out()
 			var well_done_scene: TutorialWellDone = load("res://tutorial_well_done.tscn").instantiate()
-			well_done_scene.next_scene = "res://game.tscn"
+			well_done_scene.next_scene = LevelSelector.next_level()
 			well_done_scene.message = "You reached the end of the tutorial!"
 			fade_transition.fade_to_node(well_done_scene)
 		else:

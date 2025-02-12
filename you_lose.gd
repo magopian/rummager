@@ -15,7 +15,6 @@ class_name YouLose extends CanvasLayer
 var wrong_card_data: Dictionary
 var valid_card_data: Dictionary
 var lost_reason: String
-var next_scene: String = "res://game.tscn"
 
 
 func _ready() -> void:
@@ -48,4 +47,4 @@ func instantiate_card(card_data: Dictionary) -> Card:
 	return card
 
 func _on_button_pressed() -> void:
-	fade_transition.fade_to_file(next_scene)
+	fade_transition.fade_to_file(LevelSelector.next_level())

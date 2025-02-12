@@ -6,9 +6,6 @@ class_name YouWin extends CanvasLayer
 @onready var replay_button: Button = %ReplayButton
 
 
-var next_scene: String = "res://game.tscn"
-
-
 func _ready() -> void:
 	fade_transition.show()
 	catch_all_click.pressed.connect(_on_next_level_pressed)
@@ -24,9 +21,9 @@ func _ready() -> void:
 func _on_next_level_pressed() -> void:
 	Global.level += 1
 	Music.play_theme()
-	fade_transition.fade_to_file(next_scene)
+	fade_transition.fade_to_file(LevelSelector.next_level())
 
 
 func _on_replay_pressed() -> void:
 	Music.play_theme()
-	fade_transition.fade_to_file(next_scene)
+	fade_transition.fade_to_file(LevelSelector.next_level())
